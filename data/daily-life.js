@@ -2562,6 +2562,396 @@ window.DAILY_LIFE = {
         { en: "Focus.",                         zh: "认真。",                  type: "sisWhisper", speaker: "sister" },
         { en: "Boring task.",                   zh: "无聊。",                  type: "broWhine",   speaker: "brother" }
       ]
+    },
+
+    // ====================================================
+    // Day 65: 大课间做操
+    // ====================================================
+    {
+      id: 65, theme: "大课间做操", desc: "排队形、跟错节拍、被姐姐笑",
+      sentences: [
+        { en: "Big break time.",                zh: "大课间。",                type: "broExcite",  speaker: "brother" },
+        { en: "Line up!",                       zh: "排队！",                  type: "casual",     speaker: "teacher" },
+        { en: "Square shape.",                  zh: "方队。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Where do I stand?",              zh: "我站哪？",                type: "broCurious", speaker: "brother" },
+        { en: "Second row.",                    zh: "第二排。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Music on.",                      zh: "音乐响。",                type: "casual",     speaker: "teacher" },
+        { en: "Arms up!",                       zh: "手举！",                  type: "casual",     speaker: "teacher" },
+        { en: "Wrong arm!",                     zh: "举错了！",                type: "sisTease",   speaker: "sister" },
+        { en: "Mine?",                          zh: "我？",                    type: "broCurious", speaker: "brother" },
+        { en: "Left, not right.",               zh: "左不是右。",              type: "sisCalm",    speaker: "sister" },
+        { en: "Confusing.",                     zh: "搞不清。",                type: "broWhine",   speaker: "brother" },
+        { en: "Watch me.",                      zh: "看我。",                  type: "sisBoss",    speaker: "sister" },
+        { en: "Twist!",                         zh: "扭！",                    type: "casual",     speaker: "teacher" },
+        { en: "Like this?",                     zh: "这样？",                  type: "broCurious", speaker: "brother" },
+        { en: "Smoother.",                      zh: "顺点。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Off beat!",                      zh: "拍错了！",                type: "sisTease",   speaker: "sister" },
+        { en: "So fast.",                       zh: "太快。",                  type: "broWhine",   speaker: "brother" },
+        { en: "Count one two.",                 zh: "数一二。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Got it.",                        zh: "懂了。",                  type: "broCalm",    speaker: "brother" },
+        { en: "Squat!",                         zh: "蹲！",                    type: "casual",     speaker: "teacher" },
+        { en: "Knees hurt.",                    zh: "膝盖疼。",                type: "broWhine",   speaker: "brother" },
+        { en: "Stretch first.",                 zh: "先拉伸。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Too late.",                      zh: "晚了。",                  type: "broPout",    speaker: "brother" },
+        { en: "Jump!",                          zh: "跳！",                    type: "casual",     speaker: "teacher" },
+        { en: "High!",                          zh: "高！",                    type: "sisProud",   speaker: "sister" },
+        { en: "Tired now.",                     zh: "累了。",                  type: "broWhine",   speaker: "brother" },
+        { en: "Finish strong.",                 zh: "撑到最后。",              type: "sisBoss",    speaker: "sister" },
+        { en: "Done!",                          zh: "结束！",                  type: "broExcite",  speaker: "brother" },
+        { en: "Water break.",                   zh: "喝水。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "I'm sweating.",                  zh: "出汗了。",                type: "broWhine",   speaker: "brother" }
+      ]
+    },
+
+    // ====================================================
+    // Day 66: 升旗仪式
+    // ====================================================
+    {
+      id: 66, theme: "升旗仪式", desc: "站军姿走神想上厕所",
+      sentences: [
+        { en: "Stand still.",                   zh: "立正。",                  type: "casual",     speaker: "teacher" },
+        { en: "Anthem next.",                   zh: "国歌。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Salute.",                        zh: "敬礼。",                  type: "casual",     speaker: "teacher" },
+        { en: "Hand up.",                       zh: "举手。",                  type: "sisWhisper", speaker: "sister" },
+        { en: "Like this?",                     zh: "这样？",                  type: "broWhisper", speaker: "brother" },
+        { en: "Higher.",                        zh: "高点。",                  type: "sisWhisper", speaker: "sister" },
+        { en: "Flag rising.",                   zh: "国旗升起。",              type: "sisCalm",    speaker: "sister" },
+        { en: "Watch it.",                      zh: "看着。",                  type: "sisWhisper", speaker: "sister" },
+        { en: "My feet hurt.",                  zh: "脚疼。",                  type: "broWhine",   speaker: "brother" },
+        { en: "Don't move.",                    zh: "别动。",                  type: "sisWhisper", speaker: "sister" },
+        { en: "Itchy nose.",                    zh: "鼻子痒。",                type: "broWhine",   speaker: "brother" },
+        { en: "Bear it.",                       zh: "忍。",                    type: "sisWhisper", speaker: "sister" },
+        { en: "Sing!",                          zh: "唱！",                    type: "casual",     speaker: "teacher" },
+        { en: "I'm singing.",                   zh: "唱呢。",                  type: "broCalm",    speaker: "brother" },
+        { en: "Mouth open.",                    zh: "嘴张开。",                type: "sisWhisper", speaker: "sister" },
+        { en: "Daydreaming.",                   zh: "走神。",                  type: "broCalm",    speaker: "brother" },
+        { en: "Focus!",                         zh: "认真！",                  type: "sisWhisper", speaker: "sister" },
+        { en: "Need bathroom.",                 zh: "要厕所。",                type: "broWhisper", speaker: "brother" },
+        { en: "Now?!",                          zh: "现在？！",                type: "sisWhisper", speaker: "sister" },
+        { en: "Yes!",                           zh: "对！",                    type: "broWhisper", speaker: "brother" },
+        { en: "Wait!",                          zh: "等！",                    type: "sisWhisper", speaker: "sister" },
+        { en: "Five minutes left.",             zh: "还五分钟。",              type: "sisWhisper", speaker: "sister" },
+        { en: "Can't!",                         zh: "憋不住！",                type: "broWhisper", speaker: "brother" },
+        { en: "Hold it.",                       zh: "憋着。",                  type: "sisWhisper", speaker: "sister" },
+        { en: "Trying.",                        zh: "忍着。",                  type: "broWhisper", speaker: "brother" },
+        { en: "Done!",                          zh: "结束！",                  type: "casual",     speaker: "teacher" },
+        { en: "Run!",                           zh: "跑！",                    type: "sisRushed",  speaker: "sister" },
+        { en: "Whew.",                          zh: "呼。",                    type: "broCalm",    speaker: "brother" },
+        { en: "Close call.",                    zh: "差点。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Never again.",                   zh: "下次不忍。",              type: "broPout",    speaker: "brother" }
+      ]
+    },
+
+    // ====================================================
+    // Day 67: 操场打闹
+    // ====================================================
+    {
+      id: 67, theme: "操场打闹", desc: "追跑摔倒起包找老师",
+      sentences: [
+        { en: "Catch me!",                      zh: "抓我！",                  type: "broExcite",  speaker: "brother" },
+        { en: "I'm coming!",                    zh: "来了！",                  type: "sisExcite",  speaker: "sister" },
+        { en: "Fast!",                          zh: "快！",                    type: "broLoud",    speaker: "brother" },
+        { en: "Got you!",                       zh: "逮到了！",                type: "sisProud",   speaker: "sister" },
+        { en: "Not fair!",                      zh: "不公平！",                type: "broPout",    speaker: "brother" },
+        { en: "Run again.",                     zh: "再跑。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Switch sides.",                  zh: "换边。",                  type: "broCalm",    speaker: "brother" },
+        { en: "Behind tree!",                   zh: "树后！",                  type: "sisLoud",    speaker: "sister" },
+        { en: "Got me!",                        zh: "抓到我！",                type: "broLoud",    speaker: "brother" },
+        { en: "Fall!",                          zh: "摔了！",                  type: "sisLoud",    speaker: "sister" },
+        { en: "You okay?",                      zh: "没事吧？",                type: "broWorry",   speaker: "brother" },
+        { en: "Knee scraped.",                  zh: "膝盖擦破。",              type: "sisWhine",   speaker: "sister" },
+        { en: "Bleeding?",                      zh: "流血了？",                type: "broScared",  speaker: "brother" },
+        { en: "A little.",                      zh: "一点。",                  type: "sisWhine",   speaker: "sister" },
+        { en: "Want me to find teacher?",       zh: "我找老师？",              type: "broCalm",    speaker: "brother" },
+        { en: "Please.",                        zh: "好。",                    type: "sisPout",    speaker: "sister" },
+        { en: "Teacher!",                       zh: "老师！",                  type: "broLoud",    speaker: "brother" },
+        { en: "What happened?",                 zh: "咋了？",                  type: "casual",     speaker: "teacher" },
+        { en: "Sister fell.",                   zh: "姐姐摔了。",              type: "broCalm",    speaker: "brother" },
+        { en: "Show me.",                       zh: "给我看。",                type: "casual",     speaker: "teacher" },
+        { en: "Hurts.",                         zh: "疼。",                    type: "sisWhine",   speaker: "sister" },
+        { en: "Nurse's office.",                zh: "去医务室。",              type: "casual",     speaker: "teacher" },
+        { en: "Can he come?",                   zh: "他能来吗？",              type: "sisSweet",   speaker: "sister" },
+        { en: "Sure.",                          zh: "可以。",                  type: "casual",     speaker: "teacher" },
+        { en: "Lean on me.",                    zh: "靠着我。",                type: "broSoft",    speaker: "brother" },
+        { en: "Thanks.",                        zh: "谢。",                    type: "sisSoft",    speaker: "sister" },
+        { en: "Walk slow.",                     zh: "慢走。",                  type: "broCalm",    speaker: "brother" },
+        { en: "I'll be okay.",                  zh: "会好的。",                type: "sisCalm",    speaker: "sister" },
+        { en: "I'll protect.",                  zh: "我护着你。",              type: "broProud",   speaker: "brother" },
+        { en: "Big bro.",                       zh: "大哥。",                  type: "sisTease",   speaker: "sister" }
+      ]
+    },
+
+    // ====================================================
+    // Day 68: 借文具
+    // ====================================================
+    {
+      id: 68, theme: "借文具", desc: "借橡皮借笔被拒绝",
+      sentences: [
+        { en: "Pencil's gone.",                 zh: "笔丢了。",                type: "broWhine",   speaker: "brother" },
+        { en: "Borrow one?",                    zh: "借一支？",                type: "sisCurious", speaker: "sister" },
+        { en: "From who?",                      zh: "找谁？",                  type: "broCurious", speaker: "brother" },
+        { en: "Deskmate.",                      zh: "同桌。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Hi, lend pencil?",               zh: "嗨，借支笔？",            type: "broCute",    speaker: "brother" },
+        { en: "Yeah.",                          zh: "嗯。",                    type: "casual",     speaker: "classmate" },
+        { en: "Thanks!",                        zh: "谢谢！",                  type: "broSweet",   speaker: "brother" },
+        { en: "Eraser too?",                    zh: "橡皮也？",                type: "broCute",    speaker: "brother" },
+        { en: "Sure.",                          zh: "好。",                    type: "casual",     speaker: "classmate" },
+        { en: "You're nice.",                   zh: "你真好。",                type: "broSweet",   speaker: "brother" },
+        { en: "Ask Lily?",                      zh: "问莉莉？",                type: "sisCurious", speaker: "sister" },
+        { en: "Hey Lily, ruler?",               zh: "嗨莉莉，尺？",            type: "sisSweet",   speaker: "sister" },
+        { en: "No, I need it.",                 zh: "我要用。",                type: "casual",     speaker: "classmate" },
+        { en: "Oh okay.",                       zh: "哦。",                    type: "sisPout",    speaker: "sister" },
+        { en: "Ask Joe?",                       zh: "问乔？",                  type: "broCurious", speaker: "brother" },
+        { en: "Not friends.",                   zh: "不熟。",                  type: "sisWhisper", speaker: "sister" },
+        { en: "Try anyway.",                    zh: "试试。",                  type: "broCalm",    speaker: "brother" },
+        { en: "Hi Joe, ruler?",                 zh: "嗨乔，尺？",              type: "sisCute",    speaker: "sister" },
+        { en: "Nope.",                          zh: "不借。",                  type: "casual",     speaker: "classmate" },
+        { en: "Ouch.",                          zh: "扎心。",                  type: "broWhisper", speaker: "brother" },
+        { en: "Whatever.",                      zh: "随便。",                  type: "sisPout",    speaker: "sister" },
+        { en: "Use mine.",                      zh: "用我的。",                type: "broSweet",   speaker: "brother" },
+        { en: "Thanks bro.",                    zh: "谢弟。",                  type: "sisSoft",    speaker: "sister" },
+        { en: "What's mine is yours.",          zh: "我的就是你的。",          type: "broProud",   speaker: "brother" },
+        { en: "Sweet today.",                   zh: "今天乖。",                type: "sisTease",   speaker: "sister" },
+        { en: "Don't tell.",                    zh: "别说出去。",              type: "broWhisper", speaker: "brother" },
+        { en: "Ha.",                            zh: "哈。",                    type: "sisTease",   speaker: "sister" },
+        { en: "Return after class.",            zh: "下课还。",                type: "broCalm",    speaker: "brother" },
+        { en: "Sure.",                          zh: "好。",                    type: "sisCalm",    speaker: "sister" },
+        { en: "Don't lose it.",                 zh: "别丢。",                  type: "broCalm",    speaker: "brother" }
+      ]
+    },
+
+    // ====================================================
+    // Day 69: 课桌抽屉乱
+    // ====================================================
+    {
+      id: 69, theme: "抽屉乱", desc: "找不到东西被老师查心虚",
+      sentences: [
+        { en: "Where's homework?",              zh: "作业呢？",                type: "broWorry",   speaker: "brother" },
+        { en: "Check desk.",                    zh: "翻抽屉。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Stuff falling out!",             zh: "东西掉了！",              type: "broWhine",   speaker: "brother" },
+        { en: "Messy.",                         zh: "乱。",                    type: "sisAnnoy",   speaker: "sister" },
+        { en: "Old apple core?",                zh: "苹果核？",                type: "broCurious", speaker: "brother" },
+        { en: "Gross!",                         zh: "恶心！",                  type: "sisAnnoy",   speaker: "sister" },
+        { en: "Forgot it.",                     zh: "忘了。",                  type: "broPout",    speaker: "brother" },
+        { en: "Throw out.",                     zh: "扔。",                    type: "sisBoss",    speaker: "sister" },
+        { en: "Yes ma'am.",                     zh: "好的。",                  type: "broCute",    speaker: "brother" },
+        { en: "Old worksheets.",                zh: "旧卷子。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Keep them.",                     zh: "留着。",                  type: "broPout",    speaker: "brother" },
+        { en: "Useless.",                       zh: "没用。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Throw away.",                    zh: "扔掉。",                  type: "sisBoss",    speaker: "sister" },
+        { en: "Found it!",                      zh: "找到了！",                type: "broExcite",  speaker: "brother" },
+        { en: "Wrinkled.",                      zh: "皱了。",                  type: "sisAnnoy",   speaker: "sister" },
+        { en: "Smooth it.",                     zh: "压平。",                  type: "broCalm",    speaker: "brother" },
+        { en: "Teacher's coming!",              zh: "老师来了！",              type: "sisWhisper", speaker: "sister" },
+        { en: "Hide stuff!",                    zh: "藏东西！",                type: "broWhisper", speaker: "brother" },
+        { en: "Desk check.",                    zh: "查抽屉。",                type: "casual",     speaker: "teacher" },
+        { en: "Crap.",                          zh: "完了。",                  type: "broWhisper", speaker: "brother" },
+        { en: "Open up.",                       zh: "打开。",                  type: "casual",     speaker: "teacher" },
+        { en: "It's a mess!",                   zh: "好乱！",                  type: "casual",     speaker: "teacher" },
+        { en: "Sorry.",                         zh: "对不起。",                type: "broPout",    speaker: "brother" },
+        { en: "Clean it up.",                   zh: "整理。",                  type: "casual",     speaker: "teacher" },
+        { en: "I will.",                        zh: "好。",                    type: "broCalm",    speaker: "brother" },
+        { en: "Now.",                           zh: "现在。",                  type: "casual",     speaker: "teacher" },
+        { en: "After class.",                   zh: "下课。",                  type: "broWhine",   speaker: "brother" },
+        { en: "Now.",                           zh: "现在。",                  type: "casual",     speaker: "teacher" },
+        { en: "Yes ma'am.",                     zh: "是。",                    type: "broPout",    speaker: "brother" },
+        { en: "Embarrassing.",                  zh: "丢人。",                  type: "sisWhisper", speaker: "sister" }
+      ]
+    },
+
+    // ====================================================
+    // Day 70: 放学站队回家
+    // ====================================================
+    {
+      id: 70, theme: "放学站队", desc: "管不住嘴跟同学讲话被记名",
+      sentences: [
+        { en: "Line up!",                       zh: "排队！",                  type: "casual",     speaker: "teacher" },
+        { en: "Backpack on.",                   zh: "背包。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Got mine.",                      zh: "背了。",                  type: "broCalm",    speaker: "brother" },
+        { en: "Quiet line.",                    zh: "安静。",                  type: "casual",     speaker: "teacher" },
+        { en: "Walk straight.",                 zh: "走直。",                  type: "sisWhisper", speaker: "sister" },
+        { en: "Saw Lily?",                      zh: "看莉莉？",                type: "broWhisper", speaker: "brother" },
+        { en: "Shh.",                           zh: "嘘。",                    type: "sisWhisper", speaker: "sister" },
+        { en: "Where?",                         zh: "哪？",                    type: "broWhisper", speaker: "brother" },
+        { en: "Front line.",                    zh: "前排。",                  type: "sisWhisper", speaker: "sister" },
+        { en: "Wave?",                          zh: "招手？",                  type: "broCute",    speaker: "brother" },
+        { en: "No moving!",                     zh: "别动！",                  type: "sisWhisper", speaker: "sister" },
+        { en: "Whispering!",                    zh: "说悄悄话！",              type: "casual",     speaker: "teacher" },
+        { en: "Caught.",                        zh: "抓到。",                  type: "broPout",    speaker: "brother" },
+        { en: "Brother!",                       zh: "弟弟！",                  type: "casual",     speaker: "teacher" },
+        { en: "Sorry.",                         zh: "对不起。",                type: "broScared",  speaker: "brother" },
+        { en: "Name written.",                  zh: "记名了。",                type: "casual",     speaker: "teacher" },
+        { en: "Mom will know.",                 zh: "妈会知道。",              type: "sisWhisper", speaker: "sister" },
+        { en: "Yikes.",                         zh: "完了。",                  type: "broWhisper", speaker: "brother" },
+        { en: "Walk fast.",                     zh: "走快。",                  type: "casual",     speaker: "teacher" },
+        { en: "Gate ahead.",                    zh: "门口。",                  type: "sisWhisper", speaker: "sister" },
+        { en: "Mom here?",                      zh: "妈来了？",                type: "broCurious", speaker: "brother" },
+        { en: "Right there.",                   zh: "那。",                    type: "sisCalm",    speaker: "sister" },
+        { en: "Bye teacher!",                   zh: "拜老师！",                type: "sisSweet",   speaker: "sister" },
+        { en: "Bye!",                           zh: "拜！",                    type: "broSweet",   speaker: "brother" },
+        { en: "Tell mom yet?",                  zh: "告妈了？",                type: "broWhisper", speaker: "brother" },
+        { en: "Not yet.",                       zh: "没。",                    type: "sisCalm",    speaker: "sister" },
+        { en: "Please don't.",                  zh: "别告。",                  type: "broCute",    speaker: "brother" },
+        { en: "Pay me.",                        zh: "贿赂我。",                type: "sisTease",   speaker: "sister" },
+        { en: "How much?",                      zh: "多少？",                  type: "broCurious", speaker: "brother" },
+        { en: "Candy bar.",                     zh: "一块糖。",                type: "sisCalm",    speaker: "sister" }
+      ]
+    },
+
+    // ====================================================
+    // Day 71: 谁跟谁好谁跟谁不好
+    // ====================================================
+    {
+      id: 71, theme: "班级八卦", desc: "谁好谁不好谁绝交",
+      sentences: [
+        { en: "Heard about Lily?",              zh: "听莉莉的事了？",          type: "sisWhisper", speaker: "sister" },
+        { en: "What?",                          zh: "啥？",                    type: "broCurious", speaker: "brother" },
+        { en: "Not friends with May.",          zh: "跟梅绝交了。",            type: "sisWhisper", speaker: "sister" },
+        { en: "Why?",                           zh: "为啥？",                  type: "broCurious", speaker: "brother" },
+        { en: "Long story.",                    zh: "说来话长。",              type: "sisCalm",    speaker: "sister" },
+        { en: "Tell me.",                       zh: "讲。",                    type: "broCute",    speaker: "brother" },
+        { en: "May told secret.",               zh: "梅说了秘密。",            type: "sisWhisper", speaker: "sister" },
+        { en: "Bad.",                           zh: "坏。",                    type: "broCalm",    speaker: "brother" },
+        { en: "Lily cried.",                    zh: "莉莉哭了。",              type: "sisCalm",    speaker: "sister" },
+        { en: "Poor her.",                      zh: "可怜。",                  type: "broSoft",    speaker: "brother" },
+        { en: "Joe and Ben?",                   zh: "乔跟本？",                type: "broCurious", speaker: "brother" },
+        { en: "Best friends.",                  zh: "好朋友。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Always together.",               zh: "形影不离。",              type: "broCalm",    speaker: "brother" },
+        { en: "Sit beside.",                    zh: "挨着坐。",                type: "sisCalm",    speaker: "sister" },
+        { en: "My friend Mia?",                 zh: "我朋友米娅？",            type: "broCurious", speaker: "brother" },
+        { en: "She's nice.",                    zh: "她挺好。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Lent eraser.",                   zh: "借我橡皮。",              type: "broCalm",    speaker: "brother" },
+        { en: "Real friend.",                   zh: "真朋友。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Some kids mean.",                zh: "有人坏。",                type: "broCalm",    speaker: "brother" },
+        { en: "Avoid them.",                    zh: "躲着。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Like who?",                      zh: "比如谁？",                type: "broCurious", speaker: "brother" },
+        { en: "I won't say.",                   zh: "我不说。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Tell!",                          zh: "讲！",                    type: "broPout",    speaker: "brother" },
+        { en: "No.",                            zh: "不。",                    type: "sisCalm",    speaker: "sister" },
+        { en: "Gossip rule.",                   zh: "八卦规则。",              type: "sisCalm",    speaker: "sister" },
+        { en: "What rule?",                     zh: "啥规则？",                type: "broCurious", speaker: "brother" },
+        { en: "Don't spread bad.",              zh: "不传坏话。",              type: "sisCalm",    speaker: "sister" },
+        { en: "Wise.",                          zh: "聪明。",                  type: "broCalm",    speaker: "brother" },
+        { en: "Be kind.",                       zh: "心善。",                  type: "sisSoft",    speaker: "sister" },
+        { en: "Got it.",                        zh: "懂。",                    type: "broCalm",    speaker: "brother" }
+      ]
+    },
+
+    // ====================================================
+    // Day 72: 跟好朋友吵架
+    // ====================================================
+    {
+      id: 72, theme: "跟好朋友吵架", desc: "小事冷战和好",
+      sentences: [
+        { en: "Lily mad at me.",                zh: "莉莉生气。",              type: "sisWhine",   speaker: "sister" },
+        { en: "Why?",                           zh: "咋？",                    type: "broCurious", speaker: "brother" },
+        { en: "I sat elsewhere.",               zh: "我没跟她坐。",            type: "sisPout",    speaker: "sister" },
+        { en: "Oh.",                            zh: "哦。",                    type: "broCalm",    speaker: "brother" },
+        { en: "She ignored me.",                zh: "她不理我。",              type: "sisWhine",   speaker: "sister" },
+        { en: "Sad.",                           zh: "难过。",                  type: "broSoft",    speaker: "brother" },
+        { en: "Apologize?",                     zh: "道歉？",                  type: "broCurious", speaker: "brother" },
+        { en: "Not my fault.",                  zh: "不是我错。",              type: "sisPout",    speaker: "sister" },
+        { en: "Hmm.",                           zh: "嗯。",                    type: "broCalm",    speaker: "brother" },
+        { en: "But I miss her.",                zh: "但想她。",                type: "sisSoft",    speaker: "sister" },
+        { en: "Then say sorry.",                zh: "那道歉。",                type: "broCalm",    speaker: "brother" },
+        { en: "Even if not wrong?",             zh: "即使没错？",              type: "sisCurious", speaker: "sister" },
+        { en: "Saves friendship.",              zh: "保住朋友。",              type: "broCalm",    speaker: "brother" },
+        { en: "Smart.",                         zh: "聪明。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Write a note.",                  zh: "写小纸条。",              type: "broCalm",    speaker: "brother" },
+        { en: "Good idea.",                     zh: "好主意。",                type: "sisCalm",    speaker: "sister" },
+        { en: "What to say?",                   zh: "写啥？",                  type: "sisCurious", speaker: "sister" },
+        { en: "I'm sorry.",                     zh: "对不起。",                type: "broCalm",    speaker: "brother" },
+        { en: "Miss you.",                      zh: "想你。",                  type: "broCalm",    speaker: "brother" },
+        { en: "Cute.",                          zh: "可爱。",                  type: "sisSoft",    speaker: "sister" },
+        { en: "Send it.",                       zh: "发出去。",                type: "broCalm",    speaker: "brother" },
+        { en: "Nervous.",                       zh: "紧张。",                  type: "sisScared",  speaker: "sister" },
+        { en: "She'll smile.",                  zh: "她会笑。",                type: "broCalm",    speaker: "brother" },
+        { en: "She wrote back!",                zh: "回了！",                  type: "sisExcite",  speaker: "sister" },
+        { en: "What say?",                      zh: "说啥？",                  type: "broCurious", speaker: "brother" },
+        { en: "Miss me too.",                   zh: "也想我。",                type: "sisSoft",    speaker: "sister" },
+        { en: "Yay!",                           zh: "耶！",                    type: "broExcite",  speaker: "brother" },
+        { en: "Lunch together?",                zh: "一起吃饭？",              type: "sisCalm",    speaker: "sister" },
+        { en: "Yes!",                           zh: "好！",                    type: "sisExcite",  speaker: "sister" },
+        { en: "Friends forever.",               zh: "永远朋友。",              type: "sisSoft",    speaker: "sister" }
+      ]
+    },
+
+    // ====================================================
+    // Day 73: 班里新来同学
+    // ====================================================
+    {
+      id: 73, theme: "新同学", desc: "围观，要不要交朋友",
+      sentences: [
+        { en: "New kid!",                       zh: "新同学！",                type: "broExcite",  speaker: "brother" },
+        { en: "Quiet though.",                  zh: "挺安静。",                type: "sisCalm",    speaker: "sister" },
+        { en: "What's name?",                   zh: "叫啥？",                  type: "broCurious", speaker: "brother" },
+        { en: "Lily? No, Tina.",                zh: "莉莉？不蒂娜。",          type: "sisCalm",    speaker: "sister" },
+        { en: "Cool name.",                     zh: "名字酷。",                type: "broCalm",    speaker: "brother" },
+        { en: "Looks nervous.",                 zh: "看着紧张。",              type: "sisCalm",    speaker: "sister" },
+        { en: "Say hi?",                        zh: "打招呼？",                type: "broCurious", speaker: "brother" },
+        { en: "Should.",                        zh: "应该。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Hi Tina!",                       zh: "嗨蒂娜！",                type: "broSweet",   speaker: "brother" },
+        { en: "Hi.",                            zh: "嗨。",                    type: "casual",     speaker: "classmate" },
+        { en: "Where from?",                    zh: "哪来的？",                type: "broCurious", speaker: "brother" },
+        { en: "Beijing.",                       zh: "北京。",                  type: "casual",     speaker: "classmate" },
+        { en: "Far!",                           zh: "好远！",                  type: "sisExcite",  speaker: "sister" },
+        { en: "Yeah.",                          zh: "嗯。",                    type: "casual",     speaker: "classmate" },
+        { en: "Sit with us?",                   zh: "跟我们坐？",              type: "sisSweet",   speaker: "sister" },
+        { en: "Sure.",                          zh: "好。",                    type: "casual",     speaker: "classmate" },
+        { en: "Lunch later.",                   zh: "等会儿吃饭。",            type: "broCalm",    speaker: "brother" },
+        { en: "Show her around?",               zh: "带她转转？",              type: "sisCurious", speaker: "sister" },
+        { en: "Yeah.",                          zh: "好。",                    type: "broCalm",    speaker: "brother" },
+        { en: "Bathroom there.",                zh: "厕所在那。",              type: "sisCalm",    speaker: "sister" },
+        { en: "Library next.",                  zh: "图书馆下一站。",          type: "broCalm",    speaker: "brother" },
+        { en: "Cool school.",                   zh: "学校酷。",                type: "casual",     speaker: "classmate" },
+        { en: "Like dance?",                    zh: "喜欢跳舞？",              type: "sisCurious", speaker: "sister" },
+        { en: "Yeah!",                          zh: "喜欢！",                  type: "casual",     speaker: "classmate" },
+        { en: "Me too!",                        zh: "我也！",                  type: "sisExcite",  speaker: "sister" },
+        { en: "Group?",                         zh: "一起？",                  type: "broCurious", speaker: "brother" },
+        { en: "Sure.",                          zh: "好。",                    type: "casual",     speaker: "classmate" },
+        { en: "Friends!",                       zh: "朋友！",                  type: "sisSweet",   speaker: "sister" },
+        { en: "Easy!",                          zh: "简单！",                  type: "broExcite",  speaker: "brother" },
+        { en: "She's nice.",                    zh: "她挺好。",                type: "sisSoft",    speaker: "sister" }
+      ]
+    },
+
+    // ====================================================
+    // Day 74: 同学过生日
+    // ====================================================
+    {
+      id: 74, theme: "同学生日", desc: "送礼吃蛋糕被邀请",
+      sentences: [
+        { en: "Today's Lily's.",                zh: "今天莉莉生日。",          type: "sisExcite",  speaker: "sister" },
+        { en: "Cake?",                          zh: "蛋糕？",                  type: "broExcite",  speaker: "brother" },
+        { en: "She'll bring.",                  zh: "她带。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "I have gift?",                   zh: "我有礼物？",              type: "broCurious", speaker: "brother" },
+        { en: "Bought yesterday.",               zh: "昨天买的。",              type: "sisCalm",    speaker: "sister" },
+        { en: "What is?",                       zh: "啥？",                    type: "broCurious", speaker: "brother" },
+        { en: "Sticker book.",                  zh: "贴纸本。",                type: "sisCalm",    speaker: "sister" },
+        { en: "She likes those.",               zh: "她爱那个。",              type: "broCalm",    speaker: "brother" },
+        { en: "Yeah.",                          zh: "对。",                    type: "sisCalm",    speaker: "sister" },
+        { en: "Wrap pretty?",                   zh: "包好看？",                type: "broCurious", speaker: "brother" },
+        { en: "Pink paper.",                    zh: "粉色纸。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Bow on top.",                    zh: "顶上蝴蝶结。",            type: "broCalm",    speaker: "brother" },
+        { en: "Cute.",                          zh: "可爱。",                  type: "sisSoft",    speaker: "sister" },
+        { en: "Sing song?",                     zh: "唱歌？",                  type: "broCurious", speaker: "brother" },
+        { en: "Happy birthday!",                zh: "生日快乐！",              type: "sisLoud",    speaker: "sister" },
+        { en: "Loud!",                          zh: "好大声！",                type: "broLoud",    speaker: "brother" },
+        { en: "Cake out!",                      zh: "蛋糕来了！",              type: "sisExcite",  speaker: "sister" },
+        { en: "Chocolate!",                     zh: "巧克力！",                type: "broExcite",  speaker: "brother" },
+        { en: "Yum.",                           zh: "美味。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Make a wish!",                   zh: "许愿！",                  type: "sisExcite",  speaker: "sister" },
+        { en: "Blow candles!",                  zh: "吹蜡烛！",                type: "broExcite",  speaker: "brother" },
+        { en: "All out!",                       zh: "全灭！",                  type: "sisProud",   speaker: "sister" },
+        { en: "Slice for me?",                  zh: "给我一块？",              type: "broCute",    speaker: "brother" },
+        { en: "Big one.",                       zh: "大块。",                  type: "casual",     speaker: "classmate" },
+        { en: "Thanks!",                        zh: "谢谢！",                  type: "broSweet",   speaker: "brother" },
+        { en: "Frosting!",                      zh: "奶油！",                  type: "sisExcite",  speaker: "sister" },
+        { en: "On nose.",                       zh: "鼻子上。",                type: "broTease",   speaker: "brother" },
+        { en: "Wipe!",                          zh: "擦！",                    type: "sisAnnoy",   speaker: "sister" },
+        { en: "Best day ever.",                 zh: "最棒的一天。",            type: "sisSoft",    speaker: "sister" },
+        { en: "For her.",                       zh: "对她。",                  type: "broCalm",    speaker: "brother" }
+      ]
     }
   ]
 };
