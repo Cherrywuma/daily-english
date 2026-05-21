@@ -15,6 +15,7 @@
   }
   .dialog-line.playing { background: linear-gradient(135deg, #FFE082, #FFCA28); }
   .dialog-line.done    { opacity: .55; }
+  .dialog-line.skipped { opacity: .35; background: #F0F0F0; }
   .dialog-line .role-icon { font-size: 22px; }
   .dialog-line .role-body { flex: 1; }
   .dialog-line .role-name { font-size: 11px; color: #888; }
@@ -25,6 +26,43 @@
     flex-wrap: wrap; padding: 6px 0;
   }
   .listen-ctrl .sub-btn { width: auto; padding: 8px 14px; }
+  /* 预下载进度条 */
+  .prefetch-bar {
+    height: 4px; background: #FFF0D0; border-radius: 2px; overflow: hidden;
+    margin: 8px 0;
+  }
+  .prefetch-bar .fill {
+    height: 100%; background: linear-gradient(90deg,#FFB74D,#FF9800);
+    width: 0%; transition: width .3s;
+  }
+  /* 录音中的红点呼吸动画 */
+  .mic-btn.recording {
+    background: #E53935 !important;
+    animation: micPulse 1.2s ease-in-out infinite;
+  }
+  @keyframes micPulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(229,57,53,0.6); }
+    50%     { box-shadow: 0 0 0 12px rgba(229,57,53,0); }
+  }
+  .mic-btn.uploading { background: #FFA726 !important; }
+  .mic-btn.uploading::after {
+    content: ''; display: inline-block; width: 12px; height: 12px;
+    border: 2px solid white; border-top-color: transparent;
+    border-radius: 50%; animation: spin 0.8s linear infinite;
+    margin-left: 6px; vertical-align: middle;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  /* 评分卡里的回放按钮 */
+  .replay-row {
+    display: flex; gap: 10px; justify-content: center; margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .replay-row button {
+    background: #FFF; border: 1px solid #FFB74D; color: #E65100;
+    padding: 6px 14px; border-radius: 18px; font-size: 13px;
+    cursor: pointer;
+  }
+  .replay-row button:active { background: #FFE0B2; }
 </style>
 </head>
 <body>
@@ -44,7 +82,9 @@
   <div id="listenPhase">
     <div class="card">
       <div style="font-weight:700;margin-bottom:6px;">📖 先听一遍整段对话</div>
-      <div class="tiny" style="color:#999;margin-bottom:8px;">边听边看，听完点下面"开始跟读"</div>
+      <div class="tiny" style="color:#999;margin-bottom:4px;">边听边看，听完点下面"开始跟读"</div>
+      <div class="prefetch-bar"><div class="fill" id="prefetchFill"></div></div>
+      <div class="tiny" id="prefetchText" style="color:#999;margin-bottom:6px;">准备中... 0 / 30</div>
       <div id="dialogList" class="dialog-list"></div>
     </div>
     <div class="card">
@@ -53,7 +93,7 @@
         <button class="sub-btn" onclick="stopAll()">⏸️ 暂停</button>
         <button class="sub-btn" onclick="startPractice()">🎤 跳过通听 直接跟读</button>
       </div>
-      <div class="tiny" id="listenStatus" style="text-align:center;color:#999;margin-top:8px;">点上面按钮开始播放（浏览器要求手动点一次才能放声音）</div>
+      <div class="tiny" id="listenStatus" style="text-align:center;color:#999;margin-top:8px;">点上面按钮开始播放</div>
     </div>
   </div>
 
@@ -76,7 +116,7 @@
       </div>
 
       <button class="mic-btn" id="micBtn" onclick="onMic()">🎤</button>
-      <div class="mic-hint" id="micHint">点麦克风跟读</div>
+      <div class="mic-hint" id="micHint">点麦克风开始跟读</div>
 
       <div id="resultBox"></div>
     </div>
@@ -101,11 +141,9 @@ const sentences = day.sentences;
 let curIdx = 0;
 let tryNum = 0;
 const MAX_TRY = 3;
-const PASS_SCORE = 75;
-const MIN_LEN_RATIO = 0.7;
-
-let listenPlaying = false;  // 通听是否在自动播放中
-let listenIdx = 0;          // 通听播到第几句
+const PASS_SCORE = 70;       // Whisper 比浏览器识别准；阈值微调
+const MIN_LEN_RATIO = 0.6;
+const RECORD_MAX_MS = 4000;  // 录音最长 4 秒，超时自动停
 
 document.getElementById('title').textContent = `Day ${day.id} · ${day.theme}`;
 
@@ -114,22 +152,16 @@ function getVoice(speaker) {
   return (DAILY_LIFE.defaultSpeakers || {})[speaker] || 'shimmer';
 }
 function getEmotion(type) {
-  return (DAILY_LIFE.emotionMap || {})[type] || 'Speak naturally like a real person in daily life.';
+  return (DAILY_LIFE.emotionMap || {})[type] || 'Speak naturally like a real person in daily life. ';
 }
 function getInstructions(speaker, type) {
   return ((DAILY_LIFE.speakerHints || {})[speaker] || '') + getEmotion(type);
-}
-function getPitch(speaker) {
-  return (DAILY_LIFE.speakerPitch || {})[speaker] || 1.0;
 }
 function speakerIcon(sp) {
   return ({ mom:'👩', kid:'🧒', dad:'👨', teacher:'👩‍🏫', doctor:'🧑‍⚕️', grandma:'👵', grandpa:'👴', sister:'👧', brother:'👦', classmate:'🧒' })[sp] || '🎬';
 }
 function speakerName(sp) {
   return ({ mom:'妈妈', kid:'小朋友', dad:'爸爸', teacher:'老师', doctor:'医生', grandma:'奶奶', grandpa:'爷爷', sister:'姐姐', brother:'弟弟', classmate:'同学' })[sp] || '说话人';
-}
-async function speakLine(s) {
-  return DE.TTS.speak(s.en, getVoice(s.speaker), getInstructions(s.speaker, s.type), { pitch: getPitch(s.speaker) });
 }
 
 // ============ 阶段一：通听整段 ============
@@ -155,49 +187,41 @@ function renderDialogList() {
 function markListenRow(i, cls) {
   document.querySelectorAll('.dialog-line').forEach(r => r.classList.remove('playing'));
   const row = document.getElementById('dl_' + i);
-  if (row) {
-    if (cls === 'playing') row.classList.add('playing');
-    if (cls === 'done') row.classList.add('done');
-    row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
+  if (!row) return;
+  if (cls === 'playing') row.classList.add('playing');
+  if (cls === 'done')    row.classList.add('done');
+  if (cls === 'skipped') row.classList.add('skipped');
+  row.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 async function playOneInList(i) {
-  if (listenPlaying) return;  // 自动连播中点单句无效
+  if (DE.TTS.playing) return;
+  await DE.TTS.unlock();
   markListenRow(i, 'playing');
-  await speakLine(sentences[i]);
+  try { await DE.TTS.playOne(sentences[i]); }
+  catch (e) { console.warn('playOne err', e.message); }
   markListenRow(i, 'done');
 }
 
 async function playAll() {
-  if (listenPlaying) return;
-  listenPlaying = true;
-  document.getElementById('listenStatus').textContent = '🔊 正在连播...';
+  if (DE.TTS.playing) return;
+  await DE.TTS.unlock();
+  const status = document.getElementById('listenStatus');
+  status.textContent = '🔊 正在连播...';
   document.getElementById('playAllBtn').disabled = true;
-  for (let i = listenIdx; i < sentences.length; i++) {
-    if (!listenPlaying) break;
-    listenIdx = i;
-    markListenRow(i, 'playing');
-    await speakLine(sentences[i]);
-    if (!listenPlaying) break;
-    document.getElementById('dl_' + i).classList.add('done');
-    document.getElementById('dl_' + i).classList.remove('playing');
-    // 句子之间留一点停顿，像真人对话
-    await new Promise(r => setTimeout(r, 350));
-  }
-  listenPlaying = false;
-  document.getElementById('playAllBtn').disabled = false;
-  if (listenIdx >= sentences.length - 1) {
-    document.getElementById('listenStatus').innerHTML = '✅ 整段播完了！点 <b>🎤 开始跟读</b> 进入练习';
-    listenIdx = 0;
-  } else {
-    document.getElementById('listenStatus').textContent = '⏸️ 已暂停，可继续';
-  }
+  await DE.TTS.playAll(
+    sentences,
+    (i, state) => markListenRow(i, state),
+    () => {
+      document.getElementById('playAllBtn').disabled = false;
+      status.innerHTML = '✅ 整段播完了！点 <b>🎤 跳过通听 直接跟读</b> 进入练习';
+    }
+  );
 }
 
 function stopAll() {
-  listenPlaying = false;
   DE.TTS.stop();
+  document.getElementById('playAllBtn').disabled = false;
   document.getElementById('listenStatus').textContent = '⏸️ 已暂停';
 }
 
@@ -205,7 +229,29 @@ function startPractice() {
   stopAll();
   document.getElementById('listenPhase').style.display = 'none';
   document.getElementById('practicePhase').style.display = '';
+  if (!DE.Recorder.isSupported()) {
+    showMicWarning();
+  }
   loadCurrent();
+}
+
+function showMicWarning() {
+  const hint = document.getElementById('micHint');
+  hint.innerHTML = '⚠️ 此设备无法录音，跟读会自动通过<br><span class="tiny">需要 iOS 14.3+ / 新版 Chrome</span>';
+}
+
+// ============ 后台预下载整段音频 ============
+async function prefetchAll() {
+  const fill = document.getElementById('prefetchFill');
+  const text = document.getElementById('prefetchText');
+  try {
+    await DE.TTS.prefetchAll(sentences, (done, total) => {
+      fill.style.width = (done / total * 100) + '%';
+      text.textContent = done < total ? `准备中... ${done} / ${total}` : `✅ 全部 ${total} 句已就绪`;
+    });
+  } catch (e) {
+    text.textContent = '⚠️ 预下载失败（可仍点连播，会按需下载）';
+  }
 }
 
 // ============ 阶段二：逐句跟读 ============
@@ -234,7 +280,7 @@ async function loadCurrent() {
   zh.classList.add('hidden');
   document.getElementById('resultBox').innerHTML = '';
   document.getElementById('tryCount').textContent = '';
-  document.getElementById('micHint').textContent = '点麦克风跟读';
+  setMicUI('idle');
   setStep(1);
   updateProgress();
   await playSentence();
@@ -242,7 +288,9 @@ async function loadCurrent() {
 }
 
 async function playSentence() {
-  await speakLine(sentences[curIdx]);
+  await DE.TTS.unlock();
+  try { await DE.TTS.playOne(sentences[curIdx]); }
+  catch (e) { console.warn('playSentence err', e.message); }
 }
 
 function revealZh() {
@@ -250,48 +298,145 @@ function revealZh() {
   setStep(3);
 }
 
-function onMic() {
-  const s = sentences[curIdx];
+// mic 按钮状态机：idle → recording → uploading → idle
+let _recording = false;
+let _recordTimer = null;
+
+function setMicUI(state) {
+  const btn = document.getElementById('micBtn');
+  const hint = document.getElementById('micHint');
+  btn.classList.remove('recording', 'uploading', 'listening');
+  switch (state) {
+    case 'recording':
+      btn.classList.add('recording');
+      btn.textContent = '⏹️';
+      hint.textContent = '🔴 录音中... 再点一下停（4 秒自动停）';
+      break;
+    case 'uploading':
+      btn.classList.add('uploading');
+      btn.textContent = '🎤';
+      hint.textContent = '⏳ 正在判分...';
+      break;
+    default:
+      btn.textContent = '🎤';
+      hint.textContent = '点麦克风开始跟读';
+  }
+}
+
+async function onMic() {
+  // 无录音支持时直接通过
+  if (!DE.Recorder.isSupported()) {
+    DE.Tracking.markDone(day.id, curIdx);
+    setStep(4);
+    setTimeout(next, 600);
+    return;
+  }
+
+  // 第二次点：停止录音
+  if (_recording) return stopRec();
+
+  // 第一次点：开始录音
+  await DE.TTS.unlock();   // 顺便解锁 audio，回放需要
   document.getElementById('senZh').classList.remove('hidden');
   setStep(3);
-  const btn = document.getElementById('micBtn');
-  btn.classList.add('listening');
-  document.getElementById('micHint').textContent = '🎙️ 听你说...';
   document.getElementById('resultBox').innerHTML = '';
-  DE.Recognition.start(
-    (heard) => {
-      btn.classList.remove('listening');
-      const { score, lenRatio, ok } = DE.Pronunciation.passed(s.en, heard, PASS_SCORE, MIN_LEN_RATIO);
-      showResult(score, lenRatio, ok, heard);
-      if (ok) {
-        setStep(4);
-        DE.Tracking.markDone(day.id, curIdx);
-        setTimeout(next, 1200);
-      } else {
-        tryNum++;
-        document.getElementById('tryCount').textContent = `已尝试 ${tryNum}/${MAX_TRY} 次`;
-        if (tryNum >= MAX_TRY) {
-          document.getElementById('resultBox').innerHTML += '<div class="tiny" style="text-align:center;margin-top:8px;">已重试 3 次，2 秒后跳过</div>';
-          setTimeout(() => { DE.Tracking.markDone(day.id, curIdx); next(); }, 2000);
-        }
-      }
-    },
-    (err) => {
-      btn.classList.remove('listening');
-      document.getElementById('micHint').textContent = '⚠️ ' + err;
+  try {
+    await DE.Recorder.start();
+  } catch (e) {
+    showMicError(e.message);
+    return;
+  }
+  _recording = true;
+  setMicUI('recording');
+  if (_recordTimer) clearTimeout(_recordTimer);
+  _recordTimer = setTimeout(stopRec, RECORD_MAX_MS);
+}
+
+async function stopRec() {
+  if (!_recording) return;
+  _recording = false;
+  if (_recordTimer) { clearTimeout(_recordTimer); _recordTimer = null; }
+  setMicUI('uploading');
+  let heard = '';
+  let blob = null;
+  try {
+    blob = await DE.Recorder.stop();
+  } catch (e) {
+    console.warn('stop err', e);
+  }
+  try {
+    if (blob) heard = await DE.Recorder.transcribe(blob);
+  } catch (e) {
+    console.warn('whisper err', e.message);
+    handleNetFail();
+    return;
+  }
+  setMicUI('idle');
+  scoreAndShow(heard);
+}
+
+function showMicError(msg) {
+  setMicUI('idle');
+  document.getElementById('micHint').textContent = '⚠️ ' + msg;
+}
+
+function handleNetFail() {
+  setMicUI('idle');
+  document.getElementById('resultBox').innerHTML = `
+    <div class="result pass">
+      <div style="font-size:13px;opacity:.8;">😅 网络问题，给你过了</div>
+    </div>`;
+  DE.Tracking.markDone(day.id, curIdx);
+  setStep(4);
+  setTimeout(next, 1500);
+}
+
+function scoreAndShow(heard) {
+  const s = sentences[curIdx];
+  if (!heard || !heard.trim()) {
+    showResult(0, 0, false, '(没听到声音)');
+    tryNum++;
+    document.getElementById('tryCount').textContent = `已尝试 ${tryNum}/${MAX_TRY} 次`;
+    if (tryNum >= MAX_TRY) {
+      setTimeout(() => { DE.Tracking.markDone(day.id, curIdx); next(); }, 1500);
     }
-  );
+    return;
+  }
+  const { score, lenRatio, ok } = DE.Pronunciation.passed(s.en, heard, PASS_SCORE, MIN_LEN_RATIO);
+  showResult(score, lenRatio, ok, heard);
+  if (ok) {
+    setStep(4);
+    DE.Tracking.markDone(day.id, curIdx);
+    setTimeout(next, 1500);
+  } else {
+    tryNum++;
+    document.getElementById('tryCount').textContent = `已尝试 ${tryNum}/${MAX_TRY} 次`;
+    if (tryNum >= MAX_TRY) {
+      const box = document.getElementById('resultBox');
+      box.innerHTML += '<div class="tiny" style="text-align:center;margin-top:8px;">已重试 3 次，2 秒后跳过</div>';
+      setTimeout(() => { DE.Tracking.markDone(day.id, curIdx); next(); }, 2000);
+    }
+  }
 }
 
 function showResult(score, lenRatio, ok, heard) {
   const cls = ok ? 'pass' : 'fail';
   const emoji = ok ? '🎉' : (score >= 50 ? '💪' : '😅');
-  const tip = ok ? '太棒了！' : (lenRatio < 0.7 ? '说短了，再完整一点' : '再清楚一点');
+  const tip = ok ? '太棒了！' : (lenRatio < 0.6 ? '说短了，再完整一点' : '再清楚一点');
+  const s = sentences[curIdx];
+  const replayBtn = DE.Recorder.hasPlayback()
+    ? '<button onclick="DE.Recorder.playback()">▶️ 听听刚才</button>'
+    : '';
   document.getElementById('resultBox').innerHTML = `
     <div class="result ${cls}">
       <div style="font-size:13px;opacity:.8;">${emoji} ${tip}</div>
       <div class="score">${score}<span style="font-size:14px;">分</span></div>
       <div class="heard">你说: "${heard}"</div>
+      <div class="heard" style="opacity:.6;">原句: "${s.en}"</div>
+      <div class="replay-row">
+        ${replayBtn}
+        <button onclick="DE.TTS.playOne(sentences[curIdx])">🔊 听原句</button>
+      </div>
     </div>`;
 }
 
@@ -303,7 +448,6 @@ function next() {
 // 跳过：直接跳，不弹 confirm
 function skipOne() {
   if (document.getElementById('practicePhase').style.display === 'none') {
-    // 通听阶段下点跳过：直接进入跟读
     startPractice();
     return;
   }
@@ -322,9 +466,10 @@ function finishDay() {
     </div>`;
 }
 
-// ============ 启动：先渲染对话脚本，等用户点 ▶️ ============
+// ============ 启动：先渲染对话脚本 + 后台预下载，等用户点 ▶️ ============
 renderDialogList();
-// 不自动播放：浏览器禁止页面自动播放音频，必须用户点击触发
+document.getElementById('progText').textContent = `0 / ${sentences.length}`;
+prefetchAll();  // 进页面就开始后台下载，不阻塞 UI
 </script>
 </body>
 </html>
