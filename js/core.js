@@ -17,11 +17,13 @@ const Config = {
 };
 
 // ============ TTS (调 Worker → OpenAI) ============
+// 支持 pitch boost：对小孩 (sister/brother) 升高音调让声音像娃娃
 const TTS = {
   cache: {}, // 内存音频缓存 text+voice -> objectURL
   current: null,
 
-  async speak(text, voice = 'shimmer', instructions = '') {
+  async speak(text, voice = 'shimmer', instructions = '', opts = {}) {
+    // opts: { pitch: 1.0 (正常), 1.18 (姐姐), 1.22 (弟弟); speed: 1.0 默认 }
     this.stop();
     if (!Config.isReady()) {
       alert('请先在设置里填 Worker 地址和密码');
@@ -56,6 +58,14 @@ const TTS = {
     return new Promise((res) => {
       const a = new Audio(url);
       this.current = a;
+      const pitch = opts.pitch || 1.0;
+      const speed = opts.speed || 1.0;
+      // 关键：preservesPitch=false 让 playbackRate 同时升调
+      // pitch 越大声音越尖 → 越像小孩
+      a.preservesPitch = false;
+      a.mozPreservesPitch = false;
+      a.webkitPreservesPitch = false;
+      a.playbackRate = pitch * speed;
       a.onended = () => res();
       a.onerror = () => res();
       a.play().catch(() => res());

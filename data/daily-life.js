@@ -74,8 +74,7 @@ window.DAILY_LIFE = {
     classmate: "alloy"
   },
 
-  // 角色级强提示词：会在 instructions 前面拼一段强化"小孩 / 成人"音色
-  // worker 端调用 OpenAI 时把 speakerHint + emotionInstruction 一起发
+  // 角色级强提示词
   speakerHints: {
     mom:       "Warm, mid-30s Chinese-American mother. Adult woman voice, natural mom tone. ",
     dad:       "Calm, mid-30s Chinese-American father. Adult man voice, deep and steady. ",
@@ -83,6 +82,19 @@ window.DAILY_LIFE = {
     brother:   "VERY IMPORTANT: speak like a real 7-year-old boy, NOT an adult. Higher pitch, bouncy, little-kid energy. Child voice. ",
     teacher:   "Adult female elementary school teacher, clear and patient. ",
     classmate: "Another elementary school kid, similar age to the speakers. Child voice. "
+  },
+
+  // 客户端音调放大倍数：1.0 = 原声，>1 = 升调（像小孩），<1 = 降调（像老人）
+  // 因为 OpenAI 的 voice 底层都是成人音色，所以姐弟需要 pitch shift 才像娃娃
+  speakerPitch: {
+    mom:       1.0,
+    dad:       1.0,
+    sister:    1.20,  // 升高约 3 半音，9 岁小女孩
+    brother:   1.25,  // 升高约 4 半音，7 岁小男孩（比姐姐再尖一点）
+    teacher:   1.0,
+    classmate: 1.20,
+    grandma:   0.95,
+    grandpa:   0.92
   },
 
   days: [
