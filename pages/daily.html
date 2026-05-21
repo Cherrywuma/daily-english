@@ -89,6 +89,12 @@ function getEmotion(type) {
   const m = DAILY_LIFE.emotionMap || {};
   return m[type] || 'Speak naturally like a real person in daily life.';
 }
+// 把 speaker 级的"小孩 / 成人"强提示拼到 emotion instruction 前面
+function getInstructions(speaker, type) {
+  const hints = DAILY_LIFE.speakerHints || {};
+  const hint = hints[speaker] || '';
+  return hint + getEmotion(type);
+}
 
 async function loadCurrent() {
   if (curIdx >= sentences.length) return finishDay();
@@ -109,15 +115,15 @@ async function loadCurrent() {
 }
 
 function speakerIcon(sp) {
-  return ({ mom:'👩', kid:'🧒', dad:'👨', teacher:'👩‍🏫', doctor:'🧑‍⚕️', grandma:'👵', grandpa:'👴', sister:'👧', brother:'👦' })[sp] || '🎬';
+  return ({ mom:'👩', kid:'🧒', dad:'👨', teacher:'👩‍🏫', doctor:'🧑‍⚕️', grandma:'👵', grandpa:'👴', sister:'👧', brother:'👦', classmate:'🧒' })[sp] || '🎬';
 }
 function speakerName(sp) {
-  return ({ mom:'妈妈', kid:'小朋友', dad:'爸爸', teacher:'老师', doctor:'医生', grandma:'奶奶', grandpa:'爷爷', sister:'姐姐', brother:'哥哥' })[sp] || '说话人';
+  return ({ mom:'妈妈', kid:'小朋友', dad:'爸爸', teacher:'老师', doctor:'医生', grandma:'奶奶', grandpa:'爷爷', sister:'姐姐', brother:'弟弟', classmate:'同学' })[sp] || '说话人';
 }
 
 async function playSentence() {
   const s = sentences[curIdx];
-  await DE.TTS.speak(s.en, getVoice(s.speaker), getEmotion(s.type));
+  await DE.TTS.speak(s.en, getVoice(s.speaker), getInstructions(s.speaker, s.type));
 }
 
 function revealZh() {

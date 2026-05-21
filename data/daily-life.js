@@ -56,14 +56,33 @@ window.DAILY_LIFE = {
   },
 
   defaultSpeakers: {
+    // 妈妈 = 温暖成熟女声
     mom:     "shimmer",
-    dad:     "alloy",
-    sister:  "nova",
-    brother: "fable",
-    teacher: "alloy",
+    // 爸爸 = 深沉成熟男声（跟其他三人区分最大）
+    dad:     "onyx",
+    // 姐姐 9 岁 = 清亮女声，靠 instructions 模拟小女孩
+    sister:  "coral",
+    // 弟弟 7 岁 = 年轻男声，靠 instructions 模拟小男孩
+    brother: "ash",
+    // 老师 = 中性成人，跟妈妈区分
+    teacher: "nova",
+    // 医生 / 爷爷奶奶 = 区别于家庭成员
     doctor:  "echo",
-    grandma: "shimmer",
-    grandpa: "echo"
+    grandma: "sage",
+    grandpa: "fable",
+    // 同学 = 跟姐弟同龄但又不能混
+    classmate: "alloy"
+  },
+
+  // 角色级强提示词：会在 instructions 前面拼一段强化"小孩 / 成人"音色
+  // worker 端调用 OpenAI 时把 speakerHint + emotionInstruction 一起发
+  speakerHints: {
+    mom:       "Warm, mid-30s Chinese-American mother. Adult woman voice, natural mom tone. ",
+    dad:       "Calm, mid-30s Chinese-American father. Adult man voice, deep and steady. ",
+    sister:    "VERY IMPORTANT: speak like a real 9-year-old girl, NOT an adult. Higher pitch, lighter, slightly bratty kid energy. Child voice. ",
+    brother:   "VERY IMPORTANT: speak like a real 7-year-old boy, NOT an adult. Higher pitch, bouncy, little-kid energy. Child voice. ",
+    teacher:   "Adult female elementary school teacher, clear and patient. ",
+    classmate: "Another elementary school kid, similar age to the speakers. Child voice. "
   },
 
   days: [
