@@ -48,12 +48,12 @@
       <div id="dialogList" class="dialog-list"></div>
     </div>
     <div class="card">
-      <div class="listen-ctrl">
-        <button class="sub-btn" id="playAllBtn" onclick="playAll()">▶️ 自动连播</button>
+      <button class="big-btn" id="playAllBtn" onclick="playAll()" style="background:linear-gradient(135deg,#FFB74D,#FF9800);color:white;">▶️ 开始连播整段对话</button>
+      <div class="listen-ctrl" style="margin-top:10px;">
         <button class="sub-btn" onclick="stopAll()">⏸️ 暂停</button>
-        <button class="sub-btn" onclick="startPractice()">🎤 开始跟读</button>
+        <button class="sub-btn" onclick="startPractice()">🎤 跳过通听 直接跟读</button>
       </div>
-      <div class="tiny" id="listenStatus" style="text-align:center;color:#999;margin-top:8px;"></div>
+      <div class="tiny" id="listenStatus" style="text-align:center;color:#999;margin-top:8px;">点上面按钮开始播放（浏览器要求手动点一次才能放声音）</div>
     </div>
   </div>
 
@@ -322,10 +322,9 @@ function finishDay() {
     </div>`;
 }
 
-// ============ 启动：先进入通听阶段并自动连播 ============
+// ============ 启动：先渲染对话脚本，等用户点 ▶️ ============
 renderDialogList();
-// 自动开播
-setTimeout(() => { playAll(); }, 400);
+// 不自动播放：浏览器禁止页面自动播放音频，必须用户点击触发
 </script>
 </body>
 </html>
