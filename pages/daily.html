@@ -52,7 +52,9 @@
 <script src="../data/daily-life.js"></script>
 <script>
 const TOTAL_DAYS = DAILY_LIFE.days.length;
-const dayId = DE.Tracking.currentDayId(TOTAL_DAYS);
+const chosen = localStorage.getItem('chosen_day');
+const dayId = chosen ? parseInt(chosen) : DE.Tracking.currentDayId(TOTAL_DAYS);
+localStorage.removeItem('chosen_day');
 const day = DAILY_LIFE.days.find(d => d.id === dayId) || DAILY_LIFE.days[0];
 const sentences = day.sentences;
 let curIdx = 0;

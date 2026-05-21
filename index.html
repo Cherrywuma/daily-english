@@ -30,6 +30,11 @@
   <button class="big-btn" onclick="startToday()">🚀 开始今日打卡</button>
 
   <div class="card">
+    <div style="font-weight:700;margin-bottom:10px;">📚 选一天来学</div>
+    <div id="dayPicker" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-height:400px;overflow-y:auto;"></div>
+  </div>
+
+  <div class="card">
     <div style="font-weight:700;margin-bottom:10px;">📅 学习日历</div>
     <div class="calendar" id="calendar"></div>
   </div>
@@ -130,7 +135,24 @@ async function testTTS() {
   document.getElementById('cfgMsg').innerHTML = '<span class="ok-msg">✅ 听到声音就是成功</span>';
 }
 
+function renderDayPicker() {
+  const picker = document.getElementById('dayPicker');
+  if (!picker) return;
+  const allDays = DE.Tracking.getAllDays();
+  const finishedIds = new Set(Object.values(allDays).filter(x => x.finished).map(x => x.dayId));
+  picker.innerHTML = '';
+  DAILY_LIFE.days.forEach(d => {
+    const btn = document.createElement('button');
+    const done = finishedIds.has(d.id);
+    btn.style.cssText = `padding:12px;border-radius:12px;border:none;background:${done?'linear-gradient(135deg,#A8E6CF,#81C784)':'#FFF5E1'};color:${done?'white':'#333'};font-size:13px;text-align:left;cursor:pointer;`;
+    btn.innerHTML = `<div style="font-weight:700;">Day ${d.id} ${done?'✓':''}</div><div style="font-size:11px;opacity:.85;margin-top:2px;">${d.theme}</div>`;
+    btn.onclick = () => { localStorage.setItem('chosen_day', d.id); location.href='pages/daily.html'; };
+    picker.appendChild(btn);
+  });
+}
+
 refresh();
+renderDayPicker();
 </script>
 </body>
 </html>
