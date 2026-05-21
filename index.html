@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="每日英语">
+<title>每日英语打卡</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <h1>🌟 每日英语</h1>
+    <button class="icon-btn" onclick="showSettings()">⚙️</button>
+  </div>
+
+  <div id="hero" class="day-hero">
+    <div class="day-num">Day <span id="dayNum">1</span></div>
+    <div class="day-theme" id="dayTheme">加载中...</div>
+    <div class="day-desc" id="dayDesc"></div>
+  </div>
+
+  <div class="streak-row">
+    <div class="item"><div class="num" id="streak">0</div><div class="label">连续天数</div></div>
+    <div class="item"><div class="num" id="totalDays">0</div><div class="label">累计打卡</div></div>
+    <div class="item"><div class="num" id="todayProg">0/30</div><div class="label">今日进度</div></div>
+  </div>
+
+  <button class="big-btn" onclick="startToday()">🚀 开始今日打卡</button>
+
+  <div class="card">
+    <div style="font-weight:700;margin-bottom:10px;">📅 学习日历</div>
+    <div class="calendar" id="calendar"></div>
+  </div>
+
+  <div id="settingsPanel" style="display:none">
+    <div class="card">
+      <div style="font-weight:700;margin-bottom:12px;">⚙️ 设置</div>
+      <div class="form-row">
+        <label>Worker 地址（部署 Cloudflare 后的 URL）</label>
+        <input id="cfgUrl" placeholder="https://xxx.workers.dev">
+      </div>
+      <div class="form-row">
+        <label>App 密码（和 Worker 里设的一致）</label>
+        <input id="cfgPwd" type="password" placeholder="例如 mama2026">
+      </div>
+      <button class="big-btn" onclick="saveCfg()">💾 保存</button>
+      <button class="sub-btn" onclick="testTTS()">🔊 测试一下</button>
+      <div id="cfgMsg" class="tiny"></div>
+      <div class="tiny" style="margin-top:12px;">不知道怎么填？让 Cowork 帮你部署 Worker，然后把生成的 URL 填这里。</div>
+    </div>
+  </div>
+</div>
+
+<script src="js/core.js"></script>
+<script src="data/daily-life.js"></script>
+<script>
+const TOTAL_DAYS = (window.DAILY_LIFE && DAILY_LIFE.days.length) || 30;
+
+function refresh() {
+  const dayId = DE.Tracking.currentDayId(TOTAL_DAYS);
+  const day = DAILY_LIFE.days.find(d => d.id === dayId) || DAILY_LIFE.days[0];
+  document.getElementById('dayNum').textContent = dayId;
+  document.getElementById('dayTheme').textContent = day.theme;
+  document.getElementById('dayDesc').textContent = day.desc || '';
+
+  document.getElementById('streak').textContent = DE.Tracking.getStreak();
+  const allDays = DE.Tracking.getAllDays();
+  const finished = Object.values(allDays).filter(x => x.finished).length;
+  document.getElementById('totalDays').textContent = finished;
+
+  const today = DE.Tracking.getToday();
+  const doneCount = today ? today.done.length : 0;
+  const total = day.sentences.length;
+  document.getElementById('todayProg').textContent = `${doneCount}/${total}`;
+
+  renderCalendar(allDays);
+}
+
+function renderCalendar(allDays) {
+  const cal = document.getElementById('calendar');
+  cal.innerHTML = '';
+  const today = DE.Tracking.todayStr();
+  // 显示从开始日起的天数，最多 28
+  let startStr = today;
+  const days = Object.keys(allDays).sort();
+  if (days.length) startStr = days[0];
+  const start = new Date(startStr);
+  const todayD = new Date(today);
+  const diff = Math.floor((todayD - start) / 86400000);
+  const showDays = Math.max(28, diff + 7);
+  for (let i = 0; i < showDays; i++) {
+    const d = new Date(start); d.setDate(d.getDate() + i);
+    const ds = d.toISOString().slice(0, 10);
+    const cell = document.createElement('div');
+    cell.className = 'cal-cell';
+    cell.textContent = d.getDate();
+    if (allDays[ds] && allDays[ds].finished) cell.classList.add('done');
+    if (ds === today) cell.classList.add('today');
+    cal.appendChild(cell);
+  }
+}
+
+function startToday() {
+  if (!DE.Config.isReady()) {
+    alert('请先在 ⚙️ 设置里填 Worker 地址和密码');
+    showSettings();
+    return;
+  }
+  location.href = 'pages/daily.html';
+}
+
+function showSettings() {
+  const p = document.getElementById('settingsPanel');
+  p.style.display = p.style.display === 'none' ? 'block' : 'none';
+  document.getElementById('cfgUrl').value = DE.Config.workerUrl;
+  document.getElementById('cfgPwd').value = DE.Config.password;
+}
+
+function saveCfg() {
+  DE.Config.workerUrl = document.getElementById('cfgUrl').value.trim();
+  DE.Config.password = document.getElementById('cfgPwd').value.trim();
+  document.getElementById('cfgMsg').innerHTML = '<span class="ok-msg">✅ 已保存</span>';
+}
+
+async function testTTS() {
+  document.getElementById('cfgMsg').textContent = '测试中...';
+  await DE.TTS.speak("Good morning! Let's learn English today.", 'shimmer', 'Speak warmly like a cheerful mom.');
+  document.getElementById('cfgMsg').innerHTML = '<span class="ok-msg">✅ 听到声音就是成功</span>';
+}
+
+refresh();
+</script>
+</body>
+</html>

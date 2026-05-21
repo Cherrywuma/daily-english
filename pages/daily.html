@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>今日打卡</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <button class="icon-btn" onclick="location.href='../index.html'">←</button>
+    <h1 id="title">Day 1</h1>
+    <button class="icon-btn" onclick="skipOne()">⏭️</button>
+  </div>
+
+  <div class="progress"><div id="progBar" style="width:0%"></div></div>
+  <div style="text-align:center;font-size:13px;color:#999;margin-bottom:12px;">
+    <span id="progText">0 / 0</span>
+  </div>
+
+  <div class="step-row">
+    <div class="step" id="step1"><div class="dot">1</div>听</div>
+    <div class="step" id="step2"><div class="dot">2</div>看</div>
+    <div class="step" id="step3"><div class="dot">3</div>说</div>
+    <div class="step" id="step4"><div class="dot">4</div>过</div>
+  </div>
+
+  <div class="card">
+    <div id="speakerTag" class="speaker-tag">🎬</div>
+    <div class="sentence-en" id="senEn">Loading...</div>
+    <div class="sentence-zh hidden" id="senZh" onclick="revealZh()"></div>
+
+    <div style="text-align:center;margin-top:8px;">
+      <button class="sub-btn" style="display:inline-block;width:auto;padding:8px 16px;" onclick="playSentence()">🔊 再听一次</button>
+    </div>
+
+    <button class="mic-btn" id="micBtn" onclick="onMic()">🎤</button>
+    <div class="mic-hint" id="micHint">点麦克风跟读</div>
+
+    <div id="resultBox"></div>
+  </div>
+
+  <div class="card" style="text-align:center;">
+    <div style="font-size:13px;color:#666;margin-bottom:8px;">说错了？</div>
+    <button class="sub-btn" onclick="onMic()">🎤 再试一次</button>
+    <div class="tiny" id="tryCount"></div>
+  </div>
+</div>
+
+<script src="../js/core.js"></script>
+<script src="../data/daily-life.js"></script>
+<script>
+const TOTAL_DAYS = DAILY_LIFE.days.length;
+const dayId = DE.Tracking.currentDayId(TOTAL_DAYS);
+const day = DAILY_LIFE.days.find(d => d.id === dayId) || DAILY_LIFE.days[0];
+const sentences = day.sentences;
+let curIdx = 0;
+let tryNum = 0;
+const MAX_TRY = 3;
+const PASS_SCORE = 75;
+const MIN_LEN_RATIO = 0.7;
+
+document.getElementById('title').textContent = `Day ${day.id} · ${day.theme}`;
+
+function setStep(n) {
+  for (let i = 1; i <= 4; i++) {
+    const el = document.getElementById('step' + i);
+    el.classList.remove('active', 'done');
+    if (i < n) el.classList.add('done');
+    if (i === n) el.classList.add('active');
+  }
+}
+
+function updateProgress() {
+  const today = DE.Tracking.getToday();
+  const done = today ? today.done.length : 0;
+  document.getElementById('progBar').style.width = (curIdx / sentences.length * 100) + '%';
+  document.getElementById('progText').textContent = `${curIdx} / ${sentences.length}`;
+}
+
+function getVoice(speaker) {
+  const m = DAILY_LIFE.defaultSpeakers || {};
+  return m[speaker] || 'shimmer';
+}
+function getEmotion(type) {
+  const m = DAILY_LIFE.emotionMap || {};
+  return m[type] || 'Speak naturally like a real person in daily life.';
+}
+
+async function loadCurrent() {
+  if (curIdx >= sentences.length) return finishDay();
+  const s = sentences[curIdx];
+  tryNum = 0;
+  document.getElementById('speakerTag').textContent = speakerIcon(s.speaker) + ' ' + speakerName(s.speaker);
+  document.getElementById('senEn').textContent = s.en;
+  const zh = document.getElementById('senZh');
+  zh.textContent = s.zh;
+  zh.classList.add('hidden');
+  document.getElementById('resultBox').innerHTML = '';
+  document.getElementById('tryCount').textContent = '';
+  document.getElementById('micHint').textContent = '点麦克风跟读';
+  setStep(1);
+  updateProgress();
+  await playSentence();
+  setStep(2);
+}
+
+function speakerIcon(sp) {
+  return ({ mom:'👩', kid:'🧒', dad:'👨', teacher:'👩‍🏫', doctor:'🧑‍⚕️', grandma:'👵', grandpa:'👴', sister:'👧', brother:'👦' })[sp] || '🎬';
+}
+function speakerName(sp) {
+  return ({ mom:'妈妈', kid:'小朋友', dad:'爸爸', teacher:'老师', doctor:'医生', grandma:'奶奶', grandpa:'爷爷', sister:'姐姐', brother:'哥哥' })[sp] || '说话人';
+}
+
+async function playSentence() {
+  const s = sentences[curIdx];
+  await DE.TTS.speak(s.en, getVoice(s.speaker), getEmotion(s.type));
+}
+
+function revealZh() {
+  document.getElementById('senZh').classList.remove('hidden');
+  setStep(3);
+}
+
+function onMic() {
+  const s = sentences[curIdx];
+  document.getElementById('senZh').classList.remove('hidden');
+  setStep(3);
+  const btn = document.getElementById('micBtn');
+  btn.classList.add('listening');
+  document.getElementById('micHint').textContent = '🎙️ 听你说...';
+  document.getElementById('resultBox').innerHTML = '';
+  DE.Recognition.start(
+    (heard) => {
+      btn.classList.remove('listening');
+      const { score, lenRatio, ok } = DE.Pronunciation.passed(s.en, heard, PASS_SCORE, MIN_LEN_RATIO);
+      showResult(score, lenRatio, ok, heard);
+      if (ok) {
+        setStep(4);
+        DE.Tracking.markDone(day.id, curIdx);
+        setTimeout(next, 1200);
+      } else {
+        tryNum++;
+        document.getElementById('tryCount').textContent = `已尝试 ${tryNum}/${MAX_TRY} 次`;
+        if (tryNum >= MAX_TRY) {
+          document.getElementById('resultBox').innerHTML += '<div class="tiny" style="text-align:center;margin-top:8px;">已重试 3 次，2 秒后跳过</div>';
+          setTimeout(() => { DE.Tracking.markDone(day.id, curIdx); next(); }, 2000);
+        }
+      }
+    },
+    (err) => {
+      btn.classList.remove('listening');
+      document.getElementById('micHint').textContent = '⚠️ ' + err;
+    }
+  );
+}
+
+function showResult(score, lenRatio, ok, heard) {
+  const cls = ok ? 'pass' : 'fail';
+  const emoji = ok ? '🎉' : (score >= 50 ? '💪' : '😅');
+  const tip = ok ? '太棒了！' : (lenRatio < 0.7 ? '说短了，再完整一点' : '再清楚一点');
+  document.getElementById('resultBox').innerHTML = `
+    <div class="result ${cls}">
+      <div style="font-size:13px;opacity:.8;">${emoji} ${tip}</div>
+      <div class="score">${score}<span style="font-size:14px;">分</span></div>
+      <div class="heard">你说: "${heard}"</div>
+    </div>`;
+}
+
+function next() {
+  curIdx++;
+  loadCurrent();
+}
+
+function skipOne() {
+  if (confirm('跳过这一句？')) { DE.Tracking.markDone(day.id, curIdx); next(); }
+}
+
+function finishDay() {
+  const streak = DE.Tracking.completeDay(day.id);
+  document.body.innerHTML = `
+    <div class="wrap" style="text-align:center;padding-top:60px;">
+      <div style="font-size:80px;">🏆</div>
+      <h1 style="color:#E91E63;margin:16px 0;">完成 Day ${day.id}!</h1>
+      <div style="font-size:18px;color:#666;margin-bottom:24px;">连续打卡 ${streak} 天</div>
+      <button class="big-btn" onclick="location.href='../index.html'">回主页</button>
+    </div>`;
+}
+
+loadCurrent();
+</script>
+</body>
+</html>
