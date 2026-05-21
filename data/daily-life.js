@@ -10,92 +10,98 @@
 
 window.DAILY_LIFE = {
 
+  // emotionMap：每条带情绪 + 节奏/语速，让 OpenAI TTS 自己变速
   emotionMap: {
-    // ——大人语气
-    nag:        "Speak like a tired Chinese-American mom nagging her kids in the morning. Slightly exasperated, fast, real. Not angry, just over it.",
-    momCheer:   "Warm, cheerful mom voice, smiling, gentle morning energy.",
-    momFirm:    "Firm but not angry mom voice, setting a clear limit.",
-    momSoft:    "Soft, gentle, comforting mom voice.",
-    momCalling: "Mom calling from another room, louder, slightly raised voice.",
-    momTired:   "Mom voice at the end of a long day, low energy, kind of done.",
-    momTease:   "Mom teasing her kid playfully, smiling voice.",
-    momWorry:   "Mom voice with a tiny edge of worry.",
-    dadCalm:    "Calm, easy-going dad voice, low and warm.",
-    dadStern:   "Dad voice when he's serious, low and steady, not yelling.",
-    dadPlay:    "Playful dad voice, joking around with the kids.",
+    // ——妈妈 / 爸爸
+    nag:        "Tired Chinese-American mom nagging her kids in the morning. Slightly exasperated, brisk and clipped, real. Not angry, just over it. ",
+    momCheer:   "Warm cheerful mom voice, smiling, gentle morning energy, easy unhurried pace. ",
+    momFirm:    "Firm but not angry mom voice, deliberate and slow, setting a clear limit. ",
+    momSoft:    "Soft, gentle, comforting mom voice, slow and warm. ",
+    momCalling: "Mom calling from another room, projected voice, raised and slightly drawn out. ",
+    momTired:   "Mom voice at the end of a long day, slow, sighing, low energy, kind of done. ",
+    momTease:   "Mom teasing her kid playfully, smiling, light and a bit drawn out. ",
+    momWorry:   "Mom voice with a tiny edge of worry, slightly hurried and tense. ",
+    dadCalm:    "Calm easy-going dad voice, low and warm, unhurried. ",
+    dadStern:   "Dad voice when he's serious, low and steady, slow, not yelling. ",
+    dadPlay:    "Playful dad voice, joking around with the kids, light and bouncy. ",
 
-    // ——姐姐 9 岁（女生，带点小大人气）
-    sisAnnoy:   "9-year-old girl, annoyed at her little brother. Slightly bossy, eye-rolling energy.",
-    sisProud:   "9-year-old girl bragging a little, proud and a tiny bit smug.",
-    sisBoss:    "9-year-old big-sister voice, ordering her little brother around.",
-    sisWhine:   "9-year-old girl whining to her mom, drawn out.",
-    sisTease:   "9-year-old girl teasing her little brother, playful mean.",
-    sisCalm:    "9-year-old girl, calm and matter-of-fact, kind of grown up.",
-    sisSweet:   "9-year-old girl being sweet, asking nicely.",
+    // ——姐姐 9 岁
+    sisAnnoy:   "9-year-old girl annoyed at her little brother. Sharp, impatient, slightly fast, eye-rolling energy. ",
+    sisProud:   "9-year-old girl bragging, slow and smug, drawing out the key word. ",
+    sisBoss:    "9-year-old big-sister voice ordering her little brother, firm and slightly slow. ",
+    sisWhine:   "9-year-old girl whining to mom, drawn out, dragging vowels. ",
+    sisTease:   "9-year-old girl teasing her little brother, playful mean, sing-song. ",
+    sisCalm:    "9-year-old girl, calm matter-of-fact, kind of grown up, even pace. ",
+    sisSweet:   "9-year-old girl being sweet, asking nicely, soft and slow. ",
+    sisTell:    "9-year-old girl tattling, slightly fast and indignant. ",
+    sisCurious: "9-year-old girl asking with real curiosity, lively, rising tone. ",
+    sisExcite:  "9-year-old girl super excited, fast and breathless, almost yelling. ",
+    sisLoud:    "9-year-old girl yelling across the room, loud and clipped. ",
+    sisWhisper: "9-year-old girl whispering a secret, quiet and slow. ",
+    sisPout:    "9-year-old girl pouting, slightly drawn out and grumpy. ",
+    sisSoft:    "9-year-old girl speaking softly, slow and gentle. ",
+    sisRushed:  "9-year-old girl in a hurry, fast, slightly clipped, breathless. ",
 
-    // ——弟弟 7 岁（男生，爱告状、爱粘）
-    broCry:     "7-year-old boy about to cry, voice cracking, sniffly.",
-    broTell:    "7-year-old boy tattling to mom, loud, indignant.",
-    broExcite:  "7-year-old boy super excited, loud and bouncy.",
-    broWhine:   "7-year-old boy whining, drawn out, almost crying.",
-    broScared:  "7-year-old boy a little scared, small voice.",
-    broPout:    "7-year-old boy pouting, arms crossed energy.",
-    broCute:    "7-year-old boy being cute on purpose, sweet little voice.",
-    broLoud:    "7-year-old boy yelling across the room, full volume.",
-    broCurious: "7-year-old boy asking a real curious question, wide-eyed.",
-    broSilly:   "7-year-old boy being silly, giggly.",
+    // ——弟弟 7 岁
+    broCry:     "7-year-old boy crying, voice cracking, slow and trembling, sobbing between words. ",
+    broTell:    "7-year-old boy tattling to mom, loud and indignant, slightly fast. ",
+    broExcite:  "7-year-old boy super excited, fast and breathless, almost yelling. ",
+    broWhine:   "7-year-old boy whining, drawn out, dragging vowels, almost crying. ",
+    broScared:  "7-year-old boy scared, small trembling voice, quiet and hesitant. ",
+    broPout:    "7-year-old boy pouting, slightly drawn out, arms-crossed energy. ",
+    broCute:    "7-year-old boy being cute on purpose, soft sweet little voice, slow. ",
+    broLoud:    "7-year-old boy yelling full volume, fast and clipped. ",
+    broCurious: "7-year-old boy asking a real curious question, wide-eyed, lively. ",
+    broSilly:   "7-year-old boy being silly, giggly, bouncy and light. ",
+    broTease:   "7-year-old boy teasing his sister, playful mean, sing-song. ",
+    broCalm:    "7-year-old boy speaking calmly, even normal pace. ",
+    broWhisper: "7-year-old boy whispering a secret, quiet and slow. ",
+    broProud:   "7-year-old boy bragging, slow and smug, drawing out the key word. ",
+    broSoft:    "7-year-old boy speaking softly, slow and gentle. ",
+    broAnnoy:   "7-year-old boy annoyed at his sister, sharp and impatient, slightly fast. ",
+    broRushed:  "7-year-old boy in a hurry, fast, slightly clipped, breathless. ",
+    broCalling: "7-year-old boy calling out from another room, projected and raised. ",
+    broWorry:   "7-year-old boy worried, slightly hurried and tense, voice small. ",
 
     // ——通用
-    casual:     "Talk casually, very natural, real-life pace.",
-    rushed:     "Speak fast and a little breathless, in a hurry.",
-    laugh:      "Light laughter in the voice, playful.",
-    surprised:  "Genuinely surprised, small gasp.",
-    cozy:       "Warm, cozy, dinner-table or bedtime voice.",
-    whisper:    "Whisper softly, like secret-sharing.",
-    yell:       "Calling from another room, loud."
+    casual:     "Casual everyday tone, very natural, real-life pace. ",
+    rushed:     "Speaking quickly and a little breathless, in a hurry, slightly clipped. ",
+    laugh:      "Light laughter in the voice, giggly between words. ",
+    surprised:  "Genuinely surprised, sharp intake of breath, voice raised. ",
+    cozy:       "Warm cozy dinner-table or bedtime voice, slow and drawn out. ",
+    whisper:    "Quiet whisper like secret-sharing, very soft and slow. ",
+    yell:       "Loud yelling almost shouting, voice strained, fast. "
   },
 
   defaultSpeakers: {
-    // 妈妈 = 温暖成熟女声
-    mom:     "shimmer",
-    // 爸爸 = 深沉成熟男声（跟其他三人区分最大）
-    dad:     "onyx",
-    // 姐姐 9 岁 = 清亮女声，靠 instructions 模拟小女孩
-    sister:  "coral",
-    // 弟弟 7 岁 = 年轻男声，靠 instructions 模拟小男孩
-    brother: "ash",
-    // 老师 = 中性成人，跟妈妈区分
-    teacher: "nova",
-    // 医生 / 爷爷奶奶 = 区别于家庭成员
-    doctor:  "echo",
-    grandma: "sage",
-    grandpa: "fable",
-    // 同学 = 跟姐弟同龄但又不能混
+    mom:       "shimmer",
+    dad:       "onyx",
+    sister:    "coral",
+    brother:   "ash",
+    teacher:   "nova",
+    doctor:    "echo",
+    grandma:   "sage",
+    grandpa:   "fable",
     classmate: "alloy"
   },
 
-  // 角色级强提示词
+  // 角色级强提示词 —— 客户端不再做 pitch shift，全靠 voice + 这里的描述
+  // 关键：sister/brother 写得激进，逼 OpenAI 输出小孩音色
   speakerHints: {
-    mom:       "Warm, mid-30s Chinese-American mother. Adult woman voice, natural mom tone. ",
-    dad:       "Calm, mid-30s Chinese-American father. Adult man voice, deep and steady. ",
-    sister:    "VERY IMPORTANT: speak like a real 9-year-old girl, NOT an adult. Higher pitch, lighter, slightly bratty kid energy. Child voice. ",
-    brother:   "VERY IMPORTANT: speak like a real 7-year-old boy, NOT an adult. Higher pitch, bouncy, little-kid energy. Child voice. ",
-    teacher:   "Adult female elementary school teacher, clear and patient. ",
-    classmate: "Another elementary school kid, similar age to the speakers. Child voice. "
+    mom:       "Voice of a warm mid-30s Chinese-American mother. Adult woman, natural mom tone. ",
+    dad:       "Voice of a calm mid-30s Chinese-American father. Adult man, low and steady. ",
+    sister:    "VOICE OF A REAL 9-YEAR-OLD GIRL — high-pitched, light, slightly squeaky, energetic kid voice. NOT an adult woman pretending. Think of an excited 4th-grade girl. ",
+    brother:   "VOICE OF A REAL 7-YEAR-OLD BOY — very high-pitched, breathy, slightly lispy, bouncy little-kid voice. NOT an adult man pretending. Think of a 1st-grade boy. ",
+    teacher:   "Voice of a friendly adult female elementary school teacher, clear and patient. ",
+    doctor:    "Voice of a kind doctor speaking to a child, gentle and reassuring. ",
+    grandma:   "Voice of a kind elderly Chinese-American grandma, soft and warm, slightly slow. ",
+    grandpa:   "Voice of a kind elderly Chinese-American grandpa, calm and slow, slightly raspy. ",
+    classmate: "Voice of an 8-year-old elementary school kid, high-pitched, similar age to the speakers. NOT an adult pretending. "
   },
 
-  // 客户端音调放大倍数：1.0 = 原声，>1 = 升调（像小孩），<1 = 降调（像老人）
-  // 因为 OpenAI 的 voice 底层都是成人音色，所以姐弟需要 pitch shift 才像娃娃
-  speakerPitch: {
-    mom:       1.0,
-    dad:       1.0,
-    sister:    1.20,  // 升高约 3 半音，9 岁小女孩
-    brother:   1.25,  // 升高约 4 半音，7 岁小男孩（比姐姐再尖一点）
-    teacher:   1.0,
-    classmate: 1.20,
-    grandma:   0.95,
-    grandpa:   0.92
-  },
+  // speakerPitch: 已废弃 — 客户端 Web Audio API 不再做 pitch shift。
+  // 姐弟的"娃娃音"完全靠上面 speakerHints + emotionMap 的 instructions 实现。
+  speakerPitch: {},
 
   days: [
 
