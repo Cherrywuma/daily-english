@@ -1,5 +1,5 @@
 // Daily English - core.js
-// Storage / TTS / Recognition / Pronunciation / Tracking
+// Storage / Config / TTS (Web Audio) / Recorder (MediaRecorder + Whisper) / Pronunciation / Tracking
 
 const Storage = {
   get(k, d = null) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
@@ -16,96 +16,253 @@ const Config = {
   isReady() { return !!this.workerUrl && !!this.password; },
 };
 
-// ============ TTS (调 Worker → OpenAI) ============
-// 支持 pitch boost：对小孩 (sister/brother) 升高音调让声音像娃娃
+// ============ TTS：Web Audio API + AudioContext ============
+// 关键变化：
+// 1) 用 AudioContext + AudioBuffer 调度，绕开 iOS Safari 的 autoplay 限制
+// 2) 第一次用户手势必须调 unlock() 一次
+// 3) 不再做客户端 pitch shift —— 完全靠 OpenAI 的 voice + instructions 区分小孩
+// 4) playAll 支持 prefetch + onLine 回调，让 listenPhase 真正连读
 const TTS = {
-  cache: {}, // 内存音频缓存 text+voice -> objectURL
-  current: null,
+  ctx: null,
+  cache: new Map(), // 'voice::text' -> AudioBuffer
+  playing: false,
+  currentSrc: null,
+  pauseAfter(type) {
+    if (['rushed', 'yell', 'sisRushed', 'broRushed'].includes(type)) return 150;
+    if (['whisper', 'cozy', 'momSoft', 'sisWhisper', 'broWhisper'].includes(type)) return 700;
+    return 450;
+  },
 
-  async speak(text, voice = 'shimmer', instructions = '', opts = {}) {
-    // opts: { pitch: 1.0 (正常), 1.18 (姐姐), 1.22 (弟弟); speed: 1.0 默认 }
-    this.stop();
-    if (!Config.isReady()) {
-      alert('请先在设置里填 Worker 地址和密码');
-      return;
+  _ensureCtx() {
+    if (!this.ctx) {
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if (!Ctx) throw new Error('浏览器不支持 Web Audio');
+      this.ctx = new Ctx();
     }
-    const key = `${voice}::${text}`;
-    let url = this.cache[key];
+    return this.ctx;
+  },
 
-    if (!url) {
+  // 必须在用户手势 (click/touch) 中调用一次
+  async unlock() {
+    const ctx = this._ensureCtx();
+    if (ctx.state === 'suspended') {
+      try { await ctx.resume(); } catch (e) { console.warn('resume failed', e); }
+    }
+    // 同时播一个无声 buffer 帮 iOS Safari 完全解锁
+    try {
+      const buf = ctx.createBuffer(1, 1, 22050);
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      src.connect(ctx.destination);
+      src.start(0);
+    } catch {}
+  },
+
+  _key(text, voice) { return `${voice}::${text}`; },
+
+  async _fetchBuffer(text, voice, instructions) {
+    const key = this._key(text, voice);
+    if (this.cache.has(key)) return this.cache.get(key);
+    if (!Config.isReady()) throw new Error('请先在设置里填 Worker 地址和密码');
+
+    const resp = await fetch(Config.workerUrl.replace(/\/$/, '') + '/tts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text, voice, instructions, password: Config.password }),
+    });
+    if (!resp.ok) {
+      const e = await resp.text();
+      throw new Error('TTS ' + resp.status + ': ' + e.slice(0, 100));
+    }
+    const arr = await resp.arrayBuffer();
+    const ctx = this._ensureCtx();
+    // decodeAudioData 在 Safari 上需要 callback 风格的 fallback
+    const buf = await new Promise((res, rej) => {
       try {
-        const resp = await fetch(Config.workerUrl.replace(/\/$/, '') + '/tts', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text, voice, instructions, password: Config.password }),
-        });
-        if (!resp.ok) {
-          const e = await resp.text();
-          console.error('TTS error', resp.status, e);
-          alert('TTS 调用失败: ' + resp.status);
-          return;
-        }
-        const blob = await resp.blob();
-        url = URL.createObjectURL(blob);
-        this.cache[key] = url;
-      } catch (e) {
-        console.error(e);
-        alert('网络错误：' + e.message);
-        return;
-      }
-    }
+        const p = ctx.decodeAudioData(arr, b => res(b), e => rej(e));
+        if (p && p.then) p.then(res, rej);
+      } catch (e) { rej(e); }
+    });
+    this.cache.set(key, buf);
+    return buf;
+  },
 
-    return new Promise((res) => {
-      const a = new Audio(url);
-      this.current = a;
-      const pitch = opts.pitch || 1.0;
-      const speed = opts.speed || 1.0;
-      // 关键：preservesPitch=false 让 playbackRate 同时升调
-      // pitch 越大声音越尖 → 越像小孩
-      a.preservesPitch = false;
-      a.mozPreservesPitch = false;
-      a.webkitPreservesPitch = false;
-      a.playbackRate = pitch * speed;
-      a.onended = () => res();
-      a.onerror = () => res();
-      a.play().catch(() => res());
+  // 后台批量预下载，并发 N，进度回调
+  async prefetchAll(sentences, onProgress) {
+    let done = 0;
+    const total = sentences.length;
+    const queue = sentences.slice();
+    const N = 4;
+    const work = async () => {
+      while (queue.length) {
+        const s = queue.shift();
+        try {
+          await this._fetchBuffer(s.en, _getVoice(s.speaker), _getInstructions(s.speaker, s.type));
+        } catch (e) {
+          console.warn('prefetch fail', s.en, e.message);
+        }
+        done++;
+        onProgress && onProgress(done, total);
+      }
+    };
+    await Promise.all(Array(N).fill(0).map(work));
+  },
+
+  // 播单句：用在 practicePhase 的"再听一次"
+  async playOne(s) {
+    this.stop();
+    const buf = await this._fetchBuffer(s.en, _getVoice(s.speaker), _getInstructions(s.speaker, s.type));
+    await this._playBuffer(buf);
+  },
+
+  // 连播整段：用在 listenPhase
+  async playAll(sentences, onLine, onDone) {
+    this.stop();
+    this.playing = true;
+    for (let i = 0; i < sentences.length; i++) {
+      if (!this.playing) break;
+      onLine && onLine(i, 'playing');
+      const s = sentences[i];
+      let buf;
+      try {
+        buf = await this._fetchBuffer(s.en, _getVoice(s.speaker), _getInstructions(s.speaker, s.type));
+      } catch (e) {
+        console.warn('playAll skip', s.en, e.message);
+        onLine && onLine(i, 'skipped');
+        continue;
+      }
+      if (!this.playing) break;
+      await this._playBuffer(buf);
+      onLine && onLine(i, 'done');
+      const pause = this.pauseAfter(s.type);
+      if (this.playing && pause) await new Promise(r => setTimeout(r, pause));
+    }
+    this.playing = false;
+    onDone && onDone();
+  },
+
+  _playBuffer(buf) {
+    return new Promise(res => {
+      const ctx = this._ensureCtx();
+      const src = ctx.createBufferSource();
+      src.buffer = buf;
+      src.connect(ctx.destination);
+      let ended = false;
+      const done = () => { if (!ended) { ended = true; res(); } };
+      src.onended = done;
+      this.currentSrc = src;
+      try { src.start(0); } catch (e) { done(); }
     });
   },
 
   stop() {
-    if (this.current) { try { this.current.pause(); } catch {} this.current = null; }
+    this.playing = false;
+    if (this.currentSrc) {
+      try { this.currentSrc.stop(); } catch {}
+      try { this.currentSrc.disconnect(); } catch {}
+      this.currentSrc = null;
+    }
   },
 };
 
-// ============ 语音识别 ============
-const Recognition = {
+// 这两个 helper 由 daily.html 注入（带 DAILY_LIFE 上下文）
+// 这里给 fallback，避免 core.js 单独 require 时崩
+function _getVoice(speaker) {
+  return (window.DAILY_LIFE?.defaultSpeakers || {})[speaker] || 'shimmer';
+}
+function _getInstructions(speaker, type) {
+  const hint = (window.DAILY_LIFE?.speakerHints || {})[speaker] || '';
+  const em = (window.DAILY_LIFE?.emotionMap || {})[type] || 'Speak naturally like a real person in daily life. ';
+  return hint + em;
+}
+
+// ============ Recorder：MediaRecorder + Whisper /stt ============
+const Recorder = {
   rec: null,
-  start(onResult, onError) {
-    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SR) { onError && onError('浏览器不支持语音识别（用 Safari 或 Chrome）'); return; }
-    if (this.rec) { try { this.rec.stop(); } catch {} }
-    const r = new SR();
-    r.lang = 'en-US';
-    r.interimResults = false;
-    r.maxAlternatives = 1;
-    r.continuous = false;
-    r.onresult = (e) => {
-      const t = e.results[0][0].transcript || '';
-      onResult && onResult(t);
-    };
-    r.onerror = (e) => onError && onError(e.error || 'error');
-    r.onend = () => { this.rec = null; };
-    try { r.start(); this.rec = r; } catch (e) { onError && onError(e.message); }
+  chunks: [],
+  stream: null,
+  lastBlob: null,
+  _lastUrl: null,
+
+  isSupported() {
+    return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder);
   },
-  stop() { if (this.rec) { try { this.rec.stop(); } catch {} this.rec = null; } },
+
+  _pickMime() {
+    const cands = ['audio/mp4', 'audio/webm;codecs=opus', 'audio/webm', 'audio/ogg;codecs=opus'];
+    for (const m of cands) {
+      try { if (MediaRecorder.isTypeSupported(m)) return m; } catch {}
+    }
+    return ''; // 用浏览器默认
+  },
+
+  async start() {
+    if (!this.isSupported()) throw new Error('浏览器不支持录音 (iOS 14.3+ Safari 才行)');
+    this.chunks = [];
+    this.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const mime = this._pickMime();
+    this.rec = new MediaRecorder(this.stream, mime ? { mimeType: mime } : undefined);
+    this.rec.ondataavailable = e => { if (e.data && e.data.size) this.chunks.push(e.data); };
+    this.rec.start();
+  },
+
+  isRecording() { return !!(this.rec && this.rec.state === 'recording'); },
+
+  stop() {
+    return new Promise(res => {
+      if (!this.rec) { res(null); return; }
+      const rec = this.rec;
+      rec.onstop = () => {
+        const type = rec.mimeType || 'audio/mp4';
+        const blob = this.chunks.length ? new Blob(this.chunks, { type }) : null;
+        this.lastBlob = blob;
+        if (this._lastUrl) { try { URL.revokeObjectURL(this._lastUrl); } catch {} this._lastUrl = null; }
+        if (this.stream) {
+          this.stream.getTracks().forEach(t => { try { t.stop(); } catch {} });
+          this.stream = null;
+        }
+        this.rec = null;
+        res(blob);
+      };
+      try { rec.stop(); } catch { res(null); }
+    });
+  },
+
+  async transcribe(blob) {
+    if (!Config.isReady()) throw new Error('请先填 Worker 设置');
+    if (!blob) throw new Error('录音为空');
+    const form = new FormData();
+    const filename = (blob.type || '').includes('webm') ? 'audio.webm'
+                  : (blob.type || '').includes('ogg')  ? 'audio.ogg'
+                  : 'audio.mp4';
+    form.append('file', blob, filename);
+    form.append('password', Config.password);
+    const resp = await fetch(Config.workerUrl.replace(/\/$/, '') + '/stt', {
+      method: 'POST', body: form,
+    });
+    if (!resp.ok) {
+      const e = await resp.text();
+      throw new Error('STT ' + resp.status + ': ' + e.slice(0, 100));
+    }
+    const data = await resp.json();
+    return (data && data.text) || '';
+  },
+
+  hasPlayback() { return !!this.lastBlob; },
+
+  playback() {
+    if (!this.lastBlob) return;
+    if (!this._lastUrl) this._lastUrl = URL.createObjectURL(this.lastBlob);
+    const a = new Audio(this._lastUrl);
+    a.play().catch(err => console.warn('playback fail', err));
+  },
 };
 
 // ============ 发音评分 ============
 const Pronunciation = {
-  // 清洗：小写、去标点、缩写归一
   norm(s) {
     return (s || '').toLowerCase()
-      .replace(/[\u2018\u2019']/g, "'")
+      .replace(/[‘’']/g, "'")
       .replace(/[^a-z0-9'\s]/g, ' ')
       .replace(/\s+/g, ' ')
       .replace(/\bgonna\b/g, 'going to')
@@ -118,7 +275,6 @@ const Pronunciation = {
       .replace(/'/g, '')
       .trim();
   },
-  // 词级编辑距离 + 字符相似度混合打分
   similarity(target, heard) {
     const t = this.norm(target);
     const h = this.norm(heard);
@@ -132,13 +288,11 @@ const Pronunciation = {
     const sim = wordSim * 0.7 + charSim * 0.3;
     return Math.max(0, Math.min(100, Math.round(sim * 100)));
   },
-  // 句长检查
   lengthRatio(target, heard) {
     const tw = this.norm(target).split(' ').filter(Boolean).length;
     const hw = this.norm(heard).split(' ').filter(Boolean).length;
     return tw === 0 ? 0 : hw / tw;
   },
-  // 通用 Levenshtein（接受数组或字符串拆分）
   _lev(a, b) {
     const m = a.length, n = b.length;
     if (m === 0) return n; if (n === 0) return m;
@@ -155,7 +309,8 @@ const Pronunciation = {
     }
     return dp[n];
   },
-  passed(target, heard, minScore = 75, minLenRatio = 0.7) {
+  passed(target, heard, minScore = 70, minLenRatio = 0.6) {
+    // Whisper 比浏览器识别准但对孩子的口音仍不完美，阈值稍微放宽（75/0.7 → 70/0.6）
     const s = this.similarity(target, heard);
     const r = this.lengthRatio(target, heard);
     return { score: s, lenRatio: r, ok: s >= minScore && r >= minLenRatio };
@@ -168,7 +323,6 @@ const Tracking = {
   _load() { return Storage.get(this._key, { days: {}, streak: 0, lastDate: '', startDate: '' }); },
   _save(d) { Storage.set(this._key, d); },
 
-  // 今天打卡 (sentenceIdx 完成)
   markDone(dayId, sentenceIdx) {
     const d = this._load();
     const today = this.todayStr();
@@ -178,14 +332,12 @@ const Tracking = {
     this._save(d);
   },
 
-  // 整天完成
   completeDay(dayId) {
     const d = this._load();
     const today = this.todayStr();
     if (!d.days[today]) d.days[today] = { dayId, done: [] };
     d.days[today].finished = true;
 
-    // 更新连续天数
     const yest = this.dateOffset(-1);
     if (d.lastDate === yest || d.lastDate === today) {
       if (d.lastDate !== today) d.streak += 1;
@@ -204,13 +356,12 @@ const Tracking = {
   getStreak() { return this._load().streak; },
   getAllDays() { return this._load().days; },
 
-  // 当前应该学第几天（按已完成的天数算 + 1）
   currentDayId(maxDay) {
     const d = this._load();
     const finished = Object.values(d.days).filter(x => x.finished).map(x => x.dayId);
     const max = finished.length ? Math.max(...finished) : 0;
     const next = max + 1;
-    return next > maxDay ? ((next - 1) % maxDay) + 1 : next; // 学完循环
+    return next > maxDay ? ((next - 1) % maxDay) + 1 : next;
   },
 
   todayStr() { return new Date().toISOString().slice(0, 10); },
@@ -220,4 +371,4 @@ const Tracking = {
   },
 };
 
-window.DE = { Storage, Config, TTS, Recognition, Pronunciation, Tracking };
+window.DE = { Storage, Config, TTS, Recorder, Pronunciation, Tracking };
