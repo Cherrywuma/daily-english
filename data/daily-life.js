@@ -1392,6 +1392,396 @@ window.DAILY_LIFE = {
         { en: "Corn last?",                     zh: "最后玉米？",              type: "broCurious", speaker: "brother" },
         { en: "Strip the husk.",                zh: "剥皮。",                  type: "casual",     speaker: "mom" }
       ]
+    },
+
+    // ====================================================
+    // Day 35: 妈妈教切
+    // ====================================================
+    {
+      id: 35, theme: "妈妈教切菜", desc: "黄瓜土豆西红柿香肠面包，姐姐示范",
+      sentences: [
+        { en: "Cut the cucumber.",              zh: "切黄瓜。",                type: "casual",     speaker: "mom" },
+        { en: "Whole one?",                     zh: "整根？",                  type: "broCurious", speaker: "brother" },
+        { en: "Half.",                          zh: "一半。",                  type: "casual",     speaker: "mom" },
+        { en: "With what?",                     zh: "用啥切？",                type: "broCurious", speaker: "brother" },
+        { en: "Small knife.",                   zh: "小刀。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Hold it firm.",                  zh: "按住。",                  type: "sisBoss",    speaker: "sister" },
+        { en: "Like this?",                     zh: "这样？",                  type: "broCurious", speaker: "brother" },
+        { en: "Curl your fingers.",             zh: "手指弯起来。",            type: "sisCalm",    speaker: "sister" },
+        { en: "Why?",                           zh: "为啥？",                  type: "broCurious", speaker: "brother" },
+        { en: "So you don't cut.",              zh: "免得切手。",              type: "sisCalm",    speaker: "sister" },
+        { en: "Slow.",                          zh: "慢点。",                  type: "momFirm",    speaker: "mom" },
+        { en: "Too thick!",                     zh: "太厚！",                  type: "broWhine",   speaker: "brother" },
+        { en: "Thinner.",                       zh: "薄点。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Now?",                           zh: "这样？",                  type: "broCurious", speaker: "brother" },
+        { en: "Better.",                        zh: "好多了。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Potato julienne?",               zh: "土豆切丝？",              type: "casual",     speaker: "mom" },
+        { en: "What's that?",                   zh: "啥是丝？",                type: "broCurious", speaker: "brother" },
+        { en: "Thin sticks.",                   zh: "细条。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "So thin!",                       zh: "好细！",                  type: "broExcite",  speaker: "brother" },
+        { en: "Practice.",                      zh: "多练。",                  type: "momSoft",    speaker: "mom" },
+        { en: "Tomato next.",                   zh: "下个西红柿。",            type: "casual",     speaker: "mom" },
+        { en: "They squish.",                   zh: "软的。",                  type: "broWhine",   speaker: "brother" },
+        { en: "Sharper knife.",                 zh: "换快刀。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Careful!",                       zh: "小心！",                  type: "momWorry",   speaker: "mom" },
+        { en: "Sausage round?",                 zh: "香肠切圆？",              type: "broCurious", speaker: "brother" },
+        { en: "Yes, slices.",                   zh: "对，片。",                type: "casual",     speaker: "mom" },
+        { en: "Even pieces.",                   zh: "厚薄一样。",              type: "sisBoss",    speaker: "sister" },
+        { en: "Bread last.",                    zh: "最后切面包。",            type: "casual",     speaker: "mom" },
+        { en: "Saw it.",                        zh: "锯一下。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Like a saw?",                    zh: "像锯子？",                type: "broSilly",   speaker: "brother" }
+      ]
+    },
+
+    // ====================================================
+    // Day 36: 调味料认知
+    // ====================================================
+    {
+      id: 36, theme: "认识调味料", desc: "盐糖酱油醋辣椒花椒，弟弟乱舔被辣",
+      sentences: [
+        { en: "What's the white stuff?",        zh: "白的啥？",                type: "broCurious", speaker: "brother" },
+        { en: "Salt.",                          zh: "盐。",                    type: "sisCalm",    speaker: "sister" },
+        { en: "Sweet too?",                     zh: "也甜的？",                type: "broCurious", speaker: "brother" },
+        { en: "That's sugar.",                  zh: "那是糖。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Same color!",                    zh: "颜色一样！",              type: "broLoud",    speaker: "brother" },
+        { en: "Taste it.",                      zh: "尝尝。",                  type: "sisTease",   speaker: "sister" },
+        { en: "Ack, salty!",                    zh: "啊，咸！",                type: "broWhine",   speaker: "brother" },
+        { en: "Told you.",                      zh: "我说了吧。",              type: "sisProud",   speaker: "sister" },
+        { en: "Soy sauce?",                     zh: "酱油？",                  type: "broCurious", speaker: "brother" },
+        { en: "Dark bottle.",                   zh: "深色瓶子。",              type: "sisCalm",    speaker: "sister" },
+        { en: "Smells strong.",                 zh: "味儿冲。",                type: "broCalm",    speaker: "brother" },
+        { en: "Add a drop.",                    zh: "滴一滴。",                type: "casual",     speaker: "mom" },
+        { en: "Vinegar where?",                 zh: "醋在哪？",                type: "sisCurious", speaker: "sister" },
+        { en: "Top shelf.",                     zh: "上层。",                  type: "casual",     speaker: "mom" },
+        { en: "Smells sour.",                   zh: "酸味。",                  type: "broCalm",    speaker: "brother" },
+        { en: "Yep, sour.",                     zh: "嗯，酸。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Chili peppers!",                 zh: "辣椒！",                  type: "broExcite",  speaker: "brother" },
+        { en: "Don't lick.",                    zh: "别舔。",                  type: "sisBoss",    speaker: "sister" },
+        { en: "Why?",                           zh: "为啥？",                  type: "broCurious", speaker: "brother" },
+        { en: "Burns.",                         zh: "辣死。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "I'll try.",                      zh: "我试试。",                type: "broSilly",   speaker: "brother" },
+        { en: "Don't!",                         zh: "别！",                    type: "sisAnnoy",   speaker: "sister" },
+        { en: "Ouch! Hot!",                     zh: "哎呦辣！",                type: "broLoud",    speaker: "brother" },
+        { en: "Told you.",                      zh: "说了吧。",                type: "sisTease",   speaker: "sister" },
+        { en: "Water!",                         zh: "水！",                    type: "broLoud",    speaker: "brother" },
+        { en: "Drink milk.",                    zh: "喝牛奶。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Sichuan pepper?",                zh: "花椒？",                  type: "broCurious", speaker: "brother" },
+        { en: "Numbs you.",                     zh: "麻嘴。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "MSG last.",                      zh: "最后味精。",              type: "casual",     speaker: "mom" },
+        { en: "So many!",                       zh: "好多种！",                type: "broExcite",  speaker: "brother" }
+      ]
+    },
+
+    // ====================================================
+    // Day 37: 吃饭餐具
+    // ====================================================
+    {
+      id: 37, theme: "摆餐具", desc: "碗筷勺叉刀盘杯，姐弟分工",
+      sentences: [
+        { en: "Set the table.",                 zh: "摆桌子。",                type: "casual",     speaker: "mom" },
+        { en: "How many?",                      zh: "几个人？",                type: "broCurious", speaker: "brother" },
+        { en: "Four people.",                   zh: "四个。",                  type: "casual",     speaker: "mom" },
+        { en: "Bowls?",                         zh: "碗？",                    type: "sisCurious", speaker: "sister" },
+        { en: "Big ones.",                      zh: "大的。",                  type: "casual",     speaker: "mom" },
+        { en: "Chopsticks too.",                zh: "筷子也拿。",              type: "broCalm",    speaker: "brother" },
+        { en: "Match the pairs.",               zh: "成双。",                  type: "sisBoss",    speaker: "sister" },
+        { en: "They all look same.",            zh: "都一样。",                type: "broWhine",   speaker: "brother" },
+        { en: "Not really.",                    zh: "不一样。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Spoons!",                        zh: "勺！",                    type: "broExcite",  speaker: "brother" },
+        { en: "Soup spoons.",                   zh: "汤勺。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Forks?",                         zh: "叉？",                    type: "broCurious", speaker: "brother" },
+        { en: "Not tonight.",                   zh: "今晚不用。",              type: "casual",     speaker: "mom" },
+        { en: "Why not?",                       zh: "为啥？",                  type: "broCurious", speaker: "brother" },
+        { en: "Chinese food.",                  zh: "中餐。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Knife?",                         zh: "刀呢？",                  type: "broCurious", speaker: "brother" },
+        { en: "Just for cutting.",              zh: "切菜用。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Where's mine?",                  zh: "我的呢？",                type: "broCurious", speaker: "brother" },
+        { en: "In the drawer.",                 zh: "抽屉里。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Plates next.",                   zh: "再摆盘。",                type: "casual",     speaker: "mom" },
+        { en: "Round or square?",               zh: "圆的方的？",              type: "broCurious", speaker: "brother" },
+        { en: "Round.",                         zh: "圆的。",                  type: "casual",     speaker: "mom" },
+        { en: "Cups too.",                      zh: "杯子。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Water cups?",                    zh: "水杯？",                  type: "broCurious", speaker: "brother" },
+        { en: "Or tea.",                        zh: "或茶杯。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Pick one.",                      zh: "随便挑。",                type: "casual",     speaker: "mom" },
+        { en: "Mine has flowers.",              zh: "我的有花。",              type: "broExcite",  speaker: "brother" },
+        { en: "Mine's plain.",                  zh: "我的素的。",              type: "sisCalm",    speaker: "sister" },
+        { en: "Trade?",                         zh: "换换？",                  type: "broCute",    speaker: "brother" },
+        { en: "No way.",                        zh: "不换。",                  type: "sisAnnoy",   speaker: "sister" }
+      ]
+    },
+
+    // ====================================================
+    // Day 38: 餐桌礼仪
+    // ====================================================
+    {
+      id: 38, theme: "餐桌礼仪", desc: "不挑食、不抢、嘴里别说话、等大人",
+      sentences: [
+        { en: "Don't pick.",                    zh: "别挑。",                  type: "momFirm",    speaker: "mom" },
+        { en: "I'm picky.",                     zh: "我挑食。",                type: "broPout",    speaker: "brother" },
+        { en: "Eat it.",                        zh: "吃掉。",                  type: "momFirm",    speaker: "mom" },
+        { en: "Yuck.",                          zh: "恶心。",                  type: "broWhine",   speaker: "brother" },
+        { en: "Don't reach.",                   zh: "别伸。",                  type: "sisAnnoy",   speaker: "sister" },
+        { en: "I want carrots.",                zh: "我要胡萝卜。",            type: "broWhine",   speaker: "brother" },
+        { en: "Ask.",                           zh: "说一声。",                type: "sisBoss",    speaker: "sister" },
+        { en: "Pass them please.",              zh: "递我谢谢。",              type: "broCute",    speaker: "brother" },
+        { en: "Better.",                        zh: "这才对。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Don't chew loud.",               zh: "别吧唧嘴。",              type: "sisAnnoy",   speaker: "sister" },
+        { en: "I don't!",                       zh: "我没！",                  type: "broPout",    speaker: "brother" },
+        { en: "You do.",                        zh: "你就有。",                type: "sisTease",   speaker: "sister" },
+        { en: "Mouth closed.",                  zh: "闭嘴嚼。",                type: "momFirm",    speaker: "mom" },
+        { en: "He's gross.",                    zh: "他真脏。",                type: "sisTell",    speaker: "sister" },
+        { en: "I'm not!",                       zh: "我没！",                  type: "broLoud",    speaker: "brother" },
+        { en: "Mom, look!",                     zh: "妈你看！",                type: "sisTell",    speaker: "sister" },
+        { en: "Enough.",                        zh: "够了。",                  type: "momTired",   speaker: "mom" },
+        { en: "Wait for dad.",                  zh: "等爸。",                  type: "momFirm",    speaker: "mom" },
+        { en: "He's slow.",                     zh: "他真慢。",                type: "broWhine",   speaker: "brother" },
+        { en: "Be patient.",                    zh: "耐心点。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Dad! Hurry!",                    zh: "爸！快点！",              type: "broLoud",    speaker: "brother" },
+        { en: "Coming.",                        zh: "来了。",                  type: "dadCalm",    speaker: "dad" },
+        { en: "Elbows off.",                    zh: "胳膊放下。",              type: "momFirm",    speaker: "mom" },
+        { en: "Sorry.",                         zh: "对不起。",                type: "broPout",    speaker: "brother" },
+        { en: "No phones.",                     zh: "不许玩手机。",            type: "momFirm",    speaker: "mom" },
+        { en: "Mine's away.",                   zh: "我没拿。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Sit straight.",                  zh: "坐直。",                  type: "momFirm",    speaker: "mom" },
+        { en: "My back hurts.",                 zh: "背疼。",                  type: "broWhine",   speaker: "brother" },
+        { en: "Just for dinner.",               zh: "吃饭这会儿。",            type: "momSoft",    speaker: "mom" },
+        { en: "Fine.",                          zh: "行吧。",                  type: "broPout",    speaker: "brother" }
+      ]
+    },
+
+    // ====================================================
+    // Day 39: 妈妈嫌弃菜难吃
+    // ====================================================
+    {
+      id: 39, theme: "妈嫌菜难吃", desc: "咸了淡了糊了生了，自我吐槽",
+      sentences: [
+        { en: "Too salty!",                     zh: "太咸！",                  type: "momWorry",   speaker: "mom" },
+        { en: "Is it?",                         zh: "真的？",                  type: "sisCurious", speaker: "sister" },
+        { en: "Way too salty.",                 zh: "齁死了。",                type: "momWorry",   speaker: "mom" },
+        { en: "Wasn't me.",                     zh: "不是我。",                type: "broPout",    speaker: "brother" },
+        { en: "Only I cook!",                   zh: "就我做饭。",              type: "momTired",   speaker: "mom" },
+        { en: "Sorry mom.",                     zh: "对不起妈。",              type: "sisSweet",   speaker: "sister" },
+        { en: "Now too bland.",                 zh: "又没味。",                type: "momWorry",   speaker: "mom" },
+        { en: "Add salt?",                      zh: "加盐？",                  type: "broCurious", speaker: "brother" },
+        { en: "Or not?",                        zh: "不加？",                  type: "sisCurious", speaker: "sister" },
+        { en: "I forgot.",                      zh: "我忘了。",                type: "momTired",   speaker: "mom" },
+        { en: "Smells burnt!",                  zh: "焦了！",                  type: "broLoud",    speaker: "brother" },
+        { en: "Oh no!",                         zh: "完了！",                  type: "momWorry",   speaker: "mom" },
+        { en: "Rescue it!",                     zh: "救一下！",                type: "sisLoud",    speaker: "sister" },
+        { en: "Too late.",                      zh: "晚了。",                  type: "momTired",   speaker: "mom" },
+        { en: "Throw it out.",                  zh: "扔了。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Try again.",                     zh: "再做一次。",              type: "momTired",   speaker: "mom" },
+        { en: "Raw inside!",                    zh: "里面生！",                type: "momWorry",   speaker: "mom" },
+        { en: "Eww.",                           zh: "恶心。",                  type: "broWhine",   speaker: "brother" },
+        { en: "Re-cook it.",                    zh: "再煮一下。",              type: "sisCalm",    speaker: "sister" },
+        { en: "Spicy bites!",                   zh: "辣口！",                  type: "momWorry",   speaker: "mom" },
+        { en: "He likes spice.",                zh: "他爱辣。",                type: "sisTease",   speaker: "sister" },
+        { en: "Not THIS spicy.",                zh: "不是这种辣。",            type: "momWorry",   speaker: "mom" },
+        { en: "My tongue!",                     zh: "舌头！",                  type: "broLoud",    speaker: "brother" },
+        { en: "Drink milk.",                    zh: "喝牛奶。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Oily soup.",                     zh: "汤太油。",                type: "momWorry",   speaker: "mom" },
+        { en: "Looks shiny.",                   zh: "亮晶晶。",                type: "broSilly",   speaker: "brother" },
+        { en: "Too much oil.",                  zh: "油多。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Skim it.",                       zh: "撇一下。",                type: "momTired",   speaker: "mom" },
+        { en: "With spoon.",                    zh: "用勺。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Cooking's hard.",                zh: "做饭真难。",              type: "broCalm",    speaker: "brother" }
+      ]
+    },
+
+    // ====================================================
+    // Day 40: 姐弟分零食
+    // ====================================================
+    {
+      id: 40, theme: "分零食", desc: "几块谁多谁少，藏了被发现",
+      sentences: [
+        { en: "Cookies!",                       zh: "饼干！",                  type: "broExcite",  speaker: "brother" },
+        { en: "How many?",                      zh: "几个？",                  type: "sisCurious", speaker: "sister" },
+        { en: "Six.",                           zh: "六个。",                  type: "broCalm",    speaker: "brother" },
+        { en: "Three each.",                    zh: "一人三。",                type: "sisCalm",    speaker: "sister" },
+        { en: "I want four.",                   zh: "我要四个。",              type: "broWhine",   speaker: "brother" },
+        { en: "Then I get two?",                zh: "我两个？",                type: "sisAnnoy",   speaker: "sister" },
+        { en: "Three each!",                    zh: "三个！",                  type: "broPout",    speaker: "brother" },
+        { en: "You said four.",                 zh: "你说四。",                type: "sisTease",   speaker: "sister" },
+        { en: "Three then.",                    zh: "那三个。",                type: "broPout",    speaker: "brother" },
+        { en: "Smart move.",                    zh: "聪明。",                  type: "sisTease",   speaker: "sister" },
+        { en: "Hide yours.",                    zh: "藏起来。",                type: "broWhisper", speaker: "brother" },
+        { en: "Why?",                           zh: "为啥？",                  type: "sisCurious", speaker: "sister" },
+        { en: "Mom won't see.",                 zh: "妈看不见。",              type: "broWhisper", speaker: "brother" },
+        { en: "Mom sees.",                      zh: "妈看见了。",              type: "sisCalm",    speaker: "sister" },
+        { en: "Whose are those?",               zh: "谁的？",                  type: "momFirm",    speaker: "mom" },
+        { en: "Hers!",                          zh: "她的！",                  type: "broTell",    speaker: "brother" },
+        { en: "His!",                           zh: "他的！",                  type: "sisTell",    speaker: "sister" },
+        { en: "Both yours.",                    zh: "你俩的。",                type: "momTease",   speaker: "mom" },
+        { en: "Yes mom.",                       zh: "对妈。",                  type: "broPout",    speaker: "brother" },
+        { en: "Sneaky.",                        zh: "鬼鬼祟祟。",              type: "momTease",   speaker: "mom" },
+        { en: "Share with us.",                 zh: "分给我们。",              type: "momTease",   speaker: "mom" },
+        { en: "No fair!",                       zh: "不公平！",                type: "broPout",    speaker: "brother" },
+        { en: "Family rule.",                   zh: "家规。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Two for mom.",                   zh: "给妈两个。",              type: "broPout",    speaker: "brother" },
+        { en: "One left.",                      zh: "剩一个。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Split?",                         zh: "分？",                    type: "broCute",    speaker: "brother" },
+        { en: "Bite each.",                     zh: "一人咬一口。",            type: "sisCalm",    speaker: "sister" },
+        { en: "Cool.",                          zh: "行。",                    type: "broCalm",    speaker: "brother" },
+        { en: "Your half bigger!",              zh: "你那半大！",              type: "broLoud",    speaker: "brother" },
+        { en: "Crybaby.",                       zh: "爱哭鬼。",                type: "sisTease",   speaker: "sister" }
+      ]
+    },
+
+    // ====================================================
+    // Day 41: 衣服分类
+    // ====================================================
+    {
+      id: 41, theme: "衣服分类", desc: "毛衣外套T恤裤子裙子袜子，一堆要叠",
+      sentences: [
+        { en: "Pile of clothes.",               zh: "一堆衣服。",              type: "casual",     speaker: "mom" },
+        { en: "Sort it.",                       zh: "分类。",                  type: "momFirm",    speaker: "mom" },
+        { en: "Sweaters here.",                 zh: "毛衣这堆。",              type: "sisCalm",    speaker: "sister" },
+        { en: "T-shirts too?",                  zh: "T 恤也这堆？",            type: "broCurious", speaker: "brother" },
+        { en: "Wrong pile.",                    zh: "放错了。",                type: "sisAnnoy",   speaker: "sister" },
+        { en: "Same fabric!",                   zh: "一样的料！",              type: "broPout",    speaker: "brother" },
+        { en: "Different thing.",               zh: "不一样。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Pants where?",                   zh: "裤子呢？",                type: "broCurious", speaker: "brother" },
+        { en: "Bottom drawer.",                 zh: "下层抽屉。",              type: "sisCalm",    speaker: "sister" },
+        { en: "Skirts?",                        zh: "裙子？",                  type: "broCurious", speaker: "brother" },
+        { en: "Mine.",                          zh: "我的。",                  type: "sisProud",   speaker: "sister" },
+        { en: "Boys don't wear.",               zh: "男生不穿。",              type: "broCalm",    speaker: "brother" },
+        { en: "Some do.",                       zh: "有的穿。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Socks!",                         zh: "袜子！",                  type: "broExcite",  speaker: "brother" },
+        { en: "Match them.",                    zh: "配对。",                  type: "sisBoss",    speaker: "sister" },
+        { en: "So many!",                       zh: "好多！",                  type: "broWhine",   speaker: "brother" },
+        { en: "By color.",                      zh: "按颜色。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Black ones.",                    zh: "黑的。",                  type: "broCalm",    speaker: "brother" },
+        { en: "White too.",                     zh: "白的也是。",              type: "sisCalm",    speaker: "sister" },
+        { en: "Underwear.",                     zh: "内衣。",                  type: "casual",     speaker: "mom" },
+        { en: "Eww.",                           zh: "恶心。",                  type: "broWhine",   speaker: "brother" },
+        { en: "Just fold.",                     zh: "叠就完了。",              type: "sisAnnoy",   speaker: "sister" },
+        { en: "Pajamas?",                       zh: "睡衣？",                  type: "broCurious", speaker: "brother" },
+        { en: "Top shelf.",                     zh: "上层。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "My hoodie?",                     zh: "我连帽衫？",              type: "broCurious", speaker: "brother" },
+        { en: "In wash.",                       zh: "洗着呢。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Aw man.",                        zh: "哎呀。",                  type: "broWhine",   speaker: "brother" },
+        { en: "Tomorrow.",                      zh: "明天好。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Fast though?",                   zh: "快点行吗？",              type: "broCute",    speaker: "brother" },
+        { en: "Maybe.",                         zh: "看吧。",                  type: "sisCalm",    speaker: "sister" }
+      ]
+    },
+
+    // ====================================================
+    // Day 42: 鞋袜
+    // ====================================================
+    {
+      id: 42, theme: "鞋袜", desc: "运动鞋皮鞋靴子拖鞋凉鞋雨鞋，弟弟少一只",
+      sentences: [
+        { en: "Where's left shoe?",             zh: "左鞋呢？",                type: "broCurious", speaker: "brother" },
+        { en: "By the door.",                   zh: "门口。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Only right one.",                zh: "就右脚。",                type: "broWhine",   speaker: "brother" },
+        { en: "Look again.",                    zh: "再找找。",                type: "sisAnnoy",   speaker: "sister" },
+        { en: "Found it!",                      zh: "找到了！",                type: "broExcite",  speaker: "brother" },
+        { en: "Sneakers tomorrow.",             zh: "明天穿运动鞋。",          type: "casual",     speaker: "mom" },
+        { en: "Leather shoes?",                 zh: "皮鞋呢？",                type: "sisCurious", speaker: "sister" },
+        { en: "For school.",                    zh: "上学穿。",                type: "casual",     speaker: "mom" },
+        { en: "I hate them.",                   zh: "我讨厌。",                type: "broWhine",   speaker: "brother" },
+        { en: "They pinch.",                    zh: "夹脚。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Boots day?",                     zh: "穿靴子？",                type: "broCurious", speaker: "brother" },
+        { en: "Raining?",                       zh: "下雨？",                  type: "sisCurious", speaker: "sister" },
+        { en: "Yeah.",                          zh: "嗯。",                    type: "broCalm",    speaker: "brother" },
+        { en: "Then boots.",                    zh: "那穿靴子。",              type: "sisCalm",    speaker: "sister" },
+        { en: "Slippers worn out.",             zh: "拖鞋穿烂了。",            type: "casual",     speaker: "mom" },
+        { en: "Buy new.",                       zh: "买新的。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Mine fit.",                      zh: "我合脚。",                type: "broExcite",  speaker: "brother" },
+        { en: "Yours too big.",                 zh: "你太大。",                type: "sisTease",   speaker: "sister" },
+        { en: "Are not.",                       zh: "不大。",                  type: "broPout",    speaker: "brother" },
+        { en: "Walk normal.",                   zh: "好好走。",                type: "sisAnnoy",   speaker: "sister" },
+        { en: "Sandals stink.",                 zh: "凉鞋臭。",                type: "broWhine",   speaker: "brother" },
+        { en: "Wash them.",                     zh: "洗一下。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Mom's old ones?",                zh: "妈穿旧的？",              type: "broCurious", speaker: "brother" },
+        { en: "Those are mine!",                zh: "那是我的！",              type: "sisAnnoy",   speaker: "sister" },
+        { en: "Mom gave you?",                  zh: "妈给你的？",              type: "broCurious", speaker: "brother" },
+        { en: "Yes.",                           zh: "对。",                    type: "sisProud",   speaker: "sister" },
+        { en: "Rain shoes!",                    zh: "雨鞋！",                  type: "broExcite",  speaker: "brother" },
+        { en: "Galoshes.",                      zh: "胶鞋。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Fancy word.",                    zh: "高级词。",                type: "broSilly",   speaker: "brother" },
+        { en: "Whatever.",                      zh: "随便。",                  type: "sisAnnoy",   speaker: "sister" }
+      ]
+    },
+
+    // ====================================================
+    // Day 43: 配饰
+    // ====================================================
+    {
+      id: 43, theme: "配饰", desc: "围巾帽子手套口罩书包水壶，姐弟翻箱倒柜",
+      sentences: [
+        { en: "Where's my scarf?",              zh: "围巾呢？",                type: "sisCurious", speaker: "sister" },
+        { en: "Closet.",                        zh: "衣柜。",                  type: "casual",     speaker: "mom" },
+        { en: "Found it.",                      zh: "找到了。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Mine's missing.",                zh: "我的丢了。",              type: "broWhine",   speaker: "brother" },
+        { en: "Hat too?",                       zh: "帽子也？",                type: "sisCurious", speaker: "sister" },
+        { en: "Yeah.",                          zh: "嗯。",                    type: "broCalm",    speaker: "brother" },
+        { en: "Look harder.",                   zh: "好好找。",                type: "sisAnnoy",   speaker: "sister" },
+        { en: "Help me!",                       zh: "帮我！",                  type: "broCute",    speaker: "brother" },
+        { en: "Fine, where last?",              zh: "行，最后在哪？",          type: "sisCalm",    speaker: "sister" },
+        { en: "School.",                        zh: "学校。",                  type: "broCalm",    speaker: "brother" },
+        { en: "Left it there?",                 zh: "落那了？",                type: "sisCurious", speaker: "sister" },
+        { en: "Maybe.",                         zh: "也许。",                  type: "broPout",    speaker: "brother" },
+        { en: "Gloves match?",                  zh: "手套对？",                type: "sisCurious", speaker: "sister" },
+        { en: "Yes.",                           zh: "对。",                    type: "broCalm",    speaker: "brother" },
+        { en: "Both pairs?",                    zh: "两副都有？",              type: "sisCurious", speaker: "sister" },
+        { en: "Mine blue.",                     zh: "我蓝的。",                type: "broCalm",    speaker: "brother" },
+        { en: "Mine pink.",                     zh: "我粉的。",                type: "sisProud",   speaker: "sister" },
+        { en: "Masks too.",                     zh: "口罩也带。",              type: "casual",     speaker: "mom" },
+        { en: "Plain or fun?",                  zh: "素的花的？",              type: "broCurious", speaker: "brother" },
+        { en: "Plain.",                         zh: "素的。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Fun's cooler!",                  zh: "花的酷！",                type: "broExcite",  speaker: "brother" },
+        { en: "Boring works.",                  zh: "素的也行。",              type: "sisCalm",    speaker: "sister" },
+        { en: "Backpack ready?",                zh: "书包好了？",              type: "casual",     speaker: "mom" },
+        { en: "Heavy.",                         zh: "重。",                    type: "broWhine",   speaker: "brother" },
+        { en: "Too many books.",                zh: "书太多。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Pack less.",                     zh: "少装点。",                type: "casual",     speaker: "mom" },
+        { en: "Water bottle.",                  zh: "水壶。",                  type: "broCalm",    speaker: "brother" },
+        { en: "Fill it.",                       zh: "装满。",                  type: "sisBoss",    speaker: "sister" },
+        { en: "Cap tight?",                     zh: "盖紧了？",                type: "broCurious", speaker: "brother" },
+        { en: "Check.",                         zh: "检查一下。",              type: "sisCalm",    speaker: "sister" }
+      ]
+    },
+
+    // ====================================================
+    // Day 44: 颜色互怼
+    // ====================================================
+    {
+      id: 44, theme: "颜色互怼", desc: "你眼瞎/我就喜欢/红的丑/灰的闷",
+      sentences: [
+        { en: "New shirt!",                     zh: "新衣服！",                type: "broExcite",  speaker: "brother" },
+        { en: "Eww red.",                       zh: "红的丑。",                type: "sisAnnoy",   speaker: "sister" },
+        { en: "I love red.",                    zh: "我喜欢红。",              type: "broPout",    speaker: "brother" },
+        { en: "Too bright.",                    zh: "太鲜。",                  type: "sisAnnoy",   speaker: "sister" },
+        { en: "Your shirt's gray.",             zh: "你的灰的。",              type: "broTease",   speaker: "brother" },
+        { en: "Gray's classy.",                 zh: "灰的高级。",              type: "sisProud",   speaker: "sister" },
+        { en: "Gray's boring.",                 zh: "灰的闷。",                type: "broTease",   speaker: "brother" },
+        { en: "Red's loud.",                    zh: "红的吵。",                type: "sisAnnoy",   speaker: "sister" },
+        { en: "I'm bright.",                    zh: "我亮。",                  type: "broProud",   speaker: "brother" },
+        { en: "You're loud.",                   zh: "你吵。",                  type: "sisTease",   speaker: "sister" },
+        { en: "So?",                            zh: "那又咋？",                type: "broPout",    speaker: "brother" },
+        { en: "Whatever.",                      zh: "随便。",                  type: "sisAnnoy",   speaker: "sister" },
+        { en: "My socks blue.",                 zh: "我袜子蓝的。",            type: "broCalm",    speaker: "brother" },
+        { en: "Like the ocean?",                zh: "像海？",                  type: "sisCurious", speaker: "sister" },
+        { en: "Like sky.",                      zh: "像天。",                  type: "broCalm",    speaker: "brother" },
+        { en: "Pretty.",                        zh: "好看。",                  type: "sisCalm",    speaker: "sister" },
+        { en: "Yellow shoes!",                  zh: "黄鞋！",                  type: "sisExcite",  speaker: "sister" },
+        { en: "Banana feet.",                   zh: "香蕉脚。",                type: "broTease",   speaker: "brother" },
+        { en: "Banana what?",                   zh: "啥香蕉？",                type: "sisAnnoy",   speaker: "sister" },
+        { en: "Banana feet!",                   zh: "香蕉脚！",                type: "broLoud",    speaker: "brother" },
+        { en: "Mom, look.",                     zh: "妈看他。",                type: "sisTell",    speaker: "sister" },
+        { en: "He says banana.",                zh: "他叫我香蕉。",            type: "sisWhine",   speaker: "sister" },
+        { en: "Stop it.",                       zh: "别闹。",                  type: "momFirm",    speaker: "mom" },
+        { en: "Pink hates me.",                 zh: "粉色烦我。",              type: "broSilly",   speaker: "brother" },
+        { en: "Pink's nice.",                   zh: "粉色挺好。",              type: "sisCalm",    speaker: "sister" },
+        { en: "Girls' color.",                  zh: "女孩色。",                type: "broPout",    speaker: "brother" },
+        { en: "Says who?",                      zh: "谁说的？",                type: "sisAnnoy",   speaker: "sister" },
+        { en: "Everyone.",                      zh: "都这么说。",              type: "broPout",    speaker: "brother" },
+        { en: "Old thinking.",                  zh: "老观念。",                type: "sisCalm",    speaker: "sister" },
+        { en: "Whatever.",                      zh: "随便。",                  type: "broPout",    speaker: "brother" }
+      ]
     }
   ]
 };
