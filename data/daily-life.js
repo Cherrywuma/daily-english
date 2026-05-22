@@ -3361,7 +3361,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 85: ?????
+    // Day 85: Family skit
     {
       id: 85,
       theme: "家庭小剧场 85",
@@ -3478,7 +3478,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 86: ?????
+    // Day 86: Family skit
     {
       id: 86,
       theme: "家庭小剧场 86",
@@ -3595,7 +3595,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 87: ?????
+    // Day 87: Family skit
     {
       id: 87,
       theme: "家庭小剧场 87",
@@ -3712,7 +3712,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 88: ?????
+    // Day 88: Family skit
     {
       id: 88,
       theme: "家庭小剧场 88",
@@ -3829,7 +3829,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 89: ?????
+    // Day 89: Family skit
     {
       id: 89,
       theme: "家庭小剧场 89",
@@ -3946,7 +3946,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 90: ?????
+    // Day 90: Family skit
     {
       id: 90,
       theme: "家庭小剧场 90",
@@ -4063,7 +4063,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 91: ?????
+    // Day 91: Family skit
     {
       id: 91,
       theme: "家庭小剧场 91",
@@ -4180,7 +4180,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 92: ?????
+    // Day 92: Family skit
     {
       id: 92,
       theme: "家庭小剧场 92",
@@ -4297,7 +4297,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 93: ?????
+    // Day 93: Family skit
     {
       id: 93,
       theme: "家庭小剧场 93",
@@ -4414,7 +4414,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 94: ?????
+    // Day 94: Family skit
     {
       id: 94,
       theme: "家庭小剧场 94",
@@ -4531,7 +4531,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 95: ?????
+    // Day 95: Family skit
     {
       id: 95,
       theme: "家庭小剧场 95",
@@ -4648,7 +4648,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 96: ?????
+    // Day 96: Family skit
     {
       id: 96,
       theme: "家庭小剧场 96",
@@ -4765,7 +4765,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 97: ?????
+    // Day 97: Family skit
     {
       id: 97,
       theme: "家庭小剧场 97",
@@ -4882,7 +4882,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 98: ?????
+    // Day 98: Family skit
     {
       id: 98,
       theme: "家庭小剧场 98",
@@ -4999,7 +4999,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 99: ?????
+    // Day 99: Family skit
     {
       id: 99,
       theme: "家庭小剧场 99",
@@ -5116,7 +5116,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 100: ?????
+    // Day 100: Family skit
     {
       id: 100,
       theme: "家庭小剧场 100",
@@ -5233,7 +5233,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 101: ?????
+    // Day 101: Family skit
     {
       id: 101,
       theme: "家庭小剧场 101",
@@ -5350,7 +5350,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 102: ?????
+    // Day 102: Family skit
     {
       id: 102,
       theme: "家庭小剧场 102",
@@ -5467,7 +5467,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 103: ?????
+    // Day 103: Family skit
     {
       id: 103,
       theme: "家庭小剧场 103",
@@ -5584,7 +5584,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 104: ?????
+    // Day 104: Family skit
     {
       id: 104,
       theme: "家庭小剧场 104",
@@ -5701,7 +5701,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 105: ?????
+    // Day 105: Family skit
     {
       id: 105,
       theme: "家庭小剧场 105",
@@ -5818,7 +5818,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 106: ?????
+    // Day 106: Family skit
     {
       id: 106,
       theme: "家庭小剧场 106",
@@ -5935,7 +5935,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 107: ?????
+    // Day 107: Family skit
     {
       id: 107,
       theme: "家庭小剧场 107",
@@ -6052,7 +6052,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 108: ?????
+    // Day 108: Family skit
     {
       id: 108,
       theme: "家庭小剧场 108",
@@ -6169,7 +6169,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 109: ?????
+    // Day 109: Family skit
     {
       id: 109,
       theme: "家庭小剧场 109",
@@ -6286,7 +6286,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 110: ?????
+    // Day 110: Family skit
     {
       id: 110,
       theme: "家庭小剧场 110",
@@ -6403,7 +6403,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 111: ?????
+    // Day 111: Family skit
     {
       id: 111,
       theme: "家庭小剧场 111",
@@ -6520,7 +6520,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 112: ?????
+    // Day 112: Family skit
     {
       id: 112,
       theme: "家庭小剧场 112",
@@ -6637,7 +6637,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 113: ?????
+    // Day 113: Family skit
     {
       id: 113,
       theme: "家庭小剧场 113",
@@ -6754,7 +6754,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 114: ?????
+    // Day 114: Family skit
     {
       id: 114,
       theme: "家庭小剧场 114",
@@ -6871,7 +6871,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 115: ?????
+    // Day 115: Family skit
     {
       id: 115,
       theme: "家庭小剧场 115",
@@ -6988,7 +6988,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 116: ?????
+    // Day 116: Family skit
     {
       id: 116,
       theme: "家庭小剧场 116",
@@ -7105,7 +7105,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 117: ?????
+    // Day 117: Family skit
     {
       id: 117,
       theme: "家庭小剧场 117",
@@ -7222,7 +7222,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 118: ?????
+    // Day 118: Family skit
     {
       id: 118,
       theme: "家庭小剧场 118",
@@ -7339,7 +7339,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 119: ?????
+    // Day 119: Family skit
     {
       id: 119,
       theme: "家庭小剧场 119",
@@ -7456,7 +7456,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 120: ?????
+    // Day 120: Family skit
     {
       id: 120,
       theme: "家庭小剧场 120",
