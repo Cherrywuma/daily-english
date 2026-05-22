@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>打印表演稿</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    color: #1f2933;
+    background: #f5f7fb;
+  }
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 18px;
+  }
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 12px;
+    margin: -18px -18px 16px;
+    background: rgba(245, 247, 251, .96);
+    border-bottom: 1px solid #dde3ee;
+  }
+  .toolbar button,
+  .toolbar select {
+    height: 38px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #fff;
+    color: #1f2933;
+    padding: 0 12px;
+    font-size: 14px;
+  }
+  .toolbar button.primary {
+    border-color: #2563eb;
+    background: #2563eb;
+    color: #fff;
+    font-weight: 700;
+  }
+  .sheet {
+    background: #fff;
+    border: 1px solid #d8dee9;
+    border-radius: 8px;
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, .08);
+  }
+  .lesson-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 18px;
+    align-items: start;
+    padding-bottom: 16px;
+    border-bottom: 3px solid #1f2933;
+  }
+  h1 {
+    margin: 0 0 8px;
+    font-size: 30px;
+    letter-spacing: 0;
+  }
+  .desc {
+    margin: 0;
+    color: #52606d;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .meta {
+    min-width: 150px;
+    text-align: right;
+    color: #52606d;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .section-title {
+    margin: 22px 0 10px;
+    font-size: 16px;
+    font-weight: 800;
+    color: #111827;
+  }
+  .role-grid,
+  .word-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .tag {
+    border: 1px solid #d8dee9;
+    border-radius: 8px;
+    padding: 9px 10px;
+    font-size: 14px;
+    background: #f8fafc;
+  }
+  .script {
+    display: grid;
+    gap: 8px;
+  }
+  .line {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #edf1f7;
+    break-inside: avoid;
+  }
+  .role {
+    font-weight: 800;
+    font-size: 14px;
+  }
+  .role.mom { color: #b45309; }
+  .role.dad { color: #1d4ed8; }
+  .role.sister { color: #be185d; }
+  .role.brother { color: #047857; }
+  .en {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+  .zh {
+    margin-top: 4px;
+    color: #52606d;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  body.hide-zh .zh { display: none; }
+  .actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .action-box {
+    border: 1px dashed #94a3b8;
+    border-radius: 8px;
+    min-height: 56px;
+    padding: 10px;
+    color: #475569;
+    font-size: 14px;
+  }
+  .blank-lines {
+    display: grid;
+    gap: 12px;
+    margin-top: 10px;
+  }
+  .blank-lines div {
+    border-bottom: 1px solid #94a3b8;
+    height: 22px;
+  }
+  @media (max-width: 640px) {
+    .sheet { padding: 20px; }
+    .lesson-head { grid-template-columns: 1fr; }
+    .meta { text-align: left; }
+    .role-grid, .word-grid, .actions { grid-template-columns: 1fr; }
+    .line { grid-template-columns: 72px 1fr; }
+    .en { font-size: 16px; }
+  }
+  @media print {
+    body { background: #fff; }
+    .page { max-width: none; padding: 0; }
+    .toolbar { display: none; }
+    .sheet {
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
+    }
+    @page { margin: 12mm; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="toolbar">
+    <button onclick="history.back()">返回</button>
+    <select id="daySelect" aria-label="选择课程"></select>
+    <button onclick="toggleZh()">隐藏中文</button>
+    <button class="primary" onclick="window.print()">打印</button>
+  </div>
+
+  <main class="sheet" id="sheet">
+    <div class="lesson-head">
+      <div>
+        <h1 id="title">Loading...</h1>
+        <p class="desc" id="desc"></p>
+      </div>
+      <div class="meta">
+        <div id="lineCount"></div>
+        <div id="roleCount"></div>
+        <div>姓名：__________</div>
+      </div>
+    </div>
+
+    <div class="section-title">角色</div>
+    <div class="role-grid" id="roles"></div>
+
+    <div class="section-title">重点词</div>
+    <div class="word-grid" id="words"></div>
+
+    <div class="section-title">表演台词</div>
+    <div class="script" id="script"></div>
+
+    <div class="section-title">表演动作</div>
+    <div class="actions">
+      <div class="action-box">1. 先做起床、找东西、互相催促的动作。</div>
+      <div class="action-box">2. 说到自己的角色时向前一步，声音要有表情。</div>
+      <div class="action-box">3. 结尾一起看向观众，说最后一句。</div>
+    </div>
+
+    <div class="section-title">今天要背下来的三句</div>
+    <div class="blank-lines">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </main>
+</div>
+
+<script src="../data/daily-life.js?v=20260522-speechgen-kids"></script>
+<script>
+const roleNames = {
+  mom: '妈妈',
+  dad: '爸爸',
+  sister: '姐姐',
+  brother: '弟弟',
+  kid: '孩子',
+  teacher: '老师',
+  doctor: '医生',
+  grandma: '奶奶',
+  grandpa: '爷爷',
+  classmate: '同学'
+};
+
+const wordHints = [
+  ['wake up', '起床'], ['bed', '床'], ['socks', '袜子'], ['sweater', '毛衣'],
+  ['chair', '椅子'], ['pajamas', '睡衣'], ['breakfast', '早餐'],
+  ['brush your teeth', '刷牙'], ['wash your face', '洗脸'], ['backpack', '书包'],
+  ['blanket', '毯子'], ['pillow', '枕头'], ['toothbrush', '牙刷'],
+  ['toothpaste', '牙膏'], ['towel', '毛巾'], ['bowl', '碗'],
+  ['cup', '杯子'], ['shoes', '鞋子'], ['keys', '钥匙'],
+  ['remote', '遥控器'], ['fridge', '冰箱'], ['table', '桌子']
+];
+
+function getDayId() {
+  const params = new URLSearchParams(location.search);
+  const id = Number(params.get('day') || localStorage.getItem('chosen_day') || 1);
+  return Number.isFinite(id) && id > 0 ? id : 1;
+}
+
+function setDayId(id) {
+  const url = new URL(location.href);
+  url.searchParams.set('day', id);
+  history.replaceState(null, '', url.toString());
+}
+
+function fillSelector(activeId) {
+  const select = document.getElementById('daySelect');
+  select.innerHTML = '';
+  DAILY_LIFE.days.forEach((day) => {
+    const option = document.createElement('option');
+    option.value = day.id;
+    option.textContent = `Day ${day.id} - ${day.theme}`;
+    option.selected = day.id === activeId;
+    select.appendChild(option);
+  });
+  select.onchange = () => render(Number(select.value));
+}
+
+function pickWords(day) {
+  const text = day.sentences.map((s) => `${s.en} ${s.zh}`).join(' ').toLowerCase();
+  const found = wordHints.filter(([en]) => text.includes(en.toLowerCase()));
+  return found.slice(0, 8);
+}
+
+function render(id) {
+  const day = DAILY_LIFE.days.find((d) => d.id === id) || DAILY_LIFE.days[0];
+  setDayId(day.id);
+  fillSelector(day.id);
+
+  document.getElementById('title').textContent = `Day ${day.id}: ${day.theme}`;
+  document.getElementById('desc').textContent = day.desc || '';
+  document.getElementById('lineCount').textContent = `${day.sentences.length} 句台词`;
+
+  const roles = [...new Set(day.sentences.map((s) => s.speaker))];
+  document.getElementById('roleCount').textContent = `${roles.length} 个角色`;
+  document.getElementById('roles').innerHTML = roles.map((role) =>
+    `<div class="tag"><strong>${roleNames[role] || role}</strong>：__________</div>`
+  ).join('');
+
+  const words = pickWords(day);
+  document.getElementById('words').innerHTML = words.length
+    ? words.map(([en, zh]) => `<div class="tag"><strong>${en}</strong><br>${zh}</div>`).join('')
+    : '<div class="tag">读台词时圈出今天的新单词。</div>';
+
+  document.getElementById('script').innerHTML = day.sentences.map((s) => {
+    const role = roleNames[s.speaker] || s.speaker || '角色';
+    return `<div class="line">
+      <div class="role ${s.speaker || ''}">${role}</div>
+      <div>
+        <div class="en">${s.en}</div>
+        <div class="zh">${s.zh}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleZh() {
+  document.body.classList.toggle('hide-zh');
+  event.currentTarget.textContent = document.body.classList.contains('hide-zh') ? '显示中文' : '隐藏中文';
+}
+
+render(getDayId());
+</script>
+</body>
+</html>

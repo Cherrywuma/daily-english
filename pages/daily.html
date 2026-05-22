@@ -70,6 +70,7 @@
   <div class="top">
     <button class="icon-btn" onclick="location.href='../index.html'">←</button>
     <h1 id="title">Day 1</h1>
+    <button class="icon-btn" onclick="printCurrentLesson()" title="打印表演稿">打印</button>
     <button class="icon-btn" onclick="skipOne()" title="跳过这一句">⏭️</button>
   </div>
 
@@ -245,6 +246,10 @@ function sceneKind(d) {
   if (text.includes('公园') || text.includes('park')) return 'park';
   if (text.includes('睡') || text.includes('夜') || text.includes('bed')) return 'night';
   return 'home';
+}
+
+function printCurrentLesson() {
+  location.href = `print.html?day=${day.id}&v=20260522-speechgen-kids`;
 }
 
 function showMicWarning() {
