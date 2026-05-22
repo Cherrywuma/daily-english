@@ -206,6 +206,7 @@ async function playOneInList(i) {
 async function playAll() {
   if (DE.TTS.playing) return;
   await DE.TTS.unlock();
+  await DE.Ambience.start(sceneKind(day));
   const status = document.getElementById('listenStatus');
   status.textContent = '🔊 正在连播...';
   document.getElementById('playAllBtn').disabled = true;
@@ -221,6 +222,7 @@ async function playAll() {
 
 function stopAll() {
   DE.TTS.stop();
+  DE.Ambience.stop();
   document.getElementById('playAllBtn').disabled = false;
   document.getElementById('listenStatus').textContent = '⏸️ 已暂停';
 }
@@ -233,6 +235,16 @@ function startPractice() {
     showMicWarning();
   }
   loadCurrent();
+}
+
+function sceneKind(d) {
+  const text = `${d.theme || ''} ${d.desc || ''}`.toLowerCase();
+  if (text.includes('雨') || text.includes('rain')) return 'rain';
+  if (text.includes('厨房') || text.includes('晚饭') || text.includes('早餐') || text.includes('kitchen')) return 'kitchen';
+  if (text.includes('超市') || text.includes('market') || text.includes('买东西')) return 'market';
+  if (text.includes('公园') || text.includes('park')) return 'park';
+  if (text.includes('睡') || text.includes('夜') || text.includes('bed')) return 'night';
+  return 'home';
 }
 
 function showMicWarning() {
@@ -250,7 +262,7 @@ async function prefetchAll() {
       if (done < total) {
         text.textContent = `准备中... ${done} / ${total}`;
       } else {
-        text.textContent = `✅ 全部 ${total} 句已就绪，3 秒后自动播放`;
+        text.textContent = `✅ 全部 ${total} 句已就绪，马上连播`;
         // 准备完成自动开始连播
         if (!DE.TTS.playing && !window._autoPlayed) {
           window._autoPlayed = true;
@@ -259,7 +271,7 @@ async function prefetchAll() {
             if (document.getElementById('listenPhase').style.display !== 'none') {
               playAll();
             }
-          }, 3000);
+          }, 300);
         }
       }
     });
@@ -470,6 +482,7 @@ function skipOne() {
 }
 
 function finishDay() {
+  DE.Ambience.stop();
   const streak = DE.Tracking.completeDay(day.id);
   document.body.innerHTML = `
     <div class="wrap" style="text-align:center;padding-top:60px;">
