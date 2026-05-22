@@ -43,14 +43,14 @@ function _typeToEmotion(type) {
 
 // type → speed（不同情绪不同语速，更真实）
 function _typeToSpeed(type) {
-  if (!type) return 1.15;
+  if (!type) return 1.5;
   const t = String(type).toLowerCase();
   // 快语速：急、生气、激动
-  if (t.includes('rushed') || t.includes('yell') || t.includes('angry') || t.includes('annoy') || t.includes('excite') || t.includes('loud')) return 1.30;
+  if (t.includes('rushed') || t.includes('yell') || t.includes('angry') || t.includes('annoy') || t.includes('excite') || t.includes('loud')) return 1.7;
   // 慢语速：温柔、悄悄话、累、伤心
-  if (t.includes('whisper') || t.includes('soft') || t.includes('tired') || t.includes('cozy') || t.includes('cry') || t.includes('sad')) return 1.0;
-  // 默认：1.15，比正常稍快，模拟真人对话
-  return 1.18;
+  if (t.includes('whisper') || t.includes('soft') || t.includes('tired') || t.includes('cozy') || t.includes('cry') || t.includes('sad')) return 1.2;
+  // 默认：1.5，真人聊天速度
+  return 1.5;
 }
 
 // 给文本加 MiniMax 的表情标签（让语气更逼真）
@@ -66,14 +66,14 @@ const TTS = {
   playing: false,
   currentSrc: null,
 
-  // 句间停顿（更短，符合真人对话节奏）
+  // 句间停顿（超快节奏，真人对话感）
   pauseAfter(type) {
-    if (!type) return 200;
+    if (!type) return 100;
     const t = String(type).toLowerCase();
-    if (t.includes('rushed') || t.includes('yell') || t.includes('loud')) return 80;   // 急促对话，几乎没停顿
-    if (t.includes('whisper') || t.includes('soft') || t.includes('cozy')) return 400;
-    if (t.includes('tired') || t.includes('cry')) return 350;
-    return 220;  // 默认 220ms，真人对话节奏
+    if (t.includes('rushed') || t.includes('yell') || t.includes('loud')) return 50;   // 抢话节奏
+    if (t.includes('whisper') || t.includes('soft') || t.includes('cozy')) return 250;
+    if (t.includes('tired') || t.includes('cry')) return 200;
+    return 100;  // 默认 100ms，真人聊天节奏
   },
 
   _ensureCtx() {
