@@ -140,41 +140,63 @@ const TTS = {
     if (!Config.isReady()) throw new Error('请先在设置里填 Worker 地址和密码');
 
     let lastErr;
-    for (let attempt = 1; attempt <= 3; attempt++) {
+    for (let attempt = 1; attempt <= 4; attempt++) {
       try {
         const buf = await this._fetchBufferOnce(enhancedText, voiceId, emotion, speed);
         this.cache.set(key, buf);
         return buf;
       } catch (e) {
         lastErr = e;
-        console.warn(`TTS attempt ${attempt}/3 failed for "${text.slice(0,30)}": ${e.message}`);
-        // 限速错误就等久一点
-        const isRateLimit = e.message && (e.message.includes('429') || e.message.includes('1024') || e.message.includes('rate'));
-        const wait = isRateLimit ? 1500 * attempt : 400 * attempt;
-        if (attempt < 3) await new Promise(r => setTimeout(r, wait));
+        console.warn(`TTS attempt ${attempt}/4 failed for "${text.slice(0,30)}": ${e.message}`);
+        // RPM 限速错误就等很久
+        const isRateLimit = e.message && (e.message.includes('429') || e.message.includes('1002') || e.message.includes('1024') || e.message.includes('rate limit'));
+        let wait;
+        if (isRateLimit) {
+          wait = 3000 * attempt;  // RPM 限速：3秒、6秒、9秒、12秒
+        } else {
+          wait = 500 * attempt;
+        }
+        if (attempt < 4) await new Promise(r => setTimeout(r, wait));
       }
     }
     throw lastErr;
   },
 
   async prefetchAll(sentences, onProgress) {
+    // 智能策略：
+    // 1. 先快速下载前 5 句（让用户尽快能开始听）
+    // 2. 后台慢速下载剩下的句子（不超 RPM）
     let done = 0;
     const total = sentences.length;
-    const queue = sentences.slice();
-    const N = 2;  // 并发 2，给 MiniMax 留余地，避免限速
-    const work = async () => {
-      while (queue.length) {
-        const s = queue.shift();
+    const PRIORITY = Math.min(5, sentences.length);
+
+    // 阶段 1：前 5 句快速下载（3 秒间隔）
+    for (let i = 0; i < PRIORITY; i++) {
+      const s = sentences[i];
+      try {
+        await this._fetchBuffer(s.en, _getVoiceId(s.speaker), s.type);
+      } catch (e) {
+        console.warn('priority prefetch fail', s.en, e.message);
+      }
+      done++;
+      onProgress && onProgress(done, total);
+      await new Promise(r => setTimeout(r, 3200));
+    }
+
+    // 阶段 2：剩下的句子后台慢慢下载（不阻塞用户）
+    (async () => {
+      for (let i = PRIORITY; i < sentences.length; i++) {
+        const s = sentences[i];
         try {
           await this._fetchBuffer(s.en, _getVoiceId(s.speaker), s.type);
         } catch (e) {
-          console.warn('prefetch fail', s.en, e.message);
+          console.warn('background prefetch fail', s.en, e.message);
         }
         done++;
         onProgress && onProgress(done, total);
+        await new Promise(r => setTimeout(r, 3200));
       }
-    };
-    await Promise.all(Array(N).fill(0).map(work));
+    })();
   },
 
   async playOne(s) {
@@ -186,18 +208,36 @@ const TTS = {
   async playAll(sentences, onLine, onDone) {
     this.stop();
     this.playing = true;
+    let lastFetchTime = 0;
     for (let i = 0; i < sentences.length; i++) {
       if (!this.playing) break;
       onLine && onLine(i, 'playing');
       const s = sentences[i];
       let buf;
+
+      // 检查是否有缓存
+      const emotion = _typeToEmotion(s.type);
+      const enhancedText = _enhanceText(s.en, s.type);
+      const voiceId = _getVoiceId(s.speaker);
+      const cacheKey = this._key(enhancedText, voiceId, emotion);
+      const fromCache = this.cache.has(cacheKey);
+
+      // 如果没缓存，需要远程拉取，要保证距离上次拉取 >= 3.2 秒
+      if (!fromCache) {
+        const elapsed = Date.now() - lastFetchTime;
+        const wait = Math.max(0, 3200 - elapsed);
+        if (wait > 0) {
+          console.log(`等 ${wait}ms 避免限速`);
+          await new Promise(r => setTimeout(r, wait));
+        }
+      }
+
       try {
-        // _fetchBuffer 内部已经重试 3 次了，这里失败就是真的失败
-        buf = await this._fetchBuffer(s.en, _getVoiceId(s.speaker), s.type);
+        buf = await this._fetchBuffer(s.en, voiceId, s.type);
+        if (!fromCache) lastFetchTime = Date.now();
       } catch (e) {
         console.warn('playAll skip', s.en, e.message);
         onLine && onLine(i, 'skipped');
-        // 失败后等 800ms 再继续，避免连续轰炸 MiniMax
         if (this.playing) await new Promise(r => setTimeout(r, 800));
         continue;
       }
