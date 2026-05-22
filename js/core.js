@@ -1,11 +1,5 @@
 // Daily English - core.js
-// Storage / Config / TTS (Web Audio + MiniMax) / Recorder (MediaRecorder + Whisper) / Pronunciation / Tracking
-//
-// 关键变化（相比昨晚版）：
-//   - TTS 后端从 OpenAI 切换到 MiniMax
-//   - voice 参数从 OpenAI 名字（shimmer/alloy）改成 MiniMax voice_id
-//   - request body 加 emotion 字段（供 MiniMax 调情绪）
-//   - 其他全部不动（WebAudio 调度、prefetch、Recorder、Whisper /stt 全部保留）
+// MiniMax TTS（speech-02-turbo + 英文音色 + 性格化映射 + 真人语速）
 
 const Storage = {
   get(k, d = null) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
@@ -21,29 +15,57 @@ const Config = {
   isReady() { return !!this.workerUrl && !!this.password; },
 };
 
-// ===== MiniMax voice_id 映射表 =====
+// ===== 英文音色 ID（speech-02 全套英文音色）=====
+// 姐姐：强势霸道
+// 弟弟：怂、脾气大、爱惹事
+// 妈妈：温暖但能严肃
+// 爸爸：沉稳
 const VOICE_IDS = {
-  mom:       'female-yujie',
-  dad:       'male-qn-jingying',
-  sister:    'female-shaonv',
-  brother:   'male-qn-badao',
-  teacher:   'female-chengshu',
-  doctor:    'male-qn-qingse',
-  grandma:   'female-tianmei',
-  grandpa:   'presenter_male',
-  classmate: 'male-qn-qingse',
-  kid:       'female-shaonv',
+  mom:       'English_CalmWoman',           // 冷静英文女声 - 妈妈
+  dad:       'English_Trustworth_Man',      // 可信任男声 - 爸爸
+  sister:    'English_Bossy_Leader',        // 强势女声 - 姐姐 9 岁
+  brother:   'English_PlayfulGirl',         // 调皮男声 - 弟弟 7 岁（其实是男孩声音）
+  teacher:   'English_Gentle-voiced_man',   // 老师
+  doctor:    'English_Trustworth_Man',
+  grandma:   'English_Wiselady',
+  grandpa:   'English_ReservedYoungMan',
+  classmate: 'English_PlayfulGirl',
+  kid:       'English_PlayfulGirl',
 };
 
+// type → MiniMax emotion 映射（更激进）
 function _typeToEmotion(type) {
   if (!type) return 'neutral';
   const t = String(type).toLowerCase();
   if (t.includes('cry') || t.includes('whine') || t.includes('sad')) return 'sad';
-  if (t.includes('angry') || t.includes('annoy') || t.includes('yell') || t.includes('loud') || t.includes('pout') || t.includes('rushed')) return 'angry';
+  if (t.includes('angry') || t.includes('annoy') || t.includes('yell') || t.includes('loud') || t.includes('pout') || t.includes('rushed') || t.includes('boss') || t.includes('stern')) return 'angry';
   if (t.includes('excite') || t.includes('proud') || t.includes('cute') || t.includes('cheer') || t.includes('laugh') || t.includes('silly') || t.includes('sweet') || t.includes('play')) return 'happy';
-  if (t.includes('scare')) return 'fearful';
+  if (t.includes('scare') || t.includes('worry')) return 'fearful';
   if (t.includes('surprise') || t.includes('curious')) return 'surprised';
   return 'neutral';
+}
+
+// type → speed（不同情绪不同语速，更真实）
+function _typeToSpeed(type) {
+  if (!type) return 1.15;
+  const t = String(type).toLowerCase();
+  // 快语速：急、生气、激动
+  if (t.includes('rushed') || t.includes('yell') || t.includes('angry') || t.includes('annoy') || t.includes('excite') || t.includes('loud')) return 1.30;
+  // 慢语速：温柔、悄悄话、累、伤心
+  if (t.includes('whisper') || t.includes('soft') || t.includes('tired') || t.includes('cozy') || t.includes('cry') || t.includes('sad')) return 1.0;
+  // 默认：1.15，比正常稍快，模拟真人对话
+  return 1.18;
+}
+
+// 给文本加 MiniMax 的表情标签（让语气更逼真）
+// 注意：只在特定情绪下加，避免破坏发音学习
+function _enhanceText(text, type) {
+  if (!type) return text;
+  const t = String(type).toLowerCase();
+  // 学习用 App，不能加太多干扰，但偶尔加点真人感
+  if (t.includes('laugh')) return text + ' (laughs)';
+  if (t.includes('cry')) return text + ' (sighs)';
+  return text;
 }
 
 // ============ TTS：Web Audio API + AudioContext ============
@@ -52,10 +74,15 @@ const TTS = {
   cache: new Map(),
   playing: false,
   currentSrc: null,
+
+  // 句间停顿（更短，符合真人对话节奏）
   pauseAfter(type) {
-    if (['rushed', 'yell', 'sisRushed', 'broRushed'].includes(type)) return 150;
-    if (['whisper', 'cozy', 'momSoft', 'sisWhisper', 'broWhisper'].includes(type)) return 700;
-    return 450;
+    if (!type) return 200;
+    const t = String(type).toLowerCase();
+    if (t.includes('rushed') || t.includes('yell') || t.includes('loud')) return 80;   // 急促对话，几乎没停顿
+    if (t.includes('whisper') || t.includes('soft') || t.includes('cozy')) return 400;
+    if (t.includes('tired') || t.includes('cry')) return 350;
+    return 220;  // 默认 220ms，真人对话节奏
   },
 
   _ensureCtx() {
@@ -81,21 +108,25 @@ const TTS = {
     } catch {}
   },
 
-  _key(text, voice) { return `${voice}::${text}`; },
+  _key(text, voice, emotion) { return `${voice}::${emotion}::${text}`; },
 
   async _fetchBuffer(text, voiceId, type) {
-    const key = this._key(text, voiceId);
+    const emotion = _typeToEmotion(type);
+    const speed = _typeToSpeed(type);
+    const enhancedText = _enhanceText(text, type);
+
+    const key = this._key(enhancedText, voiceId, emotion);
     if (this.cache.has(key)) return this.cache.get(key);
     if (!Config.isReady()) throw new Error('请先在设置里填 Worker 地址和密码');
 
-    const emotion = _typeToEmotion(type);
     const resp = await fetch(Config.workerUrl.replace(/\/$/, '') + '/tts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        text,
+        text: enhancedText,
         voice_id: voiceId,
         emotion,
+        speed,
         password: Config.password,
       }),
     });
@@ -192,12 +223,7 @@ const TTS = {
 
 function _getVoiceId(speaker) {
   if (VOICE_IDS[speaker]) return VOICE_IDS[speaker];
-  const ds = (window.DAILY_LIFE && window.DAILY_LIFE.defaultSpeakers) || {};
-  const v = ds[speaker];
-  if (v && (v.includes('-') || v.startsWith('audiobook_') || v.startsWith('presenter_'))) {
-    return v;
-  }
-  return 'female-shaonv';
+  return 'English_CalmWoman';
 }
 
 // ============ Recorder：MediaRecorder + Whisper /stt ============
@@ -287,6 +313,7 @@ const Pronunciation = {
   norm(s) {
     return (s || '').toLowerCase()
       .replace(/[\u2018\u2019']/g, "'")
+      .replace(/\(laughs\)|\(sighs\)|\(gasps\)|\(coughs\)|\(crying\)/g, '') // 去掉表情标签
       .replace(/[^a-z0-9'\s]/g, ' ')
       .replace(/\s+/g, ' ')
       .replace(/\bgonna\b/g, 'going to')
