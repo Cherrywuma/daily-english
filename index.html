@@ -131,7 +131,17 @@ function saveCfg() {
 
 async function testTTS() {
   document.getElementById('cfgMsg').textContent = '测试中...';
-  await DE.TTS.speak("Good morning! Let's learn English today.", 'shimmer', 'Speak warmly like a cheerful mom.');
+  try {
+    await DE.TTS.unlock();
+    await DE.TTS.playOne({
+      en: "Mom, five more minutes!",
+      speaker: 'brother',
+      type: 'whine'
+    });
+  } catch (e) {
+    document.getElementById('cfgMsg').innerHTML = `<span class="err-msg">⚠️ ${e.message}</span>`;
+    return;
+  }
   document.getElementById('cfgMsg').innerHTML = '<span class="ok-msg">✅ 听到声音就是成功</span>';
 }
 
