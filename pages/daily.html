@@ -247,7 +247,21 @@ async function prefetchAll() {
   try {
     await DE.TTS.prefetchAll(sentences, (done, total) => {
       fill.style.width = (done / total * 100) + '%';
-      text.textContent = done < total ? `准备中... ${done} / ${total}` : `✅ 全部 ${total} 句已就绪`;
+      if (done < total) {
+        text.textContent = `准备中... ${done} / ${total}`;
+      } else {
+        text.textContent = `✅ 全部 ${total} 句已就绪，3 秒后自动播放`;
+        // 准备完成自动开始连播
+        if (!DE.TTS.playing && !window._autoPlayed) {
+          window._autoPlayed = true;
+          setTimeout(() => {
+            // 还在 listen 模式才自动播
+            if (document.getElementById('listenPhase').style.display !== 'none') {
+              playAll();
+            }
+          }, 3000);
+        }
+      }
     });
   } catch (e) {
     text.textContent = '⚠️ 预下载失败（可仍点连播，会按需下载）';
