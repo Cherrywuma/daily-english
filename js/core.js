@@ -41,22 +41,76 @@ function _typeToEmotion(type) {
   return 'neutral';
 }
 
-// type → speed（不同情绪不同语速，更真实）
+// type → speed（夸张版）
 function _typeToSpeed(type) {
   if (!type) return 1.5;
   const t = String(type).toLowerCase();
-  // 快语速：急、生气、激动
-  if (t.includes('rushed') || t.includes('yell') || t.includes('angry') || t.includes('annoy') || t.includes('excite') || t.includes('loud')) return 1.7;
-  // 慢语速：温柔、悄悄话、累、伤心
-  if (t.includes('whisper') || t.includes('soft') || t.includes('tired') || t.includes('cozy') || t.includes('cry') || t.includes('sad')) return 1.2;
-  // 默认：1.5，真人聊天速度
+  // 超快：急、生气、激动、兴奋（夸张到 1.85）
+  if (t.includes('rushed') || t.includes('yell') || t.includes('angry') || t.includes('annoy') || t.includes('excite') || t.includes('loud') || t.includes('boss')) return 1.85;
+  // 超慢：哭、伤心、害怕（颤抖感）
+  if (t.includes('cry') || t.includes('sad') || t.includes('scare')) return 0.9;
+  // 慢：温柔、悄悄话、累
+  if (t.includes('whisper') || t.includes('soft') || t.includes('tired') || t.includes('cozy')) return 1.2;
+  // 默认：1.5
   return 1.5;
 }
 
-// 给文本加 MiniMax 的表情标签（让语气更逼真）
-// 注意：暂时关闭，因为有些模型不认这些标签
+// type → 音量（生气/兴奋更响，哭/悄悄话更轻）
+function _typeToVol(type) {
+  if (!type) return 1.2;
+  const t = String(type).toLowerCase();
+  if (t.includes('yell') || t.includes('loud') || t.includes('angry') || t.includes('annoy') || t.includes('excite') || t.includes('cheer')) return 1.5;  // 大声
+  if (t.includes('whisper') || t.includes('soft') || t.includes('cry')) return 0.9;  // 小声
+  return 1.2;  // 默认稍响一点
+}
+
+// 在原句前加语气词（让 AI 念得更有情绪）
+// AI 会读出语气词，但 UI 上仍显示原句，跟读评分也基于原句
 function _enhanceText(text, type) {
-  return text;  // 保守做法：不加任何标签
+  if (!type) return text;
+  const t = String(type).toLowerCase();
+
+  // 弟弟/姐姐情绪词库（随机一个让重复时不无聊）
+  const PREFIX = {
+    cry:      ['Owww! ', 'Ouch! ', 'Waaa! '],
+    whine:    ['Ugh, ', 'Aww, ', ''],
+    excite:   ['Yes! ', 'Yay! ', 'Whoa! '],
+    proud:    ['Hah! ', 'Yes! ', ''],
+    cute:     ['Aww, ', 'Hey, ', ''],
+    silly:    ['Haha! ', 'Hehe! ', ''],
+    annoy:    ['Ugh! ', 'Hey! ', 'Stop! '],
+    angry:    ['Hey! ', 'Ugh! ', ''],
+    pout:     ['Hmph! ', 'Aww, ', ''],
+    scared:   ['Eek! ', 'Oh no! ', ''],
+    loud:     ['Hey! ', 'Whoa! ', ''],
+    yell:     ['Hey! ', 'Mom! ', ''],
+    curious:  ['Huh? ', 'Hmm, ', 'Wait, '],
+    surprise: ['Whoa! ', 'Oh! ', ''],
+    boss:     ['Look, ', 'Hey, ', ''],
+    tease:    ['Heh, ', 'Aww, ', ''],
+    sweet:    ['Aww, ', 'Hey, ', ''],
+    laugh:    ['Haha! ', 'Hehe! ', ''],
+    cheer:    ['Yay! ', 'Yes! ', 'Whoo! '],
+    rushed:   ['Hey! ', 'Quick! ', ''],
+    worry:    ['Oh no, ', 'Wait, ', ''],
+    soft:     ['', '', ''],   // 温柔不加
+    whisper:  ['', '', ''],   // 悄悄话不加
+    tired:    ['Uhh, ', 'Hmm, ', ''],
+    cozy:     ['', '', ''],
+  };
+
+  // 匹配最相关的关键词
+  let prefixes = null;
+  for (const key in PREFIX) {
+    if (t.includes(key)) { prefixes = PREFIX[key]; break; }
+  }
+  if (!prefixes) return text;
+
+  // 用文本本身的 hash 选一个 prefix（让同一句每次结果一致，但不同句子不同）
+  let h = 0;
+  for (let i = 0; i < text.length; i++) h = ((h << 5) - h + text.charCodeAt(i)) | 0;
+  const prefix = prefixes[Math.abs(h) % prefixes.length];
+  return prefix + text;
 }
 
 // ============ TTS：Web Audio API + AudioContext ============
@@ -102,7 +156,7 @@ const TTS = {
   _key(text, voice, emotion) { return `${voice}::${emotion}::${text}`; },
 
   // 单次拉取（不重试）
-  async _fetchBufferOnce(text, voiceId, emotion, speed) {
+  async _fetchBufferOnce(text, voiceId, emotion, speed, vol) {
     const resp = await fetch(Config.workerUrl.replace(/\/$/, '') + '/tts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -111,6 +165,7 @@ const TTS = {
         voice_id: voiceId,
         emotion,
         speed,
+        vol,
         password: Config.password,
       }),
     });
@@ -129,10 +184,11 @@ const TTS = {
     return buf;
   },
 
-  // 拉取 + 失败重试（最多 3 次）
+  // 拉取 + 失败重试（最多 4 次）
   async _fetchBuffer(text, voiceId, type) {
     const emotion = _typeToEmotion(type);
     const speed = _typeToSpeed(type);
+    const vol = _typeToVol(type);
     const enhancedText = _enhanceText(text, type);
 
     const key = this._key(enhancedText, voiceId, emotion);
@@ -142,17 +198,16 @@ const TTS = {
     let lastErr;
     for (let attempt = 1; attempt <= 4; attempt++) {
       try {
-        const buf = await this._fetchBufferOnce(enhancedText, voiceId, emotion, speed);
+        const buf = await this._fetchBufferOnce(enhancedText, voiceId, emotion, speed, vol);
         this.cache.set(key, buf);
         return buf;
       } catch (e) {
         lastErr = e;
         console.warn(`TTS attempt ${attempt}/4 failed for "${text.slice(0,30)}": ${e.message}`);
-        // RPM 限速错误就等很久
         const isRateLimit = e.message && (e.message.includes('429') || e.message.includes('1002') || e.message.includes('1024') || e.message.includes('rate limit'));
         let wait;
         if (isRateLimit) {
-          wait = 3000 * attempt;  // RPM 限速：3秒、6秒、9秒、12秒
+          wait = 3000 * attempt;
         } else {
           wait = 500 * attempt;
         }
