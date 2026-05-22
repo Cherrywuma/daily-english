@@ -1,485 +1,439 @@
-// Daily English - core.js
-// MiniMax TTS（speech-02-turbo + 英文音色 + 性格化映射 + 真人语速）
+// Daily English - Cloudflare Worker
+// MiniMax TTS + OpenAI Whisper STT. Keeps API keys private and applies daily limits.
+//
+// Required secrets:
+//   APP_PASSWORD     = app password used by the web app
+//   OPENAI_API_KEY   = OpenAI API key for Whisper STT
+// Optional secrets:
+//   SPEECHGEN_TOKEN  = SpeechGen token for child voices
+//   SPEECHGEN_EMAIL  = SpeechGen account email
+//   MINIMAX_API_KEY  = MiniMax API key for expressive TTS
+// Optional:
+//   MINIMAX_TTS_MODEL = speech-2.8-turbo or speech-2.8-hd
+//   RATE_KV           = KV namespace for daily rate limits
 
-const Storage = {
-  get(k, d = null) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
-  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
-  del(k) { localStorage.removeItem(k); },
+const CORS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
 };
 
-const Config = {
-  get workerUrl() { return Storage.get('cfg_worker_url', ''); },
-  set workerUrl(v) { Storage.set('cfg_worker_url', v); },
-  get password()  { return Storage.get('cfg_password', ''); },
-  set password(v) { Storage.set('cfg_password', v); },
-  isReady() { return !!this.workerUrl && !!this.password; },
+const MINIMAX_ENDPOINT = 'https://api.minimax.io/v1/t2a_v2';
+const SPEECHGEN_TEXT_ENDPOINT = 'https://speechgen.io/index.php?r=api/text';
+
+export default {
+  async fetch(req, env) {
+    if (req.method === 'OPTIONS') return new Response(null, { headers: CORS });
+    const url = new URL(req.url);
+
+    if (url.pathname === '/tts' && req.method === 'POST') {
+      return handleTTS(req, env);
+    }
+    if (url.pathname === '/stt' && req.method === 'POST') {
+      return handleSTT(req, env);
+    }
+    if (url.pathname === '/health') {
+      const engines = {
+        speechgenKids: !!(env.SPEECHGEN_TOKEN && env.SPEECHGEN_EMAIL),
+        minimax: !!env.MINIMAX_API_KEY,
+        openaiFallback: !!env.OPENAI_API_KEY,
+      };
+      return j({ ok: true, tts: env.MINIMAX_API_KEY ? 'minimax' : 'openai-fallback', engines });
+    }
+    return new Response('Daily English Worker', { headers: CORS });
+  },
 };
 
-// ===== MiniMax 官方音色 ID（确认存在的）=====
-// 这些是 MiniMax API 实际支持的 voice_id
-// 虽然名字带"中文"但说英文也很流利（MiniMax 是多语言模型）
-const VOICE_IDS = {
-  mom:       'female-yujie',           // 御姐音 - 妈妈成熟温暖
-  dad:       'male-qn-jingying',       // 精英青年男声 - 爸爸
-  sister:    'cherry_sister_v1',       // 姐姐真人克隆声音 🎉
-  brother:   'English_Strong-WilledBoy', // 英文男孩声 - 弟弟 6 岁左右
-  teacher:   'female-chengshu',        // 成熟女声 - 老师
-  doctor:    'male-qn-qingse',         // 青年男声 - 医生
-  grandma:   'female-tianmei',         // 甜美女声 - 暂代奶奶
-  grandpa:   'presenter_male',         // 男主播 - 暂代爷爷
-  classmate: 'English_Strong-WilledBoy', // 男孩同学
-  kid:       'English_Strong-WilledBoy', // 通用小男孩
-};
+async function handleTTS(req, env) {
+  let body;
+  try { body = await req.json(); } catch { return j({ error: 'bad json' }, 400); }
 
-// type → MiniMax emotion（只用最稳的 4 种）
-function _typeToEmotion(type) {
-  if (!type) return 'neutral';
-  const t = String(type).toLowerCase();
-  if (t.includes('cry') || t.includes('whine') || t.includes('sad') || t.includes('scare') || t.includes('worry')) return 'sad';
-  if (t.includes('angry') || t.includes('annoy') || t.includes('yell') || t.includes('loud') || t.includes('pout') || t.includes('rushed') || t.includes('boss') || t.includes('stern')) return 'angry';
-  if (t.includes('excite') || t.includes('proud') || t.includes('cute') || t.includes('cheer') || t.includes('laugh') || t.includes('silly') || t.includes('sweet') || t.includes('play') || t.includes('surprise') || t.includes('curious')) return 'happy';
+  const { text, password = '' } = body;
+  if (password !== env.APP_PASSWORD) return j({ error: 'wrong password' }, 401);
+  if (!text || text.length > 300) return j({ error: 'bad text' }, 400);
+
+  if (!(await rateLimit(env, 'tts', 2000))) return j({ error: 'daily limit' }, 429);
+
+  if (shouldUseSpeechGenKid(body) && env.SPEECHGEN_TOKEN && env.SPEECHGEN_EMAIL) {
+    try {
+      return await handleSpeechGenKidTTS(body, env);
+    } catch (e) {
+      console.warn('SpeechGen child voice failed, falling back to OpenAI:', e.message);
+    }
+  }
+  if (env.MINIMAX_API_KEY) return handleMiniMaxTTS(body, env);
+  return handleOpenAITTSFallback(body, env);
+}
+
+function shouldUseSpeechGenKid(body) {
+  const role = inferRole(body.voice_id || body.voice || '');
+  return role === 'brother' || role === 'sister';
+}
+
+async function handleSpeechGenKidTTS(body, env) {
+  const role = inferRole(body.voice_id || body.voice || '');
+  const voice = role === 'sister' ? 'Hana' : 'Justin plus';
+  const params = new URLSearchParams({
+    token: env.SPEECHGEN_TOKEN,
+    email: env.SPEECHGEN_EMAIL,
+    voice,
+    text: body.text,
+    format: 'mp3',
+    speed: String(tuneSpeechGenSpeed(role, body.speed)),
+    pitch: String(tuneSpeechGenPitch(role, body.emotion)),
+    pause_sentence: '0',
+    pause_paragraph: '0',
+    sample_rate: '24000',
+    bitrate: '192',
+    channels: '1',
+  });
+
+  const resp = await fetch(SPEECHGEN_TEXT_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params.toString(),
+  });
+  const raw = await resp.text();
+  if (!resp.ok) throw new Error(`SpeechGen HTTP ${resp.status}: ${raw.slice(0, 200)}`);
+
+  let data;
+  try { data = JSON.parse(raw); } catch { throw new Error(`SpeechGen bad JSON: ${raw.slice(0, 200)}`); }
+  if (data.status !== 1) throw new Error(`SpeechGen: ${data.error || 'audio not ready'}`);
+
+  const audioUrl = data.file_cors || data.file;
+  if (!audioUrl) throw new Error('SpeechGen returned no audio URL');
+  const audioResp = await fetch(audioUrl);
+  if (!audioResp.ok) throw new Error(`SpeechGen audio HTTP ${audioResp.status}`);
+  const audio = await audioResp.arrayBuffer();
+
+  return new Response(audio, {
+    headers: { ...CORS, 'Content-Type': 'audio/mpeg', 'Cache-Control': 'public, max-age=2592000' },
+  });
+}
+
+function tuneSpeechGenSpeed(role, speed) {
+  const n = Number(speed || 1.45);
+  if (role === 'brother') return clamp(Number(Math.max(1.28, Math.min(1.55, n)).toFixed(2)), 0.8, 1.6);
+  if (role === 'sister') return clamp(Number(Math.max(1.22, Math.min(1.48, n)).toFixed(2)), 0.8, 1.55);
+  return clamp(Number(Math.min(1.42, Math.max(1.1, n)).toFixed(2)), 0.8, 1.5);
+}
+
+function tuneSpeechGenPitch(role, emotion) {
+  const mood = normalizeEmotion(emotion);
+  if (role === 'brother') return mood === 'sad' ? 2 : 4;
+  if (role === 'sister') return mood === 'angry' || mood === 'happy' ? 3 : 2;
+  return 0;
+}
+
+async function handleMiniMaxTTS(body, env) {
+  const voiceId = mapMiniMaxVoice(body.voice_id || body.voice || 'English_FriendlyPerson');
+  const emotion = normalizeEmotion(body.emotion || body.type || 'neutral');
+  const text = addPerformanceCue(body.text, emotion);
+  const payload = {
+    model: env.MINIMAX_TTS_MODEL || 'speech-2.8-turbo',
+    text,
+    stream: false,
+    language_boost: 'English',
+    output_format: 'hex',
+    voice_setting: {
+      voice_id: voiceId,
+      speed: tuneSpeed(body.speed, emotion, voiceId),
+      vol: tuneVolume(body.vol, emotion),
+      pitch: tunePitch(body.pitch, voiceId),
+    },
+    audio_setting: {
+      sample_rate: 32000,
+      bitrate: 128000,
+      format: 'mp3',
+      channel: 1,
+    },
+  };
+
+  const resp = await fetch(MINIMAX_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${env.MINIMAX_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const raw = await resp.text();
+  if (!resp.ok) return j({ error: 'minimax', detail: raw.slice(0, 500) }, 500);
+
+  let data;
+  try { data = JSON.parse(raw); } catch { return j({ error: 'minimax bad json', detail: raw.slice(0, 200) }, 500); }
+  if (data.base_resp && data.base_resp.status_code !== 0) {
+    return j({ error: 'minimax', detail: data.base_resp.status_msg || 'request failed' }, 500);
+  }
+  const hex = data && data.data && data.data.audio;
+  if (!hex) return j({ error: 'minimax no audio', detail: data }, 500);
+
+  return new Response(hexToBytes(hex), {
+    headers: { ...CORS, 'Content-Type': 'audio/mpeg', 'Cache-Control': 'public, max-age=2592000' },
+  });
+}
+
+// Kept so the app still makes sound if MINIMAX_API_KEY has not been added yet.
+async function handleOpenAITTSFallback(body, env) {
+  if (!env.OPENAI_API_KEY) return j({ error: 'missing MINIMAX_API_KEY' }, 500);
+  const voiceId = body.voice_id || body.voice || 'shimmer';
+  const voice = mapOpenAIVoice(voiceId);
+  const instructions = buildOpenAICharacterInstructions(voiceId, body.emotion, body.speed, body.vol);
+  const resp = await fetch('https://api.openai.com/v1/audio/speech', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${env.OPENAI_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: 'gpt-4o-mini-tts',
+      voice,
+      input: body.text,
+      instructions,
+      response_format: 'mp3',
+    }),
+  });
+
+  if (!resp.ok) return j({ error: 'openai', detail: (await resp.text()).slice(0, 500) }, 500);
+  const audio = await resp.arrayBuffer();
+  return new Response(audio, {
+    headers: { ...CORS, 'Content-Type': 'audio/mpeg', 'Cache-Control': 'public, max-age=2592000' },
+  });
+}
+
+function mapMiniMaxVoice(voiceId) {
+  const map = {
+    'female-yujie': 'English_Upbeat_Woman',
+    'male-qn-jingying': 'English_Trustworth_Man',
+    'cherry_sister_v1': 'cherry_sister_v1',
+    'male-qn-badao': 'English_Strong-WilledBoy',
+    'female-chengshu': 'English_CalmWoman',
+    'male-qn-qingse': 'English_ReservedYoungMan',
+    'female-tianmei': 'English_LovelyGirl',
+    'presenter_male': 'English_Gentle-voiced_man',
+    'female-shaonv': 'English_Strong-WilledBoy',
+    shimmer: 'English_Upbeat_Woman',
+  };
+  return map[voiceId] || voiceId;
+}
+
+function mapOpenAIVoice(voiceId) {
+  const id = String(voiceId || '').toLowerCase();
+  if (id.includes('strong-willedboy') || id.includes('badao') || id.includes('shaonv')) return 'echo';
+  if (id.includes('sister') || id.includes('girl')) return 'coral';
+  if (id.includes('jingying') || id.includes('presenter') || id.includes('qingse')) return 'onyx';
+  if (id.includes('teacher') || id.includes('chengshu')) return 'sage';
+  if (id.includes('yujie') || id.includes('mom')) return 'nova';
+  return 'shimmer';
+}
+
+function buildOpenAICharacterInstructions(voiceId, emotion, speed, vol) {
+  const role = inferRole(voiceId);
+  const mood = normalizeEmotion(emotion);
+  const pace = Number(speed || 1.1);
+  const loudness = Number(vol || 1);
+
+  const base = [
+    'This is for a children English speaking practice app.',
+    'Make the performance highly characterful and easy to tell apart with eyes closed.',
+    'Use real-life family conversation timing: quick responses, lively rhythm, almost no dead air, and expressive intonation.',
+    'Speak faster than classroom reading, like people talking at home.',
+    'Keep each sentence clear enough for kids to repeat, but avoid textbook narration.',
+    'The acting should be strong and vivid. Keep it believable and safe for children.',
+  ];
+
+  const roles = {
+    brother: [
+      'Character: a tiny five-year-old boy, much younger than everyone else.',
+      'Voice feel: very small, bright, cute, breathy, playful, impatient, and a little squeaky, but still understandable.',
+      'He talks fast in quick little bursts with lots of upward intonation, cute pleading, tiny complaints, and dramatic kid energy.',
+      'Make him sound clearly different from dad: much higher, smaller, faster, more bouncy, more emotional, more childlike.',
+      'When he complains, make it whiny and pleading. When excited, make it jumpy and delighted. When annoyed, make it cute-angry, not adult-angry.',
+    ],
+    sister: [
+      'Character: a nine-to-ten-year-old older sister.',
+      'Voice feel: crisp, bright, quick, slightly nasal, bossy, clever, teasing, and school-age.',
+      'She is not a mother. Do not make her warm and adult. Make her sound like a smart big sister who rolls her eyes and talks fast.',
+      'Make her clearly different from mom: higher, sharper, younger, quicker, more playful, more teasing, and more reactive.',
+      'When annoyed, she snaps lightly. When proud, she sounds smug. When caring, she softens but still sounds like a child.',
+    ],
+    mom: [
+      'Character: an adult mom managing two kids at home.',
+      'Voice feel: mature, warm, lower than the sister, steady, practical, a little tired, sometimes firm.',
+      'Make her clearly different from sister: adult, grounded, smoother, slower, less sharp, more caring authority.',
+      'When firm, use a mom voice that ends downward and leaves no room for debate. When warm, sound protective and close.',
+    ],
+    dad: [
+      'Character: an adult dad.',
+      'Voice feel: much lower, rounder, relaxed, amused, steady, and obviously adult.',
+      'Make him clearly different from brother: deeper, slower, calmer, less emotional, with a gentle smile in the voice.',
+      'He should sound like a dad watching the family chaos with patience and humor.',
+    ],
+    teacher: [
+      'Character: a kind elementary school teacher.',
+      'Voice feel: clear, patient, encouraging, classroom-friendly.',
+    ],
+    doctor: [
+      'Character: a calm doctor speaking to a child.',
+      'Voice feel: reassuring, clear, slow, gentle.',
+    ],
+    default: [
+      'Character: a friendly person in a lively family scene.',
+      'Voice feel: natural, warm, expressive.',
+    ],
+  };
+
+  const moods = {
+    happy: 'Emotion: happy or excited. Add a strong smile to the voice, lift phrase endings, speed up slightly, and make the rhythm energetic.',
+    sad: 'Emotion: sad, worried, tired, or pleading. Soften the voice, add a small sigh feeling, and make it tender without becoming flat.',
+    angry: 'Emotion: annoyed, rushed, or complaining. Add attitude, sharper rhythm, and urgency, but do not become harsh or scary.',
+    neutral: 'Emotion: natural daily conversation. Keep it alive with lively intonation and quick conversational timing.',
+  };
+
+  const pacing = pace >= 1.45
+    ? 'Pace: fast real-life conversation. Keep it quick and responsive, but not garbled.'
+    : pace <= 0.95
+      ? 'Pace: still conversational, only slightly softer and slower.'
+      : 'Pace: brisk natural conversation, faster than classroom reading.';
+
+  const volume = loudness >= 1.4
+    ? 'Volume: energetic and present, but do not yell.'
+    : loudness <= 0.95
+      ? 'Volume: softer and closer.'
+      : 'Volume: normal speaking volume.';
+
+  return [
+    ...base,
+    ...(roles[role] || roles.default),
+    moods[mood],
+    pacing,
+    volume,
+  ].join(' ');
+}
+
+function inferRole(voiceId) {
+  const id = String(voiceId || '').toLowerCase();
+  if (id.includes('strong-willedboy') || id.includes('badao') || id.includes('shaonv')) return 'brother';
+  if (id.includes('sister') || id.includes('girl')) return 'sister';
+  if (id.includes('yujie') || id.includes('mom')) return 'mom';
+  if (id.includes('jingying') || id.includes('presenter')) return 'dad';
+  if (id.includes('chengshu') || id.includes('teacher')) return 'teacher';
+  if (id.includes('qingse') || id.includes('doctor')) return 'doctor';
+  return 'default';
+}
+
+function normalizeEmotion(emotion) {
+  const e = String(emotion || '').toLowerCase();
+  if (e.includes('sad')) return 'sad';
+  if (e.includes('angry')) return 'angry';
+  if (e.includes('happy')) return 'happy';
   return 'neutral';
 }
 
-// type → speed（夸张版）
-function _typeToSpeed(type) {
-  if (!type) return 1.5;
-  const t = String(type).toLowerCase();
-  // 超快：急、生气、激动、兴奋（夸张到 1.85）
-  if (t.includes('rushed') || t.includes('yell') || t.includes('angry') || t.includes('annoy') || t.includes('excite') || t.includes('loud') || t.includes('boss')) return 1.8;
-  // 超慢：哭、伤心、害怕（颤抖感）
-  if (t.includes('cry') || t.includes('sad') || t.includes('scare')) return 1.25;
-  // 慢：温柔、悄悄话、累
-  if (t.includes('whisper') || t.includes('soft') || t.includes('tired') || t.includes('cozy')) return 1.35;
-  if (t.includes('bro') || t.includes('sis') || t.includes('cute') || t.includes('whine') || t.includes('pout') || t.includes('tease')) return 1.65;
-  // 默认：偏真实对话速度
-  return 1.5;
+function addPerformanceCue(text, emotion) {
+  return String(text || '').trim();
 }
 
-// type → 音量（生气/兴奋更响，哭/悄悄话更轻）
-function _typeToVol(type) {
-  if (!type) return 1.2;
-  const t = String(type).toLowerCase();
-  if (t.includes('yell') || t.includes('loud') || t.includes('angry') || t.includes('annoy') || t.includes('excite') || t.includes('cheer')) return 1.5;  // 大声
-  if (t.includes('whisper') || t.includes('soft') || t.includes('cry')) return 0.9;  // 小声
-  return 1.2;  // 默认稍响一点
+function pickCue(text, options) {
+  let h = 0;
+  for (let i = 0; i < text.length; i++) h = ((h << 5) - h + text.charCodeAt(i)) | 0;
+  return options[Math.abs(h) % options.length];
 }
 
-// 在原句前加语气词（让 AI 念得更有情绪）
-// AI 会读出语气词，但 UI 上仍显示原句，跟读评分也基于原句
-function _enhanceText(text, type) {
-  return text;
+function tuneSpeed(speed, emotion, voiceId) {
+  let s = Number(speed || 1.15);
+  // The old frontend used very high values like 1.5-1.85. MiniMax already sounds lively,
+  // so compress the range to keep children expressive without making them squeaky.
+  if (s >= 1.8) s = 1.24;
+  else if (s >= 1.45) s = 1.1;
+  else if (s <= 0.95) s = 0.9;
+  else s = Math.min(1.18, Math.max(0.92, s));
+  if (emotion === 'sad') s -= 0.06;
+  if (emotion === 'angry' || emotion === 'happy') s += 0.04;
+  if (voiceId.includes('Boy')) s += 0.02;
+  return clamp(Number(s.toFixed(2)), 0.85, 1.28);
 }
 
-// ============ TTS：Web Audio API + AudioContext ============
-const TTS = {
-  ctx: null,
-  cache: new Map(),
-  playing: false,
-  currentSrc: null,
-
-  // 句间停顿（超快节奏，真人对话感）
-  pauseAfter(type) {
-    if (!type) return 30;
-    const t = String(type).toLowerCase();
-    if (t.includes('rushed') || t.includes('yell') || t.includes('loud') || t.includes('annoy') || t.includes('excite')) return 10;
-    if (t.includes('whisper') || t.includes('soft') || t.includes('cozy')) return 70;
-    if (t.includes('tired') || t.includes('cry')) return 60;
-    return 30;
-  },
-
-  _ensureCtx() {
-    if (!this.ctx) {
-      const Ctx = window.AudioContext || window.webkitAudioContext;
-      if (!Ctx) throw new Error('浏览器不支持 Web Audio');
-      this.ctx = new Ctx();
-    }
-    return this.ctx;
-  },
-
-  async unlock() {
-    const ctx = this._ensureCtx();
-    if (ctx.state === 'suspended') {
-      try { await ctx.resume(); } catch (e) { console.warn('resume failed', e); }
-    }
-    try {
-      const buf = ctx.createBuffer(1, 1, 22050);
-      const src = ctx.createBufferSource();
-      src.buffer = buf;
-      src.connect(ctx.destination);
-      src.start(0);
-    } catch {}
-  },
-
-  _key(text, voice, emotion) { return `${voice}::${emotion}::${text}`; },
-
-  // 单次拉取（不重试）
-  async _fetchBufferOnce(text, voiceId, emotion, speed, vol) {
-    const resp = await fetch(Config.workerUrl.replace(/\/$/, '') + '/tts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        text,
-        voice_id: voiceId,
-        emotion,
-        speed,
-        vol,
-        password: Config.password,
-      }),
-    });
-    if (!resp.ok) {
-      const e = await resp.text();
-      throw new Error('TTS ' + resp.status + ': ' + e.slice(0, 100));
-    }
-    const arr = await resp.arrayBuffer();
-    const ctx = this._ensureCtx();
-    const buf = await new Promise((res, rej) => {
-      try {
-        const p = ctx.decodeAudioData(arr, b => res(b), e => rej(e));
-        if (p && p.then) p.then(res, rej);
-      } catch (e) { rej(e); }
-    });
-    return buf;
-  },
-
-  // 拉取 + 失败重试（最多 4 次）
-  async _fetchBuffer(text, voiceId, type) {
-    const emotion = _typeToEmotion(type);
-    const speed = _typeToSpeed(type);
-    const vol = _typeToVol(type);
-    const enhancedText = _enhanceText(text, type);
-
-    const key = this._key(enhancedText, voiceId, emotion);
-    if (this.cache.has(key)) return this.cache.get(key);
-    if (!Config.isReady()) throw new Error('请先在设置里填 Worker 地址和密码');
-
-    let lastErr;
-    for (let attempt = 1; attempt <= 4; attempt++) {
-      try {
-        const buf = await this._fetchBufferOnce(enhancedText, voiceId, emotion, speed, vol);
-        this.cache.set(key, buf);
-        return buf;
-      } catch (e) {
-        lastErr = e;
-        console.warn(`TTS attempt ${attempt}/4 failed for "${text.slice(0,30)}": ${e.message}`);
-        const isRateLimit = e.message && (e.message.includes('429') || e.message.includes('1002') || e.message.includes('1024') || e.message.includes('rate limit'));
-        let wait;
-        if (isRateLimit) {
-          wait = 3000 * attempt;
-        } else {
-          wait = 500 * attempt;
-        }
-        if (attempt < 4) await new Promise(r => setTimeout(r, wait));
-      }
-    }
-    throw lastErr;
-  },
-
-  async prefetchAll(sentences, onProgress) {
-    // 智能策略：
-    // 1. 先快速下载前 5 句（让用户尽快能开始听）
-    // 2. 后台慢速下载剩下的句子（不超 RPM）
-    let done = 0;
-    const total = sentences.length;
-    const PRIORITY = Math.min(5, sentences.length);
-
-    // 阶段 1：前 5 句快速下载（3 秒间隔）
-    for (let i = 0; i < PRIORITY; i++) {
-      const s = sentences[i];
-      try {
-        await this._fetchBuffer(s.en, _getVoiceId(s.speaker), s.type);
-      } catch (e) {
-        console.warn('priority prefetch fail', s.en, e.message);
-      }
-      done++;
-      onProgress && onProgress(done, total);
-      await new Promise(r => setTimeout(r, 3200));
-    }
-
-    // 阶段 2：剩下的句子后台慢慢下载（不阻塞用户）
-    (async () => {
-      for (let i = PRIORITY; i < sentences.length; i++) {
-        const s = sentences[i];
-        try {
-          await this._fetchBuffer(s.en, _getVoiceId(s.speaker), s.type);
-        } catch (e) {
-          console.warn('background prefetch fail', s.en, e.message);
-        }
-        done++;
-        onProgress && onProgress(done, total);
-        await new Promise(r => setTimeout(r, 3200));
-      }
-    })();
-  },
-
-  async playOne(s) {
-    this.stop();
-    const buf = await this._fetchBuffer(s.en, _getVoiceId(s.speaker), s.type);
-    await this._playBuffer(buf);
-  },
-
-  async playAll(sentences, onLine, onDone) {
-    this.stop();
-    this.playing = true;
-    let lastFetchTime = 0;
-    for (let i = 0; i < sentences.length; i++) {
-      if (!this.playing) break;
-      onLine && onLine(i, 'playing');
-      const s = sentences[i];
-      let buf;
-
-      // 检查是否有缓存
-      const emotion = _typeToEmotion(s.type);
-      const enhancedText = _enhanceText(s.en, s.type);
-      const voiceId = _getVoiceId(s.speaker);
-      const cacheKey = this._key(enhancedText, voiceId, emotion);
-      const fromCache = this.cache.has(cacheKey);
-
-      // 如果没缓存，需要远程拉取，要保证距离上次拉取 >= 3.2 秒
-      if (!fromCache) {
-        const elapsed = Date.now() - lastFetchTime;
-        const wait = Math.max(0, 3200 - elapsed);
-        if (wait > 0) {
-          console.log(`等 ${wait}ms 避免限速`);
-          await new Promise(r => setTimeout(r, wait));
-        }
-      }
-
-      try {
-        buf = await this._fetchBuffer(s.en, voiceId, s.type);
-        if (!fromCache) lastFetchTime = Date.now();
-      } catch (e) {
-        console.warn('playAll skip', s.en, e.message);
-        onLine && onLine(i, 'skipped');
-        if (this.playing) await new Promise(r => setTimeout(r, 800));
-        continue;
-      }
-      if (!this.playing) break;
-      await this._playBuffer(buf);
-      onLine && onLine(i, 'done');
-      const pause = this.pauseAfter(s.type);
-      if (this.playing && pause) await new Promise(r => setTimeout(r, pause));
-    }
-    this.playing = false;
-    onDone && onDone();
-  },
-
-  _playBuffer(buf) {
-    return new Promise(res => {
-      const ctx = this._ensureCtx();
-      const src = ctx.createBufferSource();
-      src.buffer = buf;
-      src.connect(ctx.destination);
-      let ended = false;
-      const done = () => { if (!ended) { ended = true; res(); } };
-      src.onended = done;
-      this.currentSrc = src;
-      try { src.start(0); } catch (e) { done(); }
-    });
-  },
-
-  stop() {
-    this.playing = false;
-    if (this.currentSrc) {
-      try { this.currentSrc.stop(); } catch {}
-      try { this.currentSrc.disconnect(); } catch {}
-      this.currentSrc = null;
-    }
-  },
-};
-
-function _getVoiceId(speaker) {
-  if (VOICE_IDS[speaker]) return VOICE_IDS[speaker];
-  return 'female-shaonv';
+function tuneVolume(vol, emotion) {
+  let v = Number(vol || 1.05);
+  if (v >= 1.45) v = 1.15;
+  else if (v <= 0.95) v = 0.95;
+  else v = 1.05;
+  if (emotion === 'angry' || emotion === 'happy') v += 0.05;
+  if (emotion === 'sad') v -= 0.05;
+  return clamp(Number(v.toFixed(2)), 0.85, 1.2);
 }
 
-// ============ Recorder：MediaRecorder + Whisper /stt ============
-const Recorder = {
-  rec: null,
-  chunks: [],
-  stream: null,
-  lastBlob: null,
-  _lastUrl: null,
+function tunePitch(pitch, voiceId) {
+  if (Number.isFinite(Number(pitch))) return clamp(Number(pitch), -4, 5);
+  if (voiceId === 'English_Strong-WilledBoy') return 3;
+  if (voiceId === 'English_ReservedYoungMan') return 1;
+  if (voiceId.includes('Girl')) return 1;
+  return 0;
+}
 
-  isSupported() {
-    return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder);
-  },
+function clamp(n, min, max) {
+  return Math.max(min, Math.min(max, n));
+}
 
-  _pickMime() {
-    const cands = ['audio/mp4', 'audio/webm;codecs=opus', 'audio/webm', 'audio/ogg;codecs=opus'];
-    for (const m of cands) {
-      try { if (MediaRecorder.isTypeSupported(m)) return m; } catch {}
-    }
-    return '';
-  },
+function hexToBytes(hex) {
+  const clean = String(hex).replace(/\s+/g, '');
+  const bytes = new Uint8Array(clean.length / 2);
+  for (let i = 0; i < clean.length; i += 2) {
+    bytes[i / 2] = parseInt(clean.slice(i, i + 2), 16);
+  }
+  return bytes;
+}
 
-  async start() {
-    if (!this.isSupported()) throw new Error('浏览器不支持录音 (iOS 14.3+ Safari 才行)');
-    this.chunks = [];
-    this.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    const mime = this._pickMime();
-    this.rec = new MediaRecorder(this.stream, mime ? { mimeType: mime } : undefined);
-    this.rec.ondataavailable = e => { if (e.data && e.data.size) this.chunks.push(e.data); };
-    this.rec.start();
-  },
+// ============ STT: OpenAI Whisper ============
+async function handleSTT(req, env) {
+  let form;
+  try { form = await req.formData(); } catch { return j({ error: 'bad form' }, 400); }
 
-  isRecording() { return !!(this.rec && this.rec.state === 'recording'); },
+  const password = form.get('password') || '';
+  if (password !== env.APP_PASSWORD) return j({ error: 'wrong password' }, 401);
 
-  stop() {
-    return new Promise(res => {
-      if (!this.rec) { res(null); return; }
-      const rec = this.rec;
-      rec.onstop = () => {
-        const type = rec.mimeType || 'audio/mp4';
-        const blob = this.chunks.length ? new Blob(this.chunks, { type }) : null;
-        this.lastBlob = blob;
-        if (this._lastUrl) { try { URL.revokeObjectURL(this._lastUrl); } catch {} this._lastUrl = null; }
-        if (this.stream) {
-          this.stream.getTracks().forEach(t => { try { t.stop(); } catch {} });
-          this.stream = null;
-        }
-        this.rec = null;
-        res(blob);
-      };
-      try { rec.stop(); } catch { res(null); }
-    });
-  },
+  const file = form.get('file');
+  if (!file || typeof file === 'string') return j({ error: 'no file' }, 400);
+  if (file.size > 10 * 1024 * 1024) return j({ error: 'file too large' }, 413);
 
-  async transcribe(blob) {
-    if (!Config.isReady()) throw new Error('请先填 Worker 设置');
-    if (!blob) throw new Error('录音为空');
-    const form = new FormData();
-    const filename = (blob.type || '').includes('webm') ? 'audio.webm'
-                  : (blob.type || '').includes('ogg')  ? 'audio.ogg'
-                  : 'audio.mp4';
-    form.append('file', blob, filename);
-    form.append('password', Config.password);
-    const resp = await fetch(Config.workerUrl.replace(/\/$/, '') + '/stt', {
-      method: 'POST', body: form,
-    });
-    if (!resp.ok) {
-      const e = await resp.text();
-      throw new Error('STT ' + resp.status + ': ' + e.slice(0, 100));
-    }
-    const data = await resp.json();
-    return (data && data.text) || '';
-  },
+  if (!(await rateLimit(env, 'stt', 2000))) return j({ error: 'daily limit' }, 429);
 
-  hasPlayback() { return !!this.lastBlob; },
+  const upstream = new FormData();
+  const filename = (file.type || '').includes('webm') ? 'audio.webm'
+                 : (file.type || '').includes('mp4')  ? 'audio.mp4'
+                 : (file.type || '').includes('mpeg') ? 'audio.mp3'
+                 : 'audio.m4a';
+  upstream.append('file', file, filename);
+  upstream.append('model', 'whisper-1');
+  upstream.append('language', 'en');
+  upstream.append('response_format', 'json');
+  upstream.append('prompt', 'A child or parent speaks a short English sentence from a daily-life dialogue.');
 
-  playback() {
-    if (!this.lastBlob) return;
-    if (!this._lastUrl) this._lastUrl = URL.createObjectURL(this.lastBlob);
-    const a = new Audio(this._lastUrl);
-    a.play().catch(err => console.warn('playback fail', err));
-  },
-};
+  const resp = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${env.OPENAI_API_KEY}` },
+    body: upstream,
+  });
 
-// ============ 发音评分 ============
-const Pronunciation = {
-  norm(s) {
-    return (s || '').toLowerCase()
-      .replace(/[\u2018\u2019']/g, "'")
-      .replace(/\(laughs\)|\(sighs\)|\(gasps\)|\(coughs\)|\(crying\)/g, '') // 去掉表情标签
-      .replace(/[^a-z0-9'\s]/g, ' ')
-      .replace(/\s+/g, ' ')
-      .replace(/\bgonna\b/g, 'going to')
-      .replace(/\bwanna\b/g, 'want to')
-      .replace(/\bgotta\b/g, 'got to')
-      .replace(/\blemme\b/g, 'let me')
-      .replace(/\bgimme\b/g, 'give me')
-      .replace(/\bkinda\b/g, 'kind of')
-      .replace(/\bdunno\b/g, "don't know")
-      .replace(/'/g, '')
-      .trim();
-  },
-  similarity(target, heard) {
-    const t = this.norm(target);
-    const h = this.norm(heard);
-    if (!t) return 0;
-    if (!h) return 0;
-    const tw = t.split(' '), hw = h.split(' ');
-    const wordDist = this._lev(tw, hw);
-    const wordSim = 1 - wordDist / Math.max(tw.length, hw.length);
-    const charDist = this._lev(t.split(''), h.split(''));
-    const charSim = 1 - charDist / Math.max(t.length, h.length);
-    const sim = wordSim * 0.7 + charSim * 0.3;
-    return Math.max(0, Math.min(100, Math.round(sim * 100)));
-  },
-  lengthRatio(target, heard) {
-    const tw = this.norm(target).split(' ').filter(Boolean).length;
-    const hw = this.norm(heard).split(' ').filter(Boolean).length;
-    return tw === 0 ? 0 : hw / tw;
-  },
-  _lev(a, b) {
-    const m = a.length, n = b.length;
-    if (m === 0) return n; if (n === 0) return m;
-    const dp = Array(n + 1).fill(0).map((_, i) => i);
-    for (let i = 1; i <= m; i++) {
-      let prev = dp[0]; dp[0] = i;
-      for (let j = 1; j <= n; j++) {
-        const tmp = dp[j];
-        dp[j] = a[i - 1] === b[j - 1] ? prev : 1 + Math.min(prev, dp[j], dp[j - 1]);
-        prev = tmp;
-      }
-    }
-    return dp[n];
-  },
-  passed(target, heard, minScore = 70, minLenRatio = 0.6) {
-    const s = this.similarity(target, heard);
-    const r = this.lengthRatio(target, heard);
-    return { score: s, lenRatio: r, ok: s >= minScore && r >= minLenRatio };
-  },
-};
+  if (!resp.ok) return j({ error: 'whisper', detail: (await resp.text()).slice(0, 500) }, 500);
+  const data = await resp.json();
+  return j({ text: data.text || '' });
+}
 
-// ============ 打卡追踪 ============
-const Tracking = {
-  _key: 'track_v1',
-  _load() { return Storage.get(this._key, { days: {}, streak: 0, lastDate: '', startDate: '' }); },
-  _save(d) { Storage.set(this._key, d); },
+async function rateLimit(env, kind, dailyLimit) {
+  if (!env.RATE_KV) return true;
+  const today = new Date().toISOString().slice(0, 10);
+  const key = `cnt:${kind}:${today}`;
+  const cur = parseInt((await env.RATE_KV.get(key)) || '0');
+  if (cur >= dailyLimit) return false;
+  await env.RATE_KV.put(key, String(cur + 1), { expirationTtl: 172800 });
+  return true;
+}
 
-  markDone(dayId, sentenceIdx) {
-    const d = this._load();
-    const today = this.todayStr();
-    if (!d.startDate) d.startDate = today;
-    if (!d.days[today]) d.days[today] = { dayId, done: [] };
-    if (!d.days[today].done.includes(sentenceIdx)) d.days[today].done.push(sentenceIdx);
-    this._save(d);
-  },
-
-  completeDay(dayId) {
-    const d = this._load();
-    const today = this.todayStr();
-    if (!d.days[today]) d.days[today] = { dayId, done: [] };
-    d.days[today].finished = true;
-    const yest = this.dateOffset(-1);
-    if (d.lastDate === yest || d.lastDate === today) {
-      if (d.lastDate !== today) d.streak += 1;
-    } else if (d.lastDate !== today) {
-      d.streak = 1;
-    }
-    d.lastDate = today;
-    this._save(d);
-    return d.streak;
-  },
-
-  getToday() { return this._load().days[this.todayStr()] || null; },
-  getStreak() { return this._load().streak; },
-  getAllDays() { return this._load().days; },
-
-  currentDayId(maxDay) {
-    const d = this._load();
-    const finished = Object.values(d.days).filter(x => x.finished).map(x => x.dayId);
-    const max = finished.length ? Math.max(...finished) : 0;
-    const next = max + 1;
-    return next > maxDay ? ((next - 1) % maxDay) + 1 : next;
-  },
-
-  todayStr() { return new Date().toISOString().slice(0, 10); },
-  dateOffset(n) {
-    const d = new Date(); d.setDate(d.getDate() + n);
-    return d.toISOString().slice(0, 10);
-  },
-};
-
-window.DE = { Storage, Config, TTS, Recorder, Pronunciation, Tracking };
+function j(obj, status = 200) {
+  return new Response(JSON.stringify(obj), {
+    status, headers: { ...CORS, 'Content-Type': 'application/json' },
+  });
+}
