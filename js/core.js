@@ -22,13 +22,13 @@ const VOICE_IDS = {
   mom:       'female-yujie',           // 御姐音 - 妈妈成熟温暖
   dad:       'male-qn-jingying',       // 精英青年男声 - 爸爸
   sister:    'cherry_sister_v1',       // 姐姐真人克隆声音 🎉
-  brother:   'male-qn-badao',          // 霸道少年 - 弟弟 7 岁
+  brother:   'English_Strong-WilledBoy', // 英文男孩声 - 弟弟 6 岁左右
   teacher:   'female-chengshu',        // 成熟女声 - 老师
   doctor:    'male-qn-qingse',         // 青年男声 - 医生
   grandma:   'female-tianmei',         // 甜美女声 - 暂代奶奶
   grandpa:   'presenter_male',         // 男主播 - 暂代爷爷
-  classmate: 'male-qn-qingse',         // 同学
-  kid:       'female-shaonv',          // 通用小孩
+  classmate: 'English_Strong-WilledBoy', // 男孩同学
+  kid:       'English_Strong-WilledBoy', // 通用小男孩
 };
 
 // type → MiniMax emotion（只用最稳的 4 种）
