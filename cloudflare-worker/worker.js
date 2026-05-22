@@ -1,15 +1,13 @@
 // Daily English - Cloudflare Worker
-// MiniMax TTS + OpenAI Whisper STT. Keeps API keys private and applies daily limits.
+// SpeechGen child voices + OpenAI TTS/STT. Keeps API keys private and applies daily limits.
 //
 // Required secrets:
 //   APP_PASSWORD     = app password used by the web app
-//   OPENAI_API_KEY   = OpenAI API key for Whisper STT
+//   OPENAI_API_KEY   = OpenAI API key for parent/other TTS + Whisper STT
 // Optional secrets:
-//   SPEECHGEN_TOKEN  = SpeechGen token for child voices
+//   SPEECHGEN_TOKEN  = SpeechGen token for sister/brother child voices
 //   SPEECHGEN_EMAIL  = SpeechGen account email
-//   MINIMAX_API_KEY  = MiniMax API key for expressive TTS
 // Optional:
-//   MINIMAX_TTS_MODEL = speech-2.8-turbo or speech-2.8-hd
 //   RATE_KV           = KV namespace for daily rate limits
 
 const CORS = {
@@ -35,10 +33,9 @@ export default {
     if (url.pathname === '/health') {
       const engines = {
         speechgenKids: !!(env.SPEECHGEN_TOKEN && env.SPEECHGEN_EMAIL),
-        minimax: !!env.MINIMAX_API_KEY,
-        openaiFallback: !!env.OPENAI_API_KEY,
+        openaiAdults: !!env.OPENAI_API_KEY,
       };
-      return j({ ok: true, tts: env.MINIMAX_API_KEY ? 'minimax' : 'openai-fallback', engines });
+      return j({ ok: true, tts: 'speechgen-kids-openai-others', model: 'gpt-4o-mini-tts', engines });
     }
     return new Response('Daily English Worker', { headers: CORS });
   },
@@ -61,7 +58,6 @@ async function handleTTS(req, env) {
       console.warn('SpeechGen child voice failed, falling back to OpenAI:', e.message);
     }
   }
-  if (env.MINIMAX_API_KEY) return handleMiniMaxTTS(body, env);
   return handleOpenAITTSFallback(body, env);
 }
 
@@ -174,9 +170,9 @@ async function handleMiniMaxTTS(body, env) {
   });
 }
 
-// Kept so the app still makes sound if MINIMAX_API_KEY has not been added yet.
+// OpenAI TTS for mom, dad, and any non-child role.
 async function handleOpenAITTSFallback(body, env) {
-  if (!env.OPENAI_API_KEY) return j({ error: 'missing MINIMAX_API_KEY' }, 500);
+  if (!env.OPENAI_API_KEY) return j({ error: 'missing OPENAI_API_KEY' }, 500);
   const voiceId = body.voice_id || body.voice || 'shimmer';
   const voice = mapOpenAIVoice(voiceId);
   const instructions = buildOpenAICharacterInstructions(voiceId, body.emotion, body.speed, body.vol);
