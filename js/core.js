@@ -1,5 +1,11 @@
 // Daily English - core.js
-// Storage / Config / TTS (Web Audio) / Recorder (MediaRecorder + Whisper) / Pronunciation / Tracking
+// Storage / Config / TTS (Web Audio + MiniMax) / Recorder (MediaRecorder + Whisper) / Pronunciation / Tracking
+//
+// 关键变化（相比昨晚版）：
+//   - TTS 后端从 OpenAI 切换到 MiniMax
+//   - voice 参数从 OpenAI 名字（shimmer/alloy）改成 MiniMax voice_id
+//   - request body 加 emotion 字段（供 MiniMax 调情绪）
+//   - 其他全部不动（WebAudio 调度、prefetch、Recorder、Whisper /stt 全部保留）
 
 const Storage = {
   get(k, d = null) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
@@ -7,7 +13,6 @@ const Storage = {
   del(k) { localStorage.removeItem(k); },
 };
 
-// ============ 配置 ============
 const Config = {
   get workerUrl() { return Storage.get('cfg_worker_url', ''); },
   set workerUrl(v) { Storage.set('cfg_worker_url', v); },
@@ -16,15 +21,35 @@ const Config = {
   isReady() { return !!this.workerUrl && !!this.password; },
 };
 
+// ===== MiniMax voice_id 映射表 =====
+const VOICE_IDS = {
+  mom:       'female-yujie',
+  dad:       'male-qn-jingying',
+  sister:    'female-shaonv',
+  brother:   'male-qn-badao',
+  teacher:   'female-chengshu',
+  doctor:    'male-qn-qingse',
+  grandma:   'female-tianmei',
+  grandpa:   'presenter_male',
+  classmate: 'male-qn-qingse',
+  kid:       'female-shaonv',
+};
+
+function _typeToEmotion(type) {
+  if (!type) return 'neutral';
+  const t = String(type).toLowerCase();
+  if (t.includes('cry') || t.includes('whine') || t.includes('sad')) return 'sad';
+  if (t.includes('angry') || t.includes('annoy') || t.includes('yell') || t.includes('loud') || t.includes('pout') || t.includes('rushed')) return 'angry';
+  if (t.includes('excite') || t.includes('proud') || t.includes('cute') || t.includes('cheer') || t.includes('laugh') || t.includes('silly') || t.includes('sweet') || t.includes('play')) return 'happy';
+  if (t.includes('scare')) return 'fearful';
+  if (t.includes('surprise') || t.includes('curious')) return 'surprised';
+  return 'neutral';
+}
+
 // ============ TTS：Web Audio API + AudioContext ============
-// 关键变化：
-// 1) 用 AudioContext + AudioBuffer 调度，绕开 iOS Safari 的 autoplay 限制
-// 2) 第一次用户手势必须调 unlock() 一次
-// 3) 不再做客户端 pitch shift —— 完全靠 OpenAI 的 voice + instructions 区分小孩
-// 4) playAll 支持 prefetch + onLine 回调，让 listenPhase 真正连读
 const TTS = {
   ctx: null,
-  cache: new Map(), // 'voice::text' -> AudioBuffer
+  cache: new Map(),
   playing: false,
   currentSrc: null,
   pauseAfter(type) {
@@ -42,13 +67,11 @@ const TTS = {
     return this.ctx;
   },
 
-  // 必须在用户手势 (click/touch) 中调用一次
   async unlock() {
     const ctx = this._ensureCtx();
     if (ctx.state === 'suspended') {
       try { await ctx.resume(); } catch (e) { console.warn('resume failed', e); }
     }
-    // 同时播一个无声 buffer 帮 iOS Safari 完全解锁
     try {
       const buf = ctx.createBuffer(1, 1, 22050);
       const src = ctx.createBufferSource();
@@ -60,15 +83,21 @@ const TTS = {
 
   _key(text, voice) { return `${voice}::${text}`; },
 
-  async _fetchBuffer(text, voice, instructions) {
-    const key = this._key(text, voice);
+  async _fetchBuffer(text, voiceId, type) {
+    const key = this._key(text, voiceId);
     if (this.cache.has(key)) return this.cache.get(key);
     if (!Config.isReady()) throw new Error('请先在设置里填 Worker 地址和密码');
 
+    const emotion = _typeToEmotion(type);
     const resp = await fetch(Config.workerUrl.replace(/\/$/, '') + '/tts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, voice, instructions, password: Config.password }),
+      body: JSON.stringify({
+        text,
+        voice_id: voiceId,
+        emotion,
+        password: Config.password,
+      }),
     });
     if (!resp.ok) {
       const e = await resp.text();
@@ -76,7 +105,6 @@ const TTS = {
     }
     const arr = await resp.arrayBuffer();
     const ctx = this._ensureCtx();
-    // decodeAudioData 在 Safari 上需要 callback 风格的 fallback
     const buf = await new Promise((res, rej) => {
       try {
         const p = ctx.decodeAudioData(arr, b => res(b), e => rej(e));
@@ -87,17 +115,16 @@ const TTS = {
     return buf;
   },
 
-  // 后台批量预下载，并发 N，进度回调
   async prefetchAll(sentences, onProgress) {
     let done = 0;
     const total = sentences.length;
     const queue = sentences.slice();
-    const N = 4;
+    const N = 3;
     const work = async () => {
       while (queue.length) {
         const s = queue.shift();
         try {
-          await this._fetchBuffer(s.en, _getVoice(s.speaker), _getInstructions(s.speaker, s.type));
+          await this._fetchBuffer(s.en, _getVoiceId(s.speaker), s.type);
         } catch (e) {
           console.warn('prefetch fail', s.en, e.message);
         }
@@ -108,14 +135,12 @@ const TTS = {
     await Promise.all(Array(N).fill(0).map(work));
   },
 
-  // 播单句：用在 practicePhase 的"再听一次"
   async playOne(s) {
     this.stop();
-    const buf = await this._fetchBuffer(s.en, _getVoice(s.speaker), _getInstructions(s.speaker, s.type));
+    const buf = await this._fetchBuffer(s.en, _getVoiceId(s.speaker), s.type);
     await this._playBuffer(buf);
   },
 
-  // 连播整段：用在 listenPhase
   async playAll(sentences, onLine, onDone) {
     this.stop();
     this.playing = true;
@@ -125,7 +150,7 @@ const TTS = {
       const s = sentences[i];
       let buf;
       try {
-        buf = await this._fetchBuffer(s.en, _getVoice(s.speaker), _getInstructions(s.speaker, s.type));
+        buf = await this._fetchBuffer(s.en, _getVoiceId(s.speaker), s.type);
       } catch (e) {
         console.warn('playAll skip', s.en, e.message);
         onLine && onLine(i, 'skipped');
@@ -165,15 +190,14 @@ const TTS = {
   },
 };
 
-// 这两个 helper 由 daily.html 注入（带 DAILY_LIFE 上下文）
-// 这里给 fallback，避免 core.js 单独 require 时崩
-function _getVoice(speaker) {
-  return (window.DAILY_LIFE?.defaultSpeakers || {})[speaker] || 'shimmer';
-}
-function _getInstructions(speaker, type) {
-  const hint = (window.DAILY_LIFE?.speakerHints || {})[speaker] || '';
-  const em = (window.DAILY_LIFE?.emotionMap || {})[type] || 'Speak naturally like a real person in daily life. ';
-  return hint + em;
+function _getVoiceId(speaker) {
+  if (VOICE_IDS[speaker]) return VOICE_IDS[speaker];
+  const ds = (window.DAILY_LIFE && window.DAILY_LIFE.defaultSpeakers) || {};
+  const v = ds[speaker];
+  if (v && (v.includes('-') || v.startsWith('audiobook_') || v.startsWith('presenter_'))) {
+    return v;
+  }
+  return 'female-shaonv';
 }
 
 // ============ Recorder：MediaRecorder + Whisper /stt ============
@@ -193,7 +217,7 @@ const Recorder = {
     for (const m of cands) {
       try { if (MediaRecorder.isTypeSupported(m)) return m; } catch {}
     }
-    return ''; // 用浏览器默认
+    return '';
   },
 
   async start() {
@@ -262,7 +286,7 @@ const Recorder = {
 const Pronunciation = {
   norm(s) {
     return (s || '').toLowerCase()
-      .replace(/[‘’']/g, "'")
+      .replace(/[\u2018\u2019']/g, "'")
       .replace(/[^a-z0-9'\s]/g, ' ')
       .replace(/\s+/g, ' ')
       .replace(/\bgonna\b/g, 'going to')
@@ -301,16 +325,13 @@ const Pronunciation = {
       let prev = dp[0]; dp[0] = i;
       for (let j = 1; j <= n; j++) {
         const tmp = dp[j];
-        dp[j] = a[i - 1] === b[j - 1]
-          ? prev
-          : 1 + Math.min(prev, dp[j], dp[j - 1]);
+        dp[j] = a[i - 1] === b[j - 1] ? prev : 1 + Math.min(prev, dp[j], dp[j - 1]);
         prev = tmp;
       }
     }
     return dp[n];
   },
   passed(target, heard, minScore = 70, minLenRatio = 0.6) {
-    // Whisper 比浏览器识别准但对孩子的口音仍不完美，阈值稍微放宽（75/0.7 → 70/0.6）
     const s = this.similarity(target, heard);
     const r = this.lengthRatio(target, heard);
     return { score: s, lenRatio: r, ok: s >= minScore && r >= minLenRatio };
@@ -337,7 +358,6 @@ const Tracking = {
     const today = this.todayStr();
     if (!d.days[today]) d.days[today] = { dayId, done: [] };
     d.days[today].finished = true;
-
     const yest = this.dateOffset(-1);
     if (d.lastDate === yest || d.lastDate === today) {
       if (d.lastDate !== today) d.streak += 1;
@@ -349,10 +369,7 @@ const Tracking = {
     return d.streak;
   },
 
-  getToday() {
-    const d = this._load();
-    return d.days[this.todayStr()] || null;
-  },
+  getToday() { return this._load().days[this.todayStr()] || null; },
   getStreak() { return this._load().streak; },
   getAllDays() { return this._load().days; },
 
