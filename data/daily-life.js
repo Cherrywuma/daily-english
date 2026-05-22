@@ -106,45 +106,30 @@ window.DAILY_LIFE = {
   days: [
 
     // ====================================================
-    // Day 1: 早上叫起床的拉锯战
-    // ====================================================
+    // Day 1: Printable morning wake-up skit
     {
-      id: 1, theme: "早上叫起床", desc: "妈妈喊三遍，姐姐先起，弟弟赖床",
+      id: 1, theme: "早上起床表演", desc: "妈妈叫起床，姐姐已经醒了，弟弟赖床找袜子。适合打印背诵表演。",
       sentences: [
-        { en: "Wake up, you two!",              zh: "起床啦，你俩！",          type: "momCalling", speaker: "mom" },
-        { en: "It's seven already.",            zh: "都七点了。",              type: "nag",        speaker: "mom" },
-        { en: "Mom, five more minutes.",        zh: "妈，再睡五分钟。",        type: "broWhine",   speaker: "brother" },
-        { en: "No, get up now.",                zh: "不行，赶紧起。",          type: "momFirm",    speaker: "mom" },
-        { en: "I'm up, I'm up.",                zh: "起了起了。",              type: "sisCalm",    speaker: "sister" },
-        { en: "He's still sleeping!",           zh: "他还在睡！",              type: "sisAnnoy",   speaker: "sister" },
-        { en: "Shut up, I'm not.",              zh: "闭嘴，我没睡。",          type: "broPout",    speaker: "brother" },
-        { en: "Don't tell your sister to shut up.", zh: "别让姐姐闭嘴。",      type: "momFirm",    speaker: "mom" },
-        { en: "She started it!",                zh: "她先开始的！",            type: "broTell",    speaker: "brother" },
-        { en: "I did not.",                     zh: "我才没有。",              type: "sisAnnoy",   speaker: "sister" },
-        { en: "Out of bed, both of you.",       zh: "都给我下床。",            type: "momFirm",    speaker: "mom" },
-        { en: "It's cold!",                     zh: "好冷啊！",                type: "broWhine",   speaker: "brother" },
-        { en: "Put on a sweater then.",         zh: "那穿件毛衣。",            type: "casual",     speaker: "mom" },
-        { en: "Where's my sweater?",            zh: "我毛衣呢？",              type: "broCurious", speaker: "brother" },
-        { en: "On the chair, dummy.",           zh: "椅子上，笨蛋。",          type: "sisTease",   speaker: "sister" },
-        { en: "Don't call him dummy.",          zh: "别叫他笨蛋。",            type: "momFirm",    speaker: "mom" },
-        { en: "He really is though.",           zh: "他就是嘛。",              type: "sisAnnoy",   speaker: "sister" },
-        { en: "Mom! She called me dummy!",      zh: "妈！她叫我笨蛋！",        type: "broTell",    speaker: "brother" },
-        { en: "Enough, both of you.",           zh: "够了，你俩。",            type: "momTired",   speaker: "mom" },
-        { en: "I can't find my socks.",         zh: "我袜子找不到了。",        type: "broWhine",   speaker: "brother" },
-        { en: "Look under the bed.",            zh: "床底下找找。",            type: "casual",     speaker: "mom" },
-        { en: "Found one!",                     zh: "找到一只！",              type: "broExcite",  speaker: "brother" },
-        { en: "Where's the other one?",         zh: "另一只呢？",              type: "casual",     speaker: "mom" },
-        { en: "Hurry up, we're late.",          zh: "快点，迟到了。",          type: "rushed",     speaker: "mom" },
-        { en: "I'm hurrying!",                  zh: "我在快啊！",              type: "broWhine",   speaker: "brother" },
-        { en: "Mom, he's still in pajamas.",    zh: "妈，他还穿着睡衣。",      type: "sisTell",    speaker: "sister" },
-        { en: "Mind your own business.",        zh: "管好你自己。",            type: "broPout",    speaker: "brother" },
-        { en: "Both of you, downstairs, now.",  zh: "都下楼，马上。",          type: "momFirm",    speaker: "mom" },
-        { en: "Coming!",                        zh: "来了！",                  type: "sisCalm",    speaker: "sister" },
-        { en: "Wait for me!",                   zh: "等等我！",                type: "broLoud",    speaker: "brother" }
+            { en: "Wake up, you two. It is seven o'clock.", zh: "起床啦，你们两个。已经七点了。", type: "momCalling", speaker: "mom" },
+            { en: "I am awake, Mom. I am getting dressed.", zh: "我醒了，妈妈。我正在穿衣服。", type: "sisCalm", speaker: "sister" },
+            { en: "Mom, five more minutes, please.", zh: "妈妈，求你了，再睡五分钟。", type: "broWhine", speaker: "brother" },
+            { en: "No more minutes. Sit up now.", zh: "不能再睡了。现在坐起来。", type: "momFirm", speaker: "mom" },
+            { en: "My eyes are open, but my body is still sleeping.", zh: "我的眼睛睁开了，可是我的身体还在睡觉。", type: "broSleepy", speaker: "brother" },
+            { en: "Your body is always late.", zh: "你的身体总是迟到。", type: "sisTease", speaker: "sister" },
+            { en: "No teasing. Brush your teeth and wash your face.", zh: "别逗他了。去刷牙洗脸。", type: "momFirm", speaker: "mom" },
+            { en: "Where are my socks? I had two socks last night.", zh: "我的袜子在哪里？我昨晚明明有两只袜子。", type: "broCurious", speaker: "brother" },
+            { en: "Look under the bed. Your socks like hiding there.", zh: "看看床底下。你的袜子喜欢藏在那里。", type: "sisDry", speaker: "sister" },
+            { en: "Found one sock. The other sock escaped.", zh: "找到一只袜子了。另一只袜子逃走了。", type: "broExcite", speaker: "brother" },
+            { en: "Find it quickly. Breakfast is ready.", zh: "快点找到它。早餐已经好了。", type: "momOrder", speaker: "mom" },
+            { en: "Here it is, beside your chair.", zh: "在这里，在你的椅子旁边。", type: "sisHelpful", speaker: "sister" },
+            { en: "Thank you. You saved my morning.", zh: "谢谢你。你拯救了我的早晨。", type: "broHappy", speaker: "brother" },
+            { en: "Say that louder. I want Mom to hear it.", zh: "大声一点说。我想让妈妈听见。", type: "sisProud", speaker: "sister" },
+            { en: "Good. Now put on your socks and come to the table.", zh: "很好。现在穿上袜子，到餐桌这边来。", type: "momWarm", speaker: "mom" },
+            { en: "I am coming. My body is finally awake.", zh: "我来了。我的身体终于醒了。", type: "broCute", speaker: "brother" },
+            { en: "Great. Bring your backpack too.", zh: "太好了。也把你的书包带上。", type: "sisPlayful", speaker: "sister" },
+            { en: "Team one is ready for breakfast.", zh: "第一小队准备吃早餐了。", type: "momEnd", speaker: "mom" }
       ]
     },
-
-    // ====================================================
     // Day 2: 抢卫生间 + 刷牙
     // ====================================================
     {
