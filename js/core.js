@@ -43,16 +43,17 @@ function _typeToEmotion(type) {
 
 // type → speed（夸张版）
 function _typeToSpeed(type) {
-  if (!type) return 1.5;
+  if (!type) return 1.35;
   const t = String(type).toLowerCase();
   // 超快：急、生气、激动、兴奋（夸张到 1.85）
-  if (t.includes('rushed') || t.includes('yell') || t.includes('angry') || t.includes('annoy') || t.includes('excite') || t.includes('loud') || t.includes('boss')) return 1.85;
+  if (t.includes('rushed') || t.includes('yell') || t.includes('angry') || t.includes('annoy') || t.includes('excite') || t.includes('loud') || t.includes('boss')) return 1.65;
   // 超慢：哭、伤心、害怕（颤抖感）
   if (t.includes('cry') || t.includes('sad') || t.includes('scare')) return 0.9;
   // 慢：温柔、悄悄话、累
   if (t.includes('whisper') || t.includes('soft') || t.includes('tired') || t.includes('cozy')) return 1.2;
-  // 默认：1.5
-  return 1.5;
+  if (t.includes('bro') || t.includes('sis') || t.includes('cute') || t.includes('whine') || t.includes('pout') || t.includes('tease')) return 1.45;
+  // 默认：偏真实对话速度
+  return 1.35;
 }
 
 // type → 音量（生气/兴奋更响，哭/悄悄话更轻）
