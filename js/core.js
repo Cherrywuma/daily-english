@@ -110,20 +110,13 @@ const TTS = {
 
   _key(text, voice, emotion) { return `${voice}::${emotion}::${text}`; },
 
-  async _fetchBuffer(text, voiceId, type) {
-    const emotion = _typeToEmotion(type);
-    const speed = _typeToSpeed(type);
-    const enhancedText = _enhanceText(text, type);
-
-    const key = this._key(enhancedText, voiceId, emotion);
-    if (this.cache.has(key)) return this.cache.get(key);
-    if (!Config.isReady()) throw new Error('请先在设置里填 Worker 地址和密码');
-
+  // 单次拉取（不重试）
+  async _fetchBufferOnce(text, voiceId, emotion, speed) {
     const resp = await fetch(Config.workerUrl.replace(/\/$/, '') + '/tts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        text: enhancedText,
+        text,
         voice_id: voiceId,
         emotion,
         speed,
@@ -142,15 +135,42 @@ const TTS = {
         if (p && p.then) p.then(res, rej);
       } catch (e) { rej(e); }
     });
-    this.cache.set(key, buf);
     return buf;
+  },
+
+  // 拉取 + 失败重试（最多 3 次）
+  async _fetchBuffer(text, voiceId, type) {
+    const emotion = _typeToEmotion(type);
+    const speed = _typeToSpeed(type);
+    const enhancedText = _enhanceText(text, type);
+
+    const key = this._key(enhancedText, voiceId, emotion);
+    if (this.cache.has(key)) return this.cache.get(key);
+    if (!Config.isReady()) throw new Error('请先在设置里填 Worker 地址和密码');
+
+    let lastErr;
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        const buf = await this._fetchBufferOnce(enhancedText, voiceId, emotion, speed);
+        this.cache.set(key, buf);
+        return buf;
+      } catch (e) {
+        lastErr = e;
+        console.warn(`TTS attempt ${attempt}/3 failed for "${text.slice(0,30)}": ${e.message}`);
+        // 限速错误就等久一点
+        const isRateLimit = e.message && (e.message.includes('429') || e.message.includes('1024') || e.message.includes('rate'));
+        const wait = isRateLimit ? 1500 * attempt : 400 * attempt;
+        if (attempt < 3) await new Promise(r => setTimeout(r, wait));
+      }
+    }
+    throw lastErr;
   },
 
   async prefetchAll(sentences, onProgress) {
     let done = 0;
     const total = sentences.length;
     const queue = sentences.slice();
-    const N = 3;
+    const N = 2;  // 并发 2，给 MiniMax 留余地，避免限速
     const work = async () => {
       while (queue.length) {
         const s = queue.shift();
@@ -181,10 +201,13 @@ const TTS = {
       const s = sentences[i];
       let buf;
       try {
+        // _fetchBuffer 内部已经重试 3 次了，这里失败就是真的失败
         buf = await this._fetchBuffer(s.en, _getVoiceId(s.speaker), s.type);
       } catch (e) {
         console.warn('playAll skip', s.en, e.message);
         onLine && onLine(i, 'skipped');
+        // 失败后等 800ms 再继续，避免连续轰炸 MiniMax
+        if (this.playing) await new Promise(r => setTimeout(r, 800));
         continue;
       }
       if (!this.playing) break;
