@@ -15,33 +15,29 @@ const Config = {
   isReady() { return !!this.workerUrl && !!this.password; },
 };
 
-// ===== 英文音色 ID（speech-02 全套英文音色）=====
-// 姐姐：强势霸道
-// 弟弟：怂、脾气大、爱惹事
-// 妈妈：温暖但能严肃
-// 爸爸：沉稳
+// ===== MiniMax 官方音色 ID（确认存在的）=====
+// 这些是 MiniMax API 实际支持的 voice_id
+// 虽然名字带"中文"但说英文也很流利（MiniMax 是多语言模型）
 const VOICE_IDS = {
-  mom:       'English_CalmWoman',           // 冷静英文女声 - 妈妈
-  dad:       'English_Trustworth_Man',      // 可信任男声 - 爸爸
-  sister:    'English_Bossy_Leader',        // 强势女声 - 姐姐 9 岁
-  brother:   'English_PlayfulGirl',         // 调皮男声 - 弟弟 7 岁（其实是男孩声音）
-  teacher:   'English_Gentle-voiced_man',   // 老师
-  doctor:    'English_Trustworth_Man',
-  grandma:   'English_Wiselady',
-  grandpa:   'English_ReservedYoungMan',
-  classmate: 'English_PlayfulGirl',
-  kid:       'English_PlayfulGirl',
+  mom:       'female-yujie',           // 御姐音 - 妈妈成熟温暖
+  dad:       'male-qn-jingying',       // 精英青年男声 - 爸爸
+  sister:    'cherry_sister_v1',       // 姐姐真人克隆声音 🎉
+  brother:   'male-qn-badao',          // 霸道少年 - 弟弟 7 岁
+  teacher:   'female-chengshu',        // 成熟女声 - 老师
+  doctor:    'male-qn-qingse',         // 青年男声 - 医生
+  grandma:   'female-tianmei',         // 甜美女声 - 暂代奶奶
+  grandpa:   'presenter_male',         // 男主播 - 暂代爷爷
+  classmate: 'male-qn-qingse',         // 同学
+  kid:       'female-shaonv',          // 通用小孩
 };
 
-// type → MiniMax emotion 映射（更激进）
+// type → MiniMax emotion（只用最稳的 4 种）
 function _typeToEmotion(type) {
   if (!type) return 'neutral';
   const t = String(type).toLowerCase();
-  if (t.includes('cry') || t.includes('whine') || t.includes('sad')) return 'sad';
+  if (t.includes('cry') || t.includes('whine') || t.includes('sad') || t.includes('scare') || t.includes('worry')) return 'sad';
   if (t.includes('angry') || t.includes('annoy') || t.includes('yell') || t.includes('loud') || t.includes('pout') || t.includes('rushed') || t.includes('boss') || t.includes('stern')) return 'angry';
-  if (t.includes('excite') || t.includes('proud') || t.includes('cute') || t.includes('cheer') || t.includes('laugh') || t.includes('silly') || t.includes('sweet') || t.includes('play')) return 'happy';
-  if (t.includes('scare') || t.includes('worry')) return 'fearful';
-  if (t.includes('surprise') || t.includes('curious')) return 'surprised';
+  if (t.includes('excite') || t.includes('proud') || t.includes('cute') || t.includes('cheer') || t.includes('laugh') || t.includes('silly') || t.includes('sweet') || t.includes('play') || t.includes('surprise') || t.includes('curious')) return 'happy';
   return 'neutral';
 }
 
@@ -58,14 +54,9 @@ function _typeToSpeed(type) {
 }
 
 // 给文本加 MiniMax 的表情标签（让语气更逼真）
-// 注意：只在特定情绪下加，避免破坏发音学习
+// 注意：暂时关闭，因为有些模型不认这些标签
 function _enhanceText(text, type) {
-  if (!type) return text;
-  const t = String(type).toLowerCase();
-  // 学习用 App，不能加太多干扰，但偶尔加点真人感
-  if (t.includes('laugh')) return text + ' (laughs)';
-  if (t.includes('cry')) return text + ' (sighs)';
-  return text;
+  return text;  // 保守做法：不加任何标签
 }
 
 // ============ TTS：Web Audio API + AudioContext ============
@@ -246,7 +237,7 @@ const TTS = {
 
 function _getVoiceId(speaker) {
   if (VOICE_IDS[speaker]) return VOICE_IDS[speaker];
-  return 'English_CalmWoman';
+  return 'female-shaonv';
 }
 
 // ============ Recorder：MediaRecorder + Whisper /stt ============
