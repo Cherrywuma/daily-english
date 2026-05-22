@@ -43,17 +43,17 @@ function _typeToEmotion(type) {
 
 // type → speed（夸张版）
 function _typeToSpeed(type) {
-  if (!type) return 1.35;
+  if (!type) return 1.5;
   const t = String(type).toLowerCase();
   // 超快：急、生气、激动、兴奋（夸张到 1.85）
-  if (t.includes('rushed') || t.includes('yell') || t.includes('angry') || t.includes('annoy') || t.includes('excite') || t.includes('loud') || t.includes('boss')) return 1.65;
+  if (t.includes('rushed') || t.includes('yell') || t.includes('angry') || t.includes('annoy') || t.includes('excite') || t.includes('loud') || t.includes('boss')) return 1.8;
   // 超慢：哭、伤心、害怕（颤抖感）
-  if (t.includes('cry') || t.includes('sad') || t.includes('scare')) return 0.9;
+  if (t.includes('cry') || t.includes('sad') || t.includes('scare')) return 1.25;
   // 慢：温柔、悄悄话、累
-  if (t.includes('whisper') || t.includes('soft') || t.includes('tired') || t.includes('cozy')) return 1.2;
-  if (t.includes('bro') || t.includes('sis') || t.includes('cute') || t.includes('whine') || t.includes('pout') || t.includes('tease')) return 1.45;
+  if (t.includes('whisper') || t.includes('soft') || t.includes('tired') || t.includes('cozy')) return 1.35;
+  if (t.includes('bro') || t.includes('sis') || t.includes('cute') || t.includes('whine') || t.includes('pout') || t.includes('tease')) return 1.65;
   // 默认：偏真实对话速度
-  return 1.35;
+  return 1.5;
 }
 
 // type → 音量（生气/兴奋更响，哭/悄悄话更轻）
@@ -68,50 +68,7 @@ function _typeToVol(type) {
 // 在原句前加语气词（让 AI 念得更有情绪）
 // AI 会读出语气词，但 UI 上仍显示原句，跟读评分也基于原句
 function _enhanceText(text, type) {
-  if (!type) return text;
-  const t = String(type).toLowerCase();
-
-  // 弟弟/姐姐情绪词库（随机一个让重复时不无聊）
-  const PREFIX = {
-    cry:      ['Owww! ', 'Ouch! ', 'Waaa! '],
-    whine:    ['Ugh, ', 'Aww, ', ''],
-    excite:   ['Yes! ', 'Yay! ', 'Whoa! '],
-    proud:    ['Hah! ', 'Yes! ', ''],
-    cute:     ['Aww, ', 'Hey, ', ''],
-    silly:    ['Haha! ', 'Hehe! ', ''],
-    annoy:    ['Ugh! ', 'Hey! ', 'Stop! '],
-    angry:    ['Hey! ', 'Ugh! ', ''],
-    pout:     ['Hmph! ', 'Aww, ', ''],
-    scared:   ['Eek! ', 'Oh no! ', ''],
-    loud:     ['Hey! ', 'Whoa! ', ''],
-    yell:     ['Hey! ', 'Mom! ', ''],
-    curious:  ['Huh? ', 'Hmm, ', 'Wait, '],
-    surprise: ['Whoa! ', 'Oh! ', ''],
-    boss:     ['Look, ', 'Hey, ', ''],
-    tease:    ['Heh, ', 'Aww, ', ''],
-    sweet:    ['Aww, ', 'Hey, ', ''],
-    laugh:    ['Haha! ', 'Hehe! ', ''],
-    cheer:    ['Yay! ', 'Yes! ', 'Whoo! '],
-    rushed:   ['Hey! ', 'Quick! ', ''],
-    worry:    ['Oh no, ', 'Wait, ', ''],
-    soft:     ['', '', ''],   // 温柔不加
-    whisper:  ['', '', ''],   // 悄悄话不加
-    tired:    ['Uhh, ', 'Hmm, ', ''],
-    cozy:     ['', '', ''],
-  };
-
-  // 匹配最相关的关键词
-  let prefixes = null;
-  for (const key in PREFIX) {
-    if (t.includes(key)) { prefixes = PREFIX[key]; break; }
-  }
-  if (!prefixes) return text;
-
-  // 用文本本身的 hash 选一个 prefix（让同一句每次结果一致，但不同句子不同）
-  let h = 0;
-  for (let i = 0; i < text.length; i++) h = ((h << 5) - h + text.charCodeAt(i)) | 0;
-  const prefix = prefixes[Math.abs(h) % prefixes.length];
-  return prefix + text;
+  return text;
 }
 
 // ============ TTS：Web Audio API + AudioContext ============
@@ -123,12 +80,12 @@ const TTS = {
 
   // 句间停顿（超快节奏，真人对话感）
   pauseAfter(type) {
-    if (!type) return 100;
+    if (!type) return 30;
     const t = String(type).toLowerCase();
-    if (t.includes('rushed') || t.includes('yell') || t.includes('loud')) return 50;   // 抢话节奏
-    if (t.includes('whisper') || t.includes('soft') || t.includes('cozy')) return 250;
-    if (t.includes('tired') || t.includes('cry')) return 200;
-    return 100;  // 默认 100ms，真人聊天节奏
+    if (t.includes('rushed') || t.includes('yell') || t.includes('loud') || t.includes('annoy') || t.includes('excite')) return 10;
+    if (t.includes('whisper') || t.includes('soft') || t.includes('cozy')) return 70;
+    if (t.includes('tired') || t.includes('cry')) return 60;
+    return 30;
   },
 
   _ensureCtx() {
