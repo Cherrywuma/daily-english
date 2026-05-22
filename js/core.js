@@ -153,7 +153,7 @@ const TTS = {
     } catch {}
   },
 
-  _key(text, voice, emotion, speed = '', vol = '') { return `v3::${voice}::${emotion}::${speed}::${vol}::${text}`; },
+  _key(text, voice, emotion, speed = '', vol = '') { return `v4-openai::${voice}::${emotion}::${speed}::${vol}::${text}`; },
 
   // 单次拉取（不重试）
   async _fetchArrayBufferOnce(text, voiceId, emotion, speed, vol) {
