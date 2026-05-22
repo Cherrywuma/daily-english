@@ -3361,7 +3361,7 @@ window.DAILY_LIFE = {
       ]
     },
 
-    // Day 85: 家庭小剧场
+    // Day 85: ?????
     {
       id: 85,
       theme: "家庭小剧场 85",
@@ -3369,116 +3369,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Do not touch my blanket. I just put it there.",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "不要碰我的 毯子 blanket。我刚把它放在那里。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "I was not touching it. I was checking if it was safe.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "我没有碰它。我只是看看它安不安全。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Your checking looks a lot like grabbing.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "你这个“看看”很像是在抢。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Mom, he is messing with the blanket again.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "妈妈，他又在乱动 毯子 blanket 了。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "Ask before you use someone else's things.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "用别人的东西以前，要先开口问。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "May I please use the blanket for one minute?",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "请问我可以用 毯子 blanket 一分钟吗？",
                   type: "broSoft",
                   speaker: "brother"
             },
             {
                   en: "One minute, and keep it away from the pillow.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "一分钟可以，而且要让它离 枕头 pillow 远一点。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "Why does the pillow get special protection?",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "为什么 枕头 pillow 还要特别保护？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "Because last time you dropped juice on it.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "因为你上次把果汁洒在上面了。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "That was an accident with personality.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "那是一次很有个性的意外。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "Put the bed back when you finish.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "用完以后把 床 bed 放回去。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "I can put things back. I am growing up.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "我会把东西放回去。我正在长大。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Growing up starts with not hiding things under the sofa.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "长大要从不把东西藏在 沙发 sofa 下面开始。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Fine, careful hands.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "好吧，小心手。",
                   type: "broCalm",
                   speaker: "brother"
             },
             {
                   en: "And careful ears, because I will remind you.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "耳朵也要小心，因为我会提醒你。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Your reminding voice is huge.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "你提醒人的声音太大了。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "Huge voices are useful in this house.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "在这个家里，大声音很有用。",
                   type: "momAmused",
                   speaker: "mom"
             },
             {
                   en: "Then I am very useful too.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "那我也很有用了。",
                   type: "broProud",
                   speaker: "brother"
             }
       ]
-},
+    },
 
-    // Day 86: 家庭小剧场
+    // Day 86: ?????
     {
       id: 86,
       theme: "家庭小剧场 86",
@@ -3486,116 +3486,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Everybody look here. Why is the toothbrush on the floor?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "大家看这里。为什么 牙刷 toothbrush 会在 地板 floor 上？",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Maybe it wanted a new life.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "也许它想换一种新生活。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "It wanted you to pick it up.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "它是想让你把它捡起来。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Pick it up and put it beside the toothpaste.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "把它捡起来，放到 牙膏 toothpaste 旁边。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Can she do it? She is closer.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "她可以做吗？她离得更近。",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "Your hand is closer to your body. Use it.",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "你的手离你的身体更近。用你的手。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "I am using emotional strength first.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "我先使用情绪力量。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "Physical strength, now.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "现在用身体力量。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Fine, I picked it up.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "好吧，我捡起来了。",
                   type: "broAnnoy",
                   speaker: "brother"
             },
             {
                   en: "Good. Now wipe the towel.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "很好。现在把 毛巾 towel 擦一下。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Why is there always another job?",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "为什么总是还有下一件事？",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "Because you always make another mess.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "因为你总是又弄出新的乱摊子。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Dad says teamwork is important.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "爸爸说团队合作很重要。",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Teamwork does not mean sister does your job.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "团队合作不是让姐姐替你做事。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I was hoping it did.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "我刚才还希望是那个意思。",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "You do the toothbrush. She does the toothpaste. Then done.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "你做 牙刷 toothbrush。她做 牙膏 toothpaste。这样就完成了。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "Deal, but he cannot supervise me.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "成交，但他不能监督我。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "I supervise with my eyes only.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "我只用眼睛监督。",
                   type: "broSilly",
                   speaker: "brother"
             }
       ]
-},
+    },
 
-    // Day 87: 家庭小剧场
+    // Day 87: ?????
     {
       id: 87,
       theme: "家庭小剧场 87",
@@ -3603,116 +3603,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Dad, can you help me with the bowl?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "爸爸，你能帮我弄一下 碗 bowl 吗？",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "Show me the problem first.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "先给我看看问题在哪里。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I can help too. I have ideas.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "我也可以帮忙。我有办法。",
                   type: "broExcite",
                   speaker: "brother"
             },
             {
                   en: "Your idea last time involved tape and a banana.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "你上次的办法用到了 胶带 tape 和一根香蕉。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "It was creative engineering.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "那是有创意的工程。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "First, check the cup. Is it loose?",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "先检查 杯子 cup。它松了吗？",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "It wiggles when I touch it.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "我一碰它，它就会晃。",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "Let me touch it. I am good at wiggling.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "让我摸一下。我很会晃东西。",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "That is not the skill we need.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "我们需要的不是这个本领。",
                   type: "dadAmused",
                   speaker: "dad"
             },
             {
                   en: "Hold the bread still for your sister.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "帮姐姐把 面包 bread 扶稳。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I am holding it like a statue.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "我像雕像一样扶着它。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "A statue that talks too much.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "是一座话太多的雕像。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Try again. Slow hands, careful eyes.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "再试一次。手慢一点，眼睛看仔细。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "It works! I fixed it with my brain.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "成功了！我是用脑子修好的。",
                   type: "sisProud",
                   speaker: "sister"
             },
             {
                   en: "And my statue hands.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "还有我的雕像手。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Yes, your statue hands helped.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "对，你的雕像手也帮忙了。",
                   type: "dadAmused",
                   speaker: "dad"
             },
             {
                   en: "Say thank you to your brother.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "跟弟弟说谢谢。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "Thank you, noisy statue.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "谢谢你，吵闹的雕像。",
                   type: "sisTease",
                   speaker: "sister"
             }
       ]
-},
+    },
 
-    // Day 88: 家庭小剧场
+    // Day 88: ?????
     {
       id: 88,
       theme: "家庭小剧场 88",
@@ -3720,116 +3720,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "What is this called in English?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "这个用英语怎么说？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "It is a backpack. Say it slowly first.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "它叫 书包 backpack。先慢慢说一遍。",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "backpack. Now can I touch it?",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "书包 backpack。现在我可以摸它了吗？",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Say: May I touch the backpack?",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "说：May I touch the 书包 backpack？",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "May I touch the backpack?",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "我可以摸一下 书包 backpack 吗？",
                   type: "broSoft",
                   speaker: "brother"
             },
             {
                   en: "Yes, but keep it away from the pencil case.",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "可以，但要让它离 铅笔盒 铅笔 pencil case 远一点。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "The pencil case is not my enemy.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "铅笔盒 铅笔 pencil case 又不是我的敌人。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "It becomes your enemy when you knock it over.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "你把它碰倒的时候，它就变成你的敌人了。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Mom, how do I say knock it over?",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "妈妈，“knock it over” 怎么说？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "Say: I knocked it over. But try not to need that sentence.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "说：I knocked it over。不过尽量别让自己需要这句话。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Too late, the homework folder moved.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "太晚了，作业文件夹 homework folder 动了。",
                   type: "broWorry",
                   speaker: "brother"
             },
             {
                   en: "It did not move. You pushed it.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "它没有自己动，是你推了它。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "I gently encouraged it.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "我只是轻轻鼓励了它一下。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "Put it back where it belongs.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "把它放回它该在的地方。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "I put it back. I said the sentence too.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "我把它放回去了。我也把句子说了。",
                   type: "broCalm",
                   speaker: "brother"
             },
             {
                   en: "Good sentence. Good hands.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "句子说得好，手也做得好。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Can we learn snack words next?",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "接下来我们可以学零食单词吗？",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Only after you learn cleaning words.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "要先学会清洁整理的词，才可以。",
                   type: "sisTease",
                   speaker: "sister"
             }
       ]
-},
+    },
 
-    // Day 89: 家庭小剧场
+    // Day 89: ?????
     {
       id: 89,
       theme: "家庭小剧场 89",
@@ -3837,116 +3837,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Do not touch my shoes. I just put it there.",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "不要碰我的 鞋子 shoes。我刚把它放在那里。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "I was not touching it. I was checking if it was safe.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "我没有碰它。我只是看看它安不安全。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Your checking looks a lot like grabbing.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "你这个“看看”很像是在抢。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Mom, he is messing with the shoes again.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "妈妈，他又在乱动 鞋子 shoes 了。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "Ask before you use someone else's things.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "用别人的东西以前，要先开口问。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "May I please use the shoes for one minute?",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "请问我可以用 鞋子 shoes 一分钟吗？",
                   type: "broSoft",
                   speaker: "brother"
             },
             {
                   en: "One minute, and keep it away from the socks.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "一分钟可以，而且要让它离 袜子 socks 远一点。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "Why does the socks get special protection?",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "为什么 袜子 socks 还要特别保护？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "Because last time you dropped juice on it.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "因为你上次把果汁洒在上面了。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "That was an accident with personality.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "那是一次很有个性的意外。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "Put the keys back when you finish.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "用完以后把 钥匙 keys 放回去。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "I can put things back. I am growing up.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "我会把东西放回去。我正在长大。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Growing up starts with not hiding things under the sofa.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "长大要从不把东西藏在 沙发 sofa 下面开始。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Fine, careful hands.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "好吧，小心手。",
                   type: "broCalm",
                   speaker: "brother"
             },
             {
                   en: "And careful ears, because I will remind you.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "耳朵也要小心，因为我会提醒你。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Your reminding voice is huge.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "你提醒人的声音太大了。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "Huge voices are useful in this house.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "在这个家里，大声音很有用。",
                   type: "momAmused",
                   speaker: "mom"
             },
             {
                   en: "Then I am very useful too.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "那我也很有用了。",
                   type: "broProud",
                   speaker: "brother"
             }
       ]
-},
+    },
 
-    // Day 90: 家庭小剧场
+    // Day 90: ?????
     {
       id: 90,
       theme: "家庭小剧场 90",
@@ -3954,116 +3954,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Everybody look here. Why is the water bottle on the floor?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "大家看这里。为什么 水壶 water bottle 会在 地板 floor 上？",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Maybe it wanted a new life.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "也许它想换一种新生活。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "It wanted you to pick it up.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "它是想让你把它捡起来。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Pick it up and put it beside the lunch box.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "把它捡起来，放到 饭盒 lunch box 旁边。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Can she do it? She is closer.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "她可以做吗？她离得更近。",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "Your hand is closer to your body. Use it.",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "你的手离你的身体更近。用你的手。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "I am using emotional strength first.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "我先使用情绪力量。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "Physical strength, now.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "现在用身体力量。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Fine, I picked it up.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "好吧，我捡起来了。",
                   type: "broAnnoy",
                   speaker: "brother"
             },
             {
                   en: "Good. Now wipe the lid.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "很好。现在把 盖子 lid 擦一下。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Why is there always another job?",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "为什么总是还有下一件事？",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "Because you always make another mess.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "因为你总是又弄出新的乱摊子。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Dad says teamwork is important.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "爸爸说团队合作很重要。",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Teamwork does not mean sister does your job.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "团队合作不是让姐姐替你做事。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I was hoping it did.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "我刚才还希望是那个意思。",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "You do the water bottle. She does the lunch box. Then done.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "你做 水壶 water bottle。她做 饭盒 lunch box。这样就完成了。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "Deal, but he cannot supervise me.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "成交，但他不能监督我。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "I supervise with my eyes only.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "我只用眼睛监督。",
                   type: "broSilly",
                   speaker: "brother"
             }
       ]
-},
+    },
 
-    // Day 91: 家庭小剧场
+    // Day 91: ?????
     {
       id: 91,
       theme: "家庭小剧场 91",
@@ -4071,116 +4071,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Dad, can you help me with the remote?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "爸爸，你能帮我弄一下 遥控器 remote 吗？",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "Show me the problem first.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "先给我看看问题在哪里。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I can help too. I have ideas.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "我也可以帮忙。我有办法。",
                   type: "broExcite",
                   speaker: "brother"
             },
             {
                   en: "Your idea last time involved tape and a banana.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "你上次的办法用到了 胶带 tape 和一根香蕉。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "It was creative engineering.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "那是有创意的工程。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "First, check the cushion. Is it loose?",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "先检查 靠垫 cushion。它松了吗？",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "It wiggles when I touch it.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "我一碰它，它就会晃。",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "Let me touch it. I am good at wiggling.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "让我摸一下。我很会晃东西。",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "That is not the skill we need.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "我们需要的不是这个本领。",
                   type: "dadAmused",
                   speaker: "dad"
             },
             {
                   en: "Hold the sofa still for your sister.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "帮姐姐把 沙发 sofa 扶稳。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I am holding it like a statue.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "我像雕像一样扶着它。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "A statue that talks too much.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "是一座话太多的雕像。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Try again. Slow hands, careful eyes.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "再试一次。手慢一点，眼睛看仔细。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "It works! I fixed it with my brain.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "成功了！我是用脑子修好的。",
                   type: "sisProud",
                   speaker: "sister"
             },
             {
                   en: "And my statue hands.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "还有我的雕像手。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Yes, your statue hands helped.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "对，你的雕像手也帮忙了。",
                   type: "dadAmused",
                   speaker: "dad"
             },
             {
                   en: "Say thank you to your brother.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "跟弟弟说谢谢。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "Thank you, noisy statue.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "谢谢你，吵闹的雕像。",
                   type: "sisTease",
                   speaker: "sister"
             }
       ]
-},
+    },
 
-    // Day 92: 家庭小剧场
+    // Day 92: ?????
     {
       id: 92,
       theme: "家庭小剧场 92",
@@ -4188,116 +4188,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "What is this called in English?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "这个用英语怎么说？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "It is a fridge. Say it slowly first.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "它叫 冰箱 fridge。先慢慢说一遍。",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "fridge. Now can I touch it?",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "冰箱 fridge。现在我可以摸它了吗？",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Say: May I touch the fridge?",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "说：May I touch the 冰箱 fridge？",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "May I touch the fridge?",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "我可以摸一下 冰箱 fridge 吗？",
                   type: "broSoft",
                   speaker: "brother"
             },
             {
                   en: "Yes, but keep it away from the yogurt.",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "可以，但要让它离 酸奶 yogurt 远一点。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "The yogurt is not my enemy.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "酸奶 yogurt 又不是我的敌人。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "It becomes your enemy when you knock it over.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "你把它碰倒的时候，它就变成你的敌人了。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Mom, how do I say knock it over?",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "妈妈，“knock it over” 怎么说？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "Say: I knocked it over. But try not to need that sentence.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "说：I knocked it over。不过尽量别让自己需要这句话。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Too late, the snack box moved.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "太晚了，snack box 动了。",
                   type: "broWorry",
                   speaker: "brother"
             },
             {
                   en: "It did not move. You pushed it.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "它没有自己动，是你推了它。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "I gently encouraged it.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "我只是轻轻鼓励了它一下。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "Put it back where it belongs.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "把它放回它该在的地方。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "I put it back. I said the sentence too.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "我把它放回去了。我也把句子说了。",
                   type: "broCalm",
                   speaker: "brother"
             },
             {
                   en: "Good sentence. Good hands.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "句子说得好，手也做得好。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Can we learn snack words next?",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "接下来我们可以学零食单词吗？",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Only after you learn cleaning words.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "要先学会清洁整理的词，才可以。",
                   type: "sisTease",
                   speaker: "sister"
             }
       ]
-},
+    },
 
-    // Day 93: 家庭小剧场
+    // Day 93: ?????
     {
       id: 93,
       theme: "家庭小剧场 93",
@@ -4305,116 +4305,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Do not touch my plate. I just put it there.",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "不要碰我的 盘子 plate。我刚把它放在那里。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "I was not touching it. I was checking if it was safe.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "我没有碰它。我只是看看它安不安全。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Your checking looks a lot like grabbing.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "你这个“看看”很像是在抢。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Mom, he is messing with the plate again.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "妈妈，他又在乱动 盘子 plate 了。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "Ask before you use someone else's things.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "用别人的东西以前，要先开口问。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "May I please use the plate for one minute?",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "请问我可以用 盘子 plate 一分钟吗？",
                   type: "broSoft",
                   speaker: "brother"
             },
             {
                   en: "One minute, and keep it away from the napkin.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "一分钟可以，而且要让它离 餐巾 napkin 远一点。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "Why does the napkin get special protection?",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "为什么 餐巾 napkin 还要特别保护？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "Because last time you dropped juice on it.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "因为你上次把果汁洒在上面了。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "That was an accident with personality.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "那是一次很有个性的意外。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "Put the table back when you finish.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "用完以后把 桌子 table 放回去。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "I can put things back. I am growing up.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "我会把东西放回去。我正在长大。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Growing up starts with not hiding things under the sofa.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "长大要从不把东西藏在 沙发 sofa 下面开始。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Fine, careful hands.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "好吧，小心手。",
                   type: "broCalm",
                   speaker: "brother"
             },
             {
                   en: "And careful ears, because I will remind you.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "耳朵也要小心，因为我会提醒你。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Your reminding voice is huge.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "你提醒人的声音太大了。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "Huge voices are useful in this house.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "在这个家里，大声音很有用。",
                   type: "momAmused",
                   speaker: "mom"
             },
             {
                   en: "Then I am very useful too.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "那我也很有用了。",
                   type: "broProud",
                   speaker: "brother"
             }
       ]
-},
+    },
 
-    // Day 94: 家庭小剧场
+    // Day 94: ?????
     {
       id: 94,
       theme: "家庭小剧场 94",
@@ -4422,116 +4422,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Everybody look here. Why is the trash bag on the floor?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "大家看这里。为什么 垃圾袋 trash bag 会在 地板 floor 上？",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Maybe it wanted a new life.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "也许它想换一种新生活。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "It wanted you to pick it up.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "它是想让你把它捡起来。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Pick it up and put it beside the trash can.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "把它捡起来，放到 垃圾桶 trash can 旁边。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Can she do it? She is closer.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "她可以做吗？她离得更近。",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "Your hand is closer to your body. Use it.",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "你的手离你的身体更近。用你的手。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "I am using emotional strength first.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "我先使用情绪力量。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "Physical strength, now.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "现在用身体力量。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Fine, I picked it up.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "好吧，我捡起来了。",
                   type: "broAnnoy",
                   speaker: "brother"
             },
             {
                   en: "Good. Now wipe the lid.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "很好。现在把 盖子 lid 擦一下。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Why is there always another job?",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "为什么总是还有下一件事？",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "Because you always make another mess.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "因为你总是又弄出新的乱摊子。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Dad says teamwork is important.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "爸爸说团队合作很重要。",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Teamwork does not mean sister does your job.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "团队合作不是让姐姐替你做事。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I was hoping it did.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "我刚才还希望是那个意思。",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "You do the trash bag. She does the trash can. Then done.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "你做 垃圾袋 trash bag。她做 垃圾桶 trash can。这样就完成了。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "Deal, but he cannot supervise me.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "成交，但他不能监督我。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "I supervise with my eyes only.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "我只用眼睛监督。",
                   type: "broSilly",
                   speaker: "brother"
             }
       ]
-},
+    },
 
-    // Day 95: 家庭小剧场
+    // Day 95: ?????
     {
       id: 95,
       theme: "家庭小剧场 95",
@@ -4539,116 +4539,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Dad, can you help me with the laundry basket?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "爸爸，你能帮我弄一下 洗衣篮 laundry basket 吗？",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "Show me the problem first.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "先给我看看问题在哪里。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I can help too. I have ideas.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "我也可以帮忙。我有办法。",
                   type: "broExcite",
                   speaker: "brother"
             },
             {
                   en: "Your idea last time involved tape and a banana.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "你上次的办法用到了 胶带 tape 和一根香蕉。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "It was creative engineering.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "那是有创意的工程。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "First, check the dirty socks. Is it loose?",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "先检查 脏袜子 dirty 袜子 socks。它松了吗？",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "It wiggles when I touch it.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "我一碰它，它就会晃。",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "Let me touch it. I am good at wiggling.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "让我摸一下。我很会晃东西。",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "That is not the skill we need.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "我们需要的不是这个本领。",
                   type: "dadAmused",
                   speaker: "dad"
             },
             {
                   en: "Hold the school uniform still for your sister.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "帮姐姐把 校服 school uniform 扶稳。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I am holding it like a statue.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "我像雕像一样扶着它。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "A statue that talks too much.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "是一座话太多的雕像。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Try again. Slow hands, careful eyes.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "再试一次。手慢一点，眼睛看仔细。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "It works! I fixed it with my brain.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "成功了！我是用脑子修好的。",
                   type: "sisProud",
                   speaker: "sister"
             },
             {
                   en: "And my statue hands.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "还有我的雕像手。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Yes, your statue hands helped.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "对，你的雕像手也帮忙了。",
                   type: "dadAmused",
                   speaker: "dad"
             },
             {
                   en: "Say thank you to your brother.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "跟弟弟说谢谢。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "Thank you, noisy statue.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "谢谢你，吵闹的雕像。",
                   type: "sisTease",
                   speaker: "sister"
             }
       ]
-},
+    },
 
-    // Day 96: 家庭小剧场
+    // Day 96: ?????
     {
       id: 96,
       theme: "家庭小剧场 96",
@@ -4656,116 +4656,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "What is this called in English?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "这个用英语怎么说？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "It is a desk lamp. Say it slowly first.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "它叫 台灯 desk lamp。先慢慢说一遍。",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "desk lamp. Now can I touch it?",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "台灯 desk lamp。现在我可以摸它了吗？",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Say: May I touch the desk lamp?",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "说：May I touch the 台灯 desk lamp？",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "May I touch the desk lamp?",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "我可以摸一下 台灯 desk lamp 吗？",
                   type: "broSoft",
                   speaker: "brother"
             },
             {
                   en: "Yes, but keep it away from the eraser.",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "可以，但要让它离 橡皮 eraser 远一点。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "The eraser is not my enemy.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "橡皮 eraser 又不是我的敌人。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "It becomes your enemy when you knock it over.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "你把它碰倒的时候，它就变成你的敌人了。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Mom, how do I say knock it over?",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "妈妈，“knock it over” 怎么说？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "Say: I knocked it over. But try not to need that sentence.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "说：I knocked it over。不过尽量别让自己需要这句话。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Too late, the ruler moved.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "太晚了，尺子 ruler 动了。",
                   type: "broWorry",
                   speaker: "brother"
             },
             {
                   en: "It did not move. You pushed it.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "它没有自己动，是你推了它。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "I gently encouraged it.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "我只是轻轻鼓励了它一下。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "Put it back where it belongs.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "把它放回它该在的地方。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "I put it back. I said the sentence too.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "我把它放回去了。我也把句子说了。",
                   type: "broCalm",
                   speaker: "brother"
             },
             {
                   en: "Good sentence. Good hands.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "句子说得好，手也做得好。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Can we learn snack words next?",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "接下来我们可以学零食单词吗？",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Only after you learn cleaning words.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "要先学会清洁整理的词，才可以。",
                   type: "sisTease",
                   speaker: "sister"
             }
       ]
-},
+    },
 
-    // Day 97: 家庭小剧场
+    // Day 97: ?????
     {
       id: 97,
       theme: "家庭小剧场 97",
@@ -4773,116 +4773,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Do not touch my math notebook. I just put it there.",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "不要碰我的 数学本 math notebook。我刚把它放在那里。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "I was not touching it. I was checking if it was safe.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "我没有碰它。我只是看看它安不安全。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Your checking looks a lot like grabbing.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "你这个“看看”很像是在抢。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Mom, he is messing with the math notebook again.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "妈妈，他又在乱动 数学本 math notebook 了。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "Ask before you use someone else's things.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "用别人的东西以前，要先开口问。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "May I please use the math notebook for one minute?",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "请问我可以用 数学本 math notebook 一分钟吗？",
                   type: "broSoft",
                   speaker: "brother"
             },
             {
                   en: "One minute, and keep it away from the pencil.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "一分钟可以，而且要让它离 铅笔 pencil 远一点。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "Why does the pencil get special protection?",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "为什么 铅笔 pencil 还要特别保护？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "Because last time you dropped juice on it.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "因为你上次把果汁洒在上面了。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "That was an accident with personality.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "那是一次很有个性的意外。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "Put the answer back when you finish.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "用完以后把 答案 answer 放回去。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "I can put things back. I am growing up.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "我会把东西放回去。我正在长大。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Growing up starts with not hiding things under the sofa.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "长大要从不把东西藏在 沙发 sofa 下面开始。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Fine, careful hands.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "好吧，小心手。",
                   type: "broCalm",
                   speaker: "brother"
             },
             {
                   en: "And careful ears, because I will remind you.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "耳朵也要小心，因为我会提醒你。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Your reminding voice is huge.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "你提醒人的声音太大了。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "Huge voices are useful in this house.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "在这个家里，大声音很有用。",
                   type: "momAmused",
                   speaker: "mom"
             },
             {
                   en: "Then I am very useful too.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "那我也很有用了。",
                   type: "broProud",
                   speaker: "brother"
             }
       ]
-},
+    },
 
-    // Day 98: 家庭小剧场
+    // Day 98: ?????
     {
       id: 98,
       theme: "家庭小剧场 98",
@@ -4890,116 +4890,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Everybody look here. Why is the shirt on the floor?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "大家看这里。为什么 衬衫 shirt 会在 地板 floor 上？",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Maybe it wanted a new life.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "也许它想换一种新生活。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "It wanted you to pick it up.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "它是想让你把它捡起来。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Pick it up and put it beside the pants.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "把它捡起来，放到 裤子 pants 旁边。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Can she do it? She is closer.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "她可以做吗？她离得更近。",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "Your hand is closer to your body. Use it.",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "你的手离你的身体更近。用你的手。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "I am using emotional strength first.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "我先使用情绪力量。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "Physical strength, now.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "现在用身体力量。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Fine, I picked it up.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "好吧，我捡起来了。",
                   type: "broAnnoy",
                   speaker: "brother"
             },
             {
                   en: "Good. Now wipe the drawer.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "很好。现在把 抽屉 drawer 擦一下。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Why is there always another job?",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "为什么总是还有下一件事？",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "Because you always make another mess.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "因为你总是又弄出新的乱摊子。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Dad says teamwork is important.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "爸爸说团队合作很重要。",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Teamwork does not mean sister does your job.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "团队合作不是让姐姐替你做事。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I was hoping it did.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "我刚才还希望是那个意思。",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "You do the shirt. She does the pants. Then done.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "你做 衬衫 shirt。她做 裤子 pants。这样就完成了。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "Deal, but he cannot supervise me.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "成交，但他不能监督我。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "I supervise with my eyes only.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "我只用眼睛监督。",
                   type: "broSilly",
                   speaker: "brother"
             }
       ]
-},
+    },
 
-    // Day 99: 家庭小剧场
+    // Day 99: ?????
     {
       id: 99,
       theme: "家庭小剧场 99",
@@ -5007,116 +5007,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Dad, can you help me with the story book?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "爸爸，你能帮我弄一下 故事书 story book 吗？",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "Show me the problem first.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "先给我看看问题在哪里。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I can help too. I have ideas.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "我也可以帮忙。我有办法。",
                   type: "broExcite",
                   speaker: "brother"
             },
             {
                   en: "Your idea last time involved tape and a banana.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "你上次的办法用到了 胶带 tape 和一根香蕉。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "It was creative engineering.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "那是有创意的工程。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "First, check the word card. Is it loose?",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "先检查 单词卡 word card。它松了吗？",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "It wiggles when I touch it.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "我一碰它，它就会晃。",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "Let me touch it. I am good at wiggling.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "让我摸一下。我很会晃东西。",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "That is not the skill we need.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "我们需要的不是这个本领。",
                   type: "dadAmused",
                   speaker: "dad"
             },
             {
                   en: "Hold the page still for your sister.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "帮姐姐把 页 page 扶稳。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I am holding it like a statue.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "我像雕像一样扶着它。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "A statue that talks too much.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "是一座话太多的雕像。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Try again. Slow hands, careful eyes.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "再试一次。手慢一点，眼睛看仔细。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "It works! I fixed it with my brain.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "成功了！我是用脑子修好的。",
                   type: "sisProud",
                   speaker: "sister"
             },
             {
                   en: "And my statue hands.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "还有我的雕像手。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Yes, your statue hands helped.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "对，你的雕像手也帮忙了。",
                   type: "dadAmused",
                   speaker: "dad"
             },
             {
                   en: "Say thank you to your brother.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "跟弟弟说谢谢。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "Thank you, noisy statue.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "谢谢你，吵闹的雕像。",
                   type: "sisTease",
                   speaker: "sister"
             }
       ]
-},
+    },
 
-    // Day 100: 家庭小剧场
+    // Day 100: ?????
     {
       id: 100,
       theme: "家庭小剧场 100",
@@ -5124,116 +5124,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "What is this called in English?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "这个用英语怎么说？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "It is a charger. Say it slowly first.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "它叫 充电器 charger。先慢慢说一遍。",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "charger. Now can I touch it?",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "充电器 charger。现在我可以摸它了吗？",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Say: May I touch the charger?",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "说：May I touch the 充电器 charger？",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "May I touch the charger?",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "我可以摸一下 充电器 charger 吗？",
                   type: "broSoft",
                   speaker: "brother"
             },
             {
                   en: "Yes, but keep it away from the phone.",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "可以，但要让它离 手机 phone 远一点。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "The phone is not my enemy.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "手机 phone 又不是我的敌人。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "It becomes your enemy when you knock it over.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "你把它碰倒的时候，它就变成你的敌人了。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Mom, how do I say knock it over?",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "妈妈，“knock it over” 怎么说？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "Say: I knocked it over. But try not to need that sentence.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "说：I knocked it over。不过尽量别让自己需要这句话。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Too late, the cable moved.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "太晚了，线 cable 动了。",
                   type: "broWorry",
                   speaker: "brother"
             },
             {
                   en: "It did not move. You pushed it.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "它没有自己动，是你推了它。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "I gently encouraged it.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "我只是轻轻鼓励了它一下。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "Put it back where it belongs.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "把它放回它该在的地方。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "I put it back. I said the sentence too.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "我把它放回去了。我也把句子说了。",
                   type: "broCalm",
                   speaker: "brother"
             },
             {
                   en: "Good sentence. Good hands.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "句子说得好，手也做得好。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Can we learn snack words next?",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "接下来我们可以学零食单词吗？",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Only after you learn cleaning words.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "要先学会清洁整理的词，才可以。",
                   type: "sisTease",
                   speaker: "sister"
             }
       ]
-},
+    },
 
-    // Day 101: 家庭小剧场
+    // Day 101: ?????
     {
       id: 101,
       theme: "家庭小剧场 101",
@@ -5241,116 +5241,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Do not touch my doorbell. I just put it there.",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "不要碰我的 门铃 doorbell。我刚把它放在那里。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "I was not touching it. I was checking if it was safe.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "我没有碰它。我只是看看它安不安全。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Your checking looks a lot like grabbing.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "你这个“看看”很像是在抢。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Mom, he is messing with the doorbell again.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "妈妈，他又在乱动 门铃 doorbell 了。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "Ask before you use someone else's things.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "用别人的东西以前，要先开口问。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "May I please use the doorbell for one minute?",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "请问我可以用 门铃 doorbell 一分钟吗？",
                   type: "broSoft",
                   speaker: "brother"
             },
             {
                   en: "One minute, and keep it away from the package.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "一分钟可以，而且要让它离 包裹 package 远一点。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "Why does the package get special protection?",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "为什么 包裹 package 还要特别保护？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "Because last time you dropped juice on it.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "因为你上次把果汁洒在上面了。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "That was an accident with personality.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "那是一次很有个性的意外。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "Put the front door back when you finish.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "用完以后把 前门 front 门 door 放回去。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "I can put things back. I am growing up.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "我会把东西放回去。我正在长大。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Growing up starts with not hiding things under the sofa.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "长大要从不把东西藏在 沙发 sofa 下面开始。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Fine, careful hands.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "好吧，小心手。",
                   type: "broCalm",
                   speaker: "brother"
             },
             {
                   en: "And careful ears, because I will remind you.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "耳朵也要小心，因为我会提醒你。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Your reminding voice is huge.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "你提醒人的声音太大了。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "Huge voices are useful in this house.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "在这个家里，大声音很有用。",
                   type: "momAmused",
                   speaker: "mom"
             },
             {
                   en: "Then I am very useful too.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "那我也很有用了。",
                   type: "broProud",
                   speaker: "brother"
             }
       ]
-},
+    },
 
-    // Day 102: 家庭小剧场
+    // Day 102: ?????
     {
       id: 102,
       theme: "家庭小剧场 102",
@@ -5358,116 +5358,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Everybody look here. Why is the plant on the floor?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "大家看这里。为什么 植物 plant 会在 地板 floor 上？",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Maybe it wanted a new life.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "也许它想换一种新生活。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "It wanted you to pick it up.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "它是想让你把它捡起来。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Pick it up and put it beside the spray bottle.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "把它捡起来，放到 喷壶 spray bottle 旁边。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Can she do it? She is closer.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "她可以做吗？她离得更近。",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "Your hand is closer to your body. Use it.",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "你的手离你的身体更近。用你的手。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "I am using emotional strength first.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "我先使用情绪力量。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "Physical strength, now.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "现在用身体力量。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Fine, I picked it up.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "好吧，我捡起来了。",
                   type: "broAnnoy",
                   speaker: "brother"
             },
             {
                   en: "Good. Now wipe the balcony floor.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "很好。现在把 阳台地面 balcony 地板 floor 擦一下。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Why is there always another job?",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "为什么总是还有下一件事？",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "Because you always make another mess.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "因为你总是又弄出新的乱摊子。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Dad says teamwork is important.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "爸爸说团队合作很重要。",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Teamwork does not mean sister does your job.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "团队合作不是让姐姐替你做事。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I was hoping it did.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "我刚才还希望是那个意思。",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "You do the plant. She does the spray bottle. Then done.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "你做 植物 plant。她做 喷壶 spray bottle。这样就完成了。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "Deal, but he cannot supervise me.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "成交，但他不能监督我。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "I supervise with my eyes only.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "我只用眼睛监督。",
                   type: "broSilly",
                   speaker: "brother"
             }
       ]
-},
+    },
 
-    // Day 103: 家庭小剧场
+    // Day 103: ?????
     {
       id: 103,
       theme: "家庭小剧场 103",
@@ -5475,116 +5475,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Dad, can you help me with the sink?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "爸爸，你能帮我弄一下 水槽 sink 吗？",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "Show me the problem first.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "先给我看看问题在哪里。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I can help too. I have ideas.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "我也可以帮忙。我有办法。",
                   type: "broExcite",
                   speaker: "brother"
             },
             {
                   en: "Your idea last time involved tape and a banana.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "你上次的办法用到了 胶带 tape 和一根香蕉。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "It was creative engineering.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "那是有创意的工程。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "First, check the apple. Is it loose?",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "先检查 苹果 apple。它松了吗？",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "It wiggles when I touch it.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "我一碰它，它就会晃。",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "Let me touch it. I am good at wiggling.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "让我摸一下。我很会晃东西。",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "That is not the skill we need.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "我们需要的不是这个本领。",
                   type: "dadAmused",
                   speaker: "dad"
             },
             {
                   en: "Hold the water tap still for your sister.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "帮姐姐把 水龙头 water tap 扶稳。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I am holding it like a statue.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "我像雕像一样扶着它。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "A statue that talks too much.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "是一座话太多的雕像。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Try again. Slow hands, careful eyes.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "再试一次。手慢一点，眼睛看仔细。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "It works! I fixed it with my brain.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "成功了！我是用脑子修好的。",
                   type: "sisProud",
                   speaker: "sister"
             },
             {
                   en: "And my statue hands.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "还有我的雕像手。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Yes, your statue hands helped.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "对，你的雕像手也帮忙了。",
                   type: "dadAmused",
                   speaker: "dad"
             },
             {
                   en: "Say thank you to your brother.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "跟弟弟说谢谢。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "Thank you, noisy statue.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "谢谢你，吵闹的雕像。",
                   type: "sisTease",
                   speaker: "sister"
             }
       ]
-},
+    },
 
-    // Day 104: 家庭小剧场
+    // Day 104: ?????
     {
       id: 104,
       theme: "家庭小剧场 104",
@@ -5592,116 +5592,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "What is this called in English?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "这个用英语怎么说？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "It is a microwave. Say it slowly first.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "它叫 微波炉 microwave。先慢慢说一遍。",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "microwave. Now can I touch it?",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "微波炉 microwave。现在我可以摸它了吗？",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Say: May I touch the microwave?",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "说：May I touch the 微波炉 microwave？",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "May I touch the microwave?",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "我可以摸一下 微波炉 microwave 吗？",
                   type: "broSoft",
                   speaker: "brother"
             },
             {
                   en: "Yes, but keep it away from the milk cup.",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "可以，但要让它离 牛奶杯 milk 杯子 cup 远一点。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "The milk cup is not my enemy.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "牛奶杯 milk 杯子 cup 又不是我的敌人。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "It becomes your enemy when you knock it over.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "你把它碰倒的时候，它就变成你的敌人了。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Mom, how do I say knock it over?",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "妈妈，“knock it over” 怎么说？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "Say: I knocked it over. But try not to need that sentence.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "说：I knocked it over。不过尽量别让自己需要这句话。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Too late, the button moved.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "太晚了，按钮 button 动了。",
                   type: "broWorry",
                   speaker: "brother"
             },
             {
                   en: "It did not move. You pushed it.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "它没有自己动，是你推了它。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "I gently encouraged it.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "我只是轻轻鼓励了它一下。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "Put it back where it belongs.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "把它放回它该在的地方。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "I put it back. I said the sentence too.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "我把它放回去了。我也把句子说了。",
                   type: "broCalm",
                   speaker: "brother"
             },
             {
                   en: "Good sentence. Good hands.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "句子说得好，手也做得好。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Can we learn snack words next?",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "接下来我们可以学零食单词吗？",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Only after you learn cleaning words.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "要先学会清洁整理的词，才可以。",
                   type: "sisTease",
                   speaker: "sister"
             }
       ]
-},
+    },
 
-    // Day 105: 家庭小剧场
+    // Day 105: ?????
     {
       id: 105,
       theme: "家庭小剧场 105",
@@ -5709,116 +5709,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Do not touch my sticky note. I just put it there.",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "不要碰我的 便利贴 sticky note。我刚把它放在那里。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "I was not touching it. I was checking if it was safe.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "我没有碰它。我只是看看它安不安全。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Your checking looks a lot like grabbing.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "你这个“看看”很像是在抢。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Mom, he is messing with the sticky note again.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "妈妈，他又在乱动 便利贴 sticky note 了。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "Ask before you use someone else's things.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "用别人的东西以前，要先开口问。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "May I please use the sticky note for one minute?",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "请问我可以用 便利贴 sticky note 一分钟吗？",
                   type: "broSoft",
                   speaker: "brother"
             },
             {
                   en: "One minute, and keep it away from the fridge magnet.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "一分钟可以，而且要让它离 冰箱磁铁 冰箱 fridge magnet 远一点。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "Why does the fridge magnet get special protection?",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "为什么 冰箱磁铁 冰箱 fridge magnet 还要特别保护？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "Because last time you dropped juice on it.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "因为你上次把果汁洒在上面了。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "That was an accident with personality.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "那是一次很有个性的意外。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "Put the marker back when you finish.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "用完以后把 记号笔 marker 放回去。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "I can put things back. I am growing up.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "我会把东西放回去。我正在长大。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Growing up starts with not hiding things under the sofa.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "长大要从不把东西藏在 沙发 sofa 下面开始。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Fine, careful hands.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "好吧，小心手。",
                   type: "broCalm",
                   speaker: "brother"
             },
             {
                   en: "And careful ears, because I will remind you.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "耳朵也要小心，因为我会提醒你。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Your reminding voice is huge.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "你提醒人的声音太大了。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "Huge voices are useful in this house.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "在这个家里，大声音很有用。",
                   type: "momAmused",
                   speaker: "mom"
             },
             {
                   en: "Then I am very useful too.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "那我也很有用了。",
                   type: "broProud",
                   speaker: "brother"
             }
       ]
-},
+    },
 
-    // Day 106: 家庭小剧场
+    // Day 106: ?????
     {
       id: 106,
       theme: "家庭小剧场 106",
@@ -5826,116 +5826,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Everybody look here. Why is the blocks on the floor?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "大家看这里。为什么 积木 blocks 会在 地板 floor 上？",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Maybe it wanted a new life.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "也许它想换一种新生活。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "It wanted you to pick it up.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "它是想让你把它捡起来。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Pick it up and put it beside the toy car.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "把它捡起来，放到 玩具车 toy car 旁边。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Can she do it? She is closer.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "她可以做吗？她离得更近。",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "Your hand is closer to your body. Use it.",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "你的手离你的身体更近。用你的手。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "I am using emotional strength first.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "我先使用情绪力量。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "Physical strength, now.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "现在用身体力量。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Fine, I picked it up.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "好吧，我捡起来了。",
                   type: "broAnnoy",
                   speaker: "brother"
             },
             {
                   en: "Good. Now wipe the toy box.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "很好。现在把 玩具箱 toy box 擦一下。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Why is there always another job?",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "为什么总是还有下一件事？",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "Because you always make another mess.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "因为你总是又弄出新的乱摊子。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Dad says teamwork is important.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "爸爸说团队合作很重要。",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Teamwork does not mean sister does your job.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "团队合作不是让姐姐替你做事。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I was hoping it did.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "我刚才还希望是那个意思。",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "You do the blocks. She does the toy car. Then done.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "你做 积木 blocks。她做 玩具车 toy car。这样就完成了。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "Deal, but he cannot supervise me.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "成交，但他不能监督我。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "I supervise with my eyes only.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "我只用眼睛监督。",
                   type: "broSilly",
                   speaker: "brother"
             }
       ]
-},
+    },
 
-    // Day 107: 家庭小剧场
+    // Day 107: ?????
     {
       id: 107,
       theme: "家庭小剧场 107",
@@ -5943,116 +5943,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Dad, can you help me with the bath towel?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "爸爸，你能帮我弄一下 浴巾 bath 毛巾 towel 吗？",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "Show me the problem first.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "先给我看看问题在哪里。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I can help too. I have ideas.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "我也可以帮忙。我有办法。",
                   type: "broExcite",
                   speaker: "brother"
             },
             {
                   en: "Your idea last time involved tape and a banana.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "你上次的办法用到了 胶带 tape 和一根香蕉。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "It was creative engineering.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "那是有创意的工程。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "First, check the shampoo. Is it loose?",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "先检查 洗发水 shampoo。它松了吗？",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "It wiggles when I touch it.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "我一碰它，它就会晃。",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "Let me touch it. I am good at wiggling.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "让我摸一下。我很会晃东西。",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "That is not the skill we need.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "我们需要的不是这个本领。",
                   type: "dadAmused",
                   speaker: "dad"
             },
             {
                   en: "Hold the bath mat still for your sister.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "帮姐姐把 浴室地垫 bath mat 扶稳。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I am holding it like a statue.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "我像雕像一样扶着它。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "A statue that talks too much.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "是一座话太多的雕像。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Try again. Slow hands, careful eyes.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "再试一次。手慢一点，眼睛看仔细。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "It works! I fixed it with my brain.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "成功了！我是用脑子修好的。",
                   type: "sisProud",
                   speaker: "sister"
             },
             {
                   en: "And my statue hands.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "还有我的雕像手。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Yes, your statue hands helped.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "对，你的雕像手也帮忙了。",
                   type: "dadAmused",
                   speaker: "dad"
             },
             {
                   en: "Say thank you to your brother.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "跟弟弟说谢谢。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "Thank you, noisy statue.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "谢谢你，吵闹的雕像。",
                   type: "sisTease",
                   speaker: "sister"
             }
       ]
-},
+    },
 
-    // Day 108: 家庭小剧场
+    // Day 108: ?????
     {
       id: 108,
       theme: "家庭小剧场 108",
@@ -6060,116 +6060,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "What is this called in English?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "这个用英语怎么说？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "It is a night light. Say it slowly first.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "它叫 夜灯 night light。先慢慢说一遍。",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "night light. Now can I touch it?",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "夜灯 night light。现在我可以摸它了吗？",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Say: May I touch the night light?",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "说：May I touch the 夜灯 night light？",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "May I touch the night light?",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "我可以摸一下 夜灯 night light 吗？",
                   type: "broSoft",
                   speaker: "brother"
             },
             {
                   en: "Yes, but keep it away from the blanket.",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "可以，但要让它离 毯子 blanket 远一点。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "The blanket is not my enemy.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "毯子 blanket 又不是我的敌人。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "It becomes your enemy when you knock it over.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "你把它碰倒的时候，它就变成你的敌人了。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Mom, how do I say knock it over?",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "妈妈，“knock it over” 怎么说？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "Say: I knocked it over. But try not to need that sentence.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "说：I knocked it over。不过尽量别让自己需要这句话。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Too late, the door moved.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "太晚了，门 door 动了。",
                   type: "broWorry",
                   speaker: "brother"
             },
             {
                   en: "It did not move. You pushed it.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "它没有自己动，是你推了它。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "I gently encouraged it.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "我只是轻轻鼓励了它一下。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "Put it back where it belongs.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "把它放回它该在的地方。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "I put it back. I said the sentence too.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "我把它放回去了。我也把句子说了。",
                   type: "broCalm",
                   speaker: "brother"
             },
             {
                   en: "Good sentence. Good hands.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "句子说得好，手也做得好。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Can we learn snack words next?",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "接下来我们可以学零食单词吗？",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Only after you learn cleaning words.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "要先学会清洁整理的词，才可以。",
                   type: "sisTease",
                   speaker: "sister"
             }
       ]
-},
+    },
 
-    // Day 109: 家庭小剧场
+    // Day 109: ?????
     {
       id: 109,
       theme: "家庭小剧场 109",
@@ -6177,116 +6177,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Do not touch my curtain. I just put it there.",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "不要碰我的 窗帘 curtain。我刚把它放在那里。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "I was not touching it. I was checking if it was safe.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "我没有碰它。我只是看看它安不安全。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Your checking looks a lot like grabbing.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "你这个“看看”很像是在抢。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Mom, he is messing with the curtain again.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "妈妈，他又在乱动 窗帘 curtain 了。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "Ask before you use someone else's things.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "用别人的东西以前，要先开口问。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "May I please use the curtain for one minute?",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "请问我可以用 窗帘 curtain 一分钟吗？",
                   type: "broSoft",
                   speaker: "brother"
             },
             {
                   en: "One minute, and keep it away from the window.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "一分钟可以，而且要让它离 窗户 window 远一点。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "Why does the window get special protection?",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "为什么 窗户 window 还要特别保护？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "Because last time you dropped juice on it.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "因为你上次把果汁洒在上面了。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "That was an accident with personality.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "那是一次很有个性的意外。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "Put the sunlight back when you finish.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "用完以后把 阳光 sunlight 放回去。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "I can put things back. I am growing up.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "我会把东西放回去。我正在长大。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Growing up starts with not hiding things under the sofa.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "长大要从不把东西藏在 沙发 sofa 下面开始。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Fine, careful hands.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "好吧，小心手。",
                   type: "broCalm",
                   speaker: "brother"
             },
             {
                   en: "And careful ears, because I will remind you.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "耳朵也要小心，因为我会提醒你。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Your reminding voice is huge.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "你提醒人的声音太大了。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "Huge voices are useful in this house.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "在这个家里，大声音很有用。",
                   type: "momAmused",
                   speaker: "mom"
             },
             {
                   en: "Then I am very useful too.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "那我也很有用了。",
                   type: "broProud",
                   speaker: "brother"
             }
       ]
-},
+    },
 
-    // Day 110: 家庭小剧场
+    // Day 110: ?????
     {
       id: 110,
       theme: "家庭小剧场 110",
@@ -6294,116 +6294,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Everybody look here. Why is the shoe cabinet on the floor?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "大家看这里。为什么 鞋柜 shoe cabinet 会在 地板 floor 上？",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Maybe it wanted a new life.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "也许它想换一种新生活。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "It wanted you to pick it up.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "它是想让你把它捡起来。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Pick it up and put it beside the slippers.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "把它捡起来，放到 拖鞋 slippers 旁边。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Can she do it? She is closer.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "她可以做吗？她离得更近。",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "Your hand is closer to your body. Use it.",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "你的手离你的身体更近。用你的手。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "I am using emotional strength first.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "我先使用情绪力量。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "Physical strength, now.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "现在用身体力量。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Fine, I picked it up.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "好吧，我捡起来了。",
                   type: "broAnnoy",
                   speaker: "brother"
             },
             {
                   en: "Good. Now wipe the sneakers.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "很好。现在把 运动鞋 sneakers 擦一下。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Why is there always another job?",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "为什么总是还有下一件事？",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "Because you always make another mess.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "因为你总是又弄出新的乱摊子。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Dad says teamwork is important.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "爸爸说团队合作很重要。",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Teamwork does not mean sister does your job.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "团队合作不是让姐姐替你做事。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I was hoping it did.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "我刚才还希望是那个意思。",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "You do the shoe cabinet. She does the slippers. Then done.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "你做 鞋柜 shoe cabinet。她做 拖鞋 slippers。这样就完成了。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "Deal, but he cannot supervise me.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "成交，但他不能监督我。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "I supervise with my eyes only.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "我只用眼睛监督。",
                   type: "broSilly",
                   speaker: "brother"
             }
       ]
-},
+    },
 
-    // Day 111: 家庭小剧场
+    // Day 111: ?????
     {
       id: 111,
       theme: "家庭小剧场 111",
@@ -6411,116 +6411,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Dad, can you help me with the drawer?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "爸爸，你能帮我弄一下 抽屉 drawer 吗？",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "Show me the problem first.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "先给我看看问题在哪里。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I can help too. I have ideas.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "我也可以帮忙。我有办法。",
                   type: "broExcite",
                   speaker: "brother"
             },
             {
                   en: "Your idea last time involved tape and a banana.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "你上次的办法用到了 胶带 tape 和一根香蕉。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "It was creative engineering.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "那是有创意的工程。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "First, check the spoon. Is it loose?",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "先检查 勺子 spoon。它松了吗？",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "It wiggles when I touch it.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "我一碰它，它就会晃。",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "Let me touch it. I am good at wiggling.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "让我摸一下。我很会晃东西。",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "That is not the skill we need.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "我们需要的不是这个本领。",
                   type: "dadAmused",
                   speaker: "dad"
             },
             {
                   en: "Hold the chopsticks still for your sister.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "帮姐姐把 筷子 chopsticks 扶稳。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I am holding it like a statue.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "我像雕像一样扶着它。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "A statue that talks too much.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "是一座话太多的雕像。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Try again. Slow hands, careful eyes.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "再试一次。手慢一点，眼睛看仔细。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "It works! I fixed it with my brain.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "成功了！我是用脑子修好的。",
                   type: "sisProud",
                   speaker: "sister"
             },
             {
                   en: "And my statue hands.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "还有我的雕像手。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Yes, your statue hands helped.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "对，你的雕像手也帮忙了。",
                   type: "dadAmused",
                   speaker: "dad"
             },
             {
                   en: "Say thank you to your brother.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "跟弟弟说谢谢。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "Thank you, noisy statue.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "谢谢你，吵闹的雕像。",
                   type: "sisTease",
                   speaker: "sister"
             }
       ]
-},
+    },
 
-    // Day 112: 家庭小剧场
+    // Day 112: ?????
     {
       id: 112,
       theme: "家庭小剧场 112",
@@ -6528,116 +6528,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "What is this called in English?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "这个用英语怎么说？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "It is a mom bag. Say it slowly first.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "它叫 妈妈的包 mom bag。先慢慢说一遍。",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "mom bag. Now can I touch it?",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "妈妈的包 mom bag。现在我可以摸它了吗？",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Say: May I touch the mom bag?",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "说：May I touch the 妈妈的包 mom bag？",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "May I touch the mom bag?",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "我可以摸一下 妈妈的包 mom bag 吗？",
                   type: "broSoft",
                   speaker: "brother"
             },
             {
                   en: "Yes, but keep it away from the tissue.",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "可以，但要让它离 纸巾 tissue 远一点。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "The tissue is not my enemy.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "纸巾 tissue 又不是我的敌人。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "It becomes your enemy when you knock it over.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "你把它碰倒的时候，它就变成你的敌人了。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Mom, how do I say knock it over?",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "妈妈，“knock it over” 怎么说？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "Say: I knocked it over. But try not to need that sentence.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "说：I knocked it over。不过尽量别让自己需要这句话。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Too late, the wallet moved.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "太晚了，钱包 wallet 动了。",
                   type: "broWorry",
                   speaker: "brother"
             },
             {
                   en: "It did not move. You pushed it.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "它没有自己动，是你推了它。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "I gently encouraged it.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "我只是轻轻鼓励了它一下。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "Put it back where it belongs.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "把它放回它该在的地方。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "I put it back. I said the sentence too.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "我把它放回去了。我也把句子说了。",
                   type: "broCalm",
                   speaker: "brother"
             },
             {
                   en: "Good sentence. Good hands.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "句子说得好，手也做得好。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Can we learn snack words next?",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "接下来我们可以学零食单词吗？",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Only after you learn cleaning words.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "要先学会清洁整理的词，才可以。",
                   type: "sisTease",
                   speaker: "sister"
             }
       ]
-},
+    },
 
-    // Day 113: 家庭小剧场
+    // Day 113: ?????
     {
       id: 113,
       theme: "家庭小剧场 113",
@@ -6645,116 +6645,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Do not touch my toolbox. I just put it there.",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "不要碰我的 工具箱 toolbox。我刚把它放在那里。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "I was not touching it. I was checking if it was safe.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "我没有碰它。我只是看看它安不安全。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Your checking looks a lot like grabbing.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "你这个“看看”很像是在抢。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Mom, he is messing with the toolbox again.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "妈妈，他又在乱动 工具箱 toolbox 了。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "Ask before you use someone else's things.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "用别人的东西以前，要先开口问。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "May I please use the toolbox for one minute?",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "请问我可以用 工具箱 toolbox 一分钟吗？",
                   type: "broSoft",
                   speaker: "brother"
             },
             {
                   en: "One minute, and keep it away from the tape.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "一分钟可以，而且要让它离 胶带 tape 远一点。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "Why does the tape get special protection?",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "为什么 胶带 tape 还要特别保护？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "Because last time you dropped juice on it.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "因为你上次把果汁洒在上面了。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "That was an accident with personality.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "那是一次很有个性的意外。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "Put the screwdriver back when you finish.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "用完以后把 螺丝刀 screwdriver 放回去。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "I can put things back. I am growing up.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "我会把东西放回去。我正在长大。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Growing up starts with not hiding things under the sofa.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "长大要从不把东西藏在 沙发 sofa 下面开始。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Fine, careful hands.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "好吧，小心手。",
                   type: "broCalm",
                   speaker: "brother"
             },
             {
                   en: "And careful ears, because I will remind you.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "耳朵也要小心，因为我会提醒你。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Your reminding voice is huge.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "你提醒人的声音太大了。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "Huge voices are useful in this house.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "在这个家里，大声音很有用。",
                   type: "momAmused",
                   speaker: "mom"
             },
             {
                   en: "Then I am very useful too.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "那我也很有用了。",
                   type: "broProud",
                   speaker: "brother"
             }
       ]
-},
+    },
 
-    // Day 114: 家庭小剧场
+    // Day 114: ?????
     {
       id: 114,
       theme: "家庭小剧场 114",
@@ -6762,116 +6762,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Everybody look here. Why is the photo frame on the floor?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "大家看这里。为什么 相框 photo frame 会在 地板 floor 上？",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Maybe it wanted a new life.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "也许它想换一种新生活。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "It wanted you to pick it up.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "它是想让你把它捡起来。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Pick it up and put it beside the baby picture.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "把它捡起来，放到 婴儿照 baby picture 旁边。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Can she do it? She is closer.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "她可以做吗？她离得更近。",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "Your hand is closer to your body. Use it.",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "你的手离你的身体更近。用你的手。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "I am using emotional strength first.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "我先使用情绪力量。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "Physical strength, now.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "现在用身体力量。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Fine, I picked it up.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "好吧，我捡起来了。",
                   type: "broAnnoy",
                   speaker: "brother"
             },
             {
                   en: "Good. Now wipe the wall.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "很好。现在把 墙 wall 擦一下。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Why is there always another job?",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "为什么总是还有下一件事？",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "Because you always make another mess.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "因为你总是又弄出新的乱摊子。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Dad says teamwork is important.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "爸爸说团队合作很重要。",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Teamwork does not mean sister does your job.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "团队合作不是让姐姐替你做事。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I was hoping it did.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "我刚才还希望是那个意思。",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "You do the photo frame. She does the baby picture. Then done.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "你做 相框 photo frame。她做 婴儿照 baby picture。这样就完成了。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "Deal, but he cannot supervise me.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "成交，但他不能监督我。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "I supervise with my eyes only.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "我只用眼睛监督。",
                   type: "broSilly",
                   speaker: "brother"
             }
       ]
-},
+    },
 
-    // Day 115: 家庭小剧场
+    // Day 115: ?????
     {
       id: 115,
       theme: "家庭小剧场 115",
@@ -6879,116 +6879,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Dad, can you help me with the robot vacuum?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "爸爸，你能帮我弄一下 扫地机器人 robot vacuum 吗？",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "Show me the problem first.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "先给我看看问题在哪里。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I can help too. I have ideas.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "我也可以帮忙。我有办法。",
                   type: "broExcite",
                   speaker: "brother"
             },
             {
                   en: "Your idea last time involved tape and a banana.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "你上次的办法用到了 胶带 tape 和一根香蕉。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "It was creative engineering.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "那是有创意的工程。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "First, check the sock. Is it loose?",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "先检查 袜子 sock。它松了吗？",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "It wiggles when I touch it.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "我一碰它，它就会晃。",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "Let me touch it. I am good at wiggling.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "让我摸一下。我很会晃东西。",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "That is not the skill we need.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "我们需要的不是这个本领。",
                   type: "dadAmused",
                   speaker: "dad"
             },
             {
                   en: "Hold the floor still for your sister.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "帮姐姐把 地板 floor 扶稳。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I am holding it like a statue.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "我像雕像一样扶着它。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "A statue that talks too much.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "是一座话太多的雕像。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Try again. Slow hands, careful eyes.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "再试一次。手慢一点，眼睛看仔细。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "It works! I fixed it with my brain.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "成功了！我是用脑子修好的。",
                   type: "sisProud",
                   speaker: "sister"
             },
             {
                   en: "And my statue hands.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "还有我的雕像手。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Yes, your statue hands helped.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "对，你的雕像手也帮忙了。",
                   type: "dadAmused",
                   speaker: "dad"
             },
             {
                   en: "Say thank you to your brother.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "跟弟弟说谢谢。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "Thank you, noisy statue.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "谢谢你，吵闹的雕像。",
                   type: "sisTease",
                   speaker: "sister"
             }
       ]
-},
+    },
 
-    // Day 116: 家庭小剧场
+    // Day 116: ?????
     {
       id: 116,
       theme: "家庭小剧场 116",
@@ -6996,116 +6996,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "What is this called in English?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "这个用英语怎么说？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "It is a bookshelf. Say it slowly first.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "它叫 书架 bookshelf。先慢慢说一遍。",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "bookshelf. Now can I touch it?",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "书架 bookshelf。现在我可以摸它了吗？",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Say: May I touch the bookshelf?",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "说：May I touch the 书架 bookshelf？",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "May I touch the bookshelf?",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "我可以摸一下 书架 bookshelf 吗？",
                   type: "broSoft",
                   speaker: "brother"
             },
             {
                   en: "Yes, but keep it away from the comic book.",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "可以，但要让它离 漫画书 comic book 远一点。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "The comic book is not my enemy.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "漫画书 comic book 又不是我的敌人。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "It becomes your enemy when you knock it over.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "你把它碰倒的时候，它就变成你的敌人了。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Mom, how do I say knock it over?",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "妈妈，“knock it over” 怎么说？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "Say: I knocked it over. But try not to need that sentence.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "说：I knocked it over。不过尽量别让自己需要这句话。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Too late, the bookmark moved.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "太晚了，书签 bookmark 动了。",
                   type: "broWorry",
                   speaker: "brother"
             },
             {
                   en: "It did not move. You pushed it.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "它没有自己动，是你推了它。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "I gently encouraged it.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "我只是轻轻鼓励了它一下。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "Put it back where it belongs.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "把它放回它该在的地方。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "I put it back. I said the sentence too.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "我把它放回去了。我也把句子说了。",
                   type: "broCalm",
                   speaker: "brother"
             },
             {
                   en: "Good sentence. Good hands.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "句子说得好，手也做得好。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Can we learn snack words next?",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "接下来我们可以学零食单词吗？",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Only after you learn cleaning words.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "要先学会清洁整理的词，才可以。",
                   type: "sisTease",
                   speaker: "sister"
             }
       ]
-},
+    },
 
-    // Day 117: 家庭小剧场
+    // Day 117: ?????
     {
       id: 117,
       theme: "家庭小剧场 117",
@@ -7113,116 +7113,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Do not touch my umbrella. I just put it there.",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "不要碰我的 雨伞 umbrella。我刚把它放在那里。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "I was not touching it. I was checking if it was safe.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "我没有碰它。我只是看看它安不安全。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Your checking looks a lot like grabbing.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "你这个“看看”很像是在抢。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Mom, he is messing with the umbrella again.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "妈妈，他又在乱动 雨伞 umbrella 了。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "Ask before you use someone else's things.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "用别人的东西以前，要先开口问。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "May I please use the umbrella for one minute?",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "请问我可以用 雨伞 umbrella 一分钟吗？",
                   type: "broSoft",
                   speaker: "brother"
             },
             {
                   en: "One minute, and keep it away from the rain boots.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "一分钟可以，而且要让它离 雨靴 rain boots 远一点。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "Why does the rain boots get special protection?",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "为什么 雨靴 rain boots 还要特别保护？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "Because last time you dropped juice on it.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "因为你上次把果汁洒在上面了。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "That was an accident with personality.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "那是一次很有个性的意外。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "Put the raincoat back when you finish.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "用完以后把 雨衣 raincoat 放回去。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "I can put things back. I am growing up.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "我会把东西放回去。我正在长大。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Growing up starts with not hiding things under the sofa.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "长大要从不把东西藏在 沙发 sofa 下面开始。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Fine, careful hands.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "好吧，小心手。",
                   type: "broCalm",
                   speaker: "brother"
             },
             {
                   en: "And careful ears, because I will remind you.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "耳朵也要小心，因为我会提醒你。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Your reminding voice is huge.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "你提醒人的声音太大了。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "Huge voices are useful in this house.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "在这个家里，大声音很有用。",
                   type: "momAmused",
                   speaker: "mom"
             },
             {
                   en: "Then I am very useful too.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "那我也很有用了。",
                   type: "broProud",
                   speaker: "brother"
             }
       ]
-},
+    },
 
-    // Day 118: 家庭小剧场
+    // Day 118: ?????
     {
       id: 118,
       theme: "家庭小剧场 118",
@@ -7230,116 +7230,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Everybody look here. Why is the storage box on the floor?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "大家看这里。为什么 收纳箱 storage box 会在 地板 floor 上？",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Maybe it wanted a new life.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "也许它想换一种新生活。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "It wanted you to pick it up.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "它是想让你把它捡起来。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Pick it up and put it beside the hanger.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "把它捡起来，放到 衣架 hanger 旁边。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Can she do it? She is closer.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "她可以做吗？她离得更近。",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "Your hand is closer to your body. Use it.",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "你的手离你的身体更近。用你的手。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "I am using emotional strength first.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "我先使用情绪力量。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "Physical strength, now.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "现在用身体力量。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "Fine, I picked it up.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "好吧，我捡起来了。",
                   type: "broAnnoy",
                   speaker: "brother"
             },
             {
                   en: "Good. Now wipe the floor.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "很好。现在把 地板 floor 擦一下。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Why is there always another job?",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "为什么总是还有下一件事？",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "Because you always make another mess.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "因为你总是又弄出新的乱摊子。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Dad says teamwork is important.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "爸爸说团队合作很重要。",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Teamwork does not mean sister does your job.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "团队合作不是让姐姐替你做事。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I was hoping it did.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "我刚才还希望是那个意思。",
                   type: "broWhine",
                   speaker: "brother"
             },
             {
                   en: "You do the storage box. She does the hanger. Then done.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "你做 收纳箱 storage box。她做 衣架 hanger。这样就完成了。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "Deal, but he cannot supervise me.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "成交，但他不能监督我。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "I supervise with my eyes only.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "我只用眼睛监督。",
                   type: "broSilly",
                   speaker: "brother"
             }
       ]
-},
+    },
 
-    // Day 119: 家庭小剧场
+    // Day 119: ?????
     {
       id: 119,
       theme: "家庭小剧场 119",
@@ -7347,116 +7347,116 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "Dad, can you help me with the bandage?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "爸爸，你能帮我弄一下 创可贴 bandage 吗？",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "Show me the problem first.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "先给我看看问题在哪里。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I can help too. I have ideas.",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "我也可以帮忙。我有办法。",
                   type: "broExcite",
                   speaker: "brother"
             },
             {
                   en: "Your idea last time involved tape and a banana.",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "你上次的办法用到了 胶带 tape 和一根香蕉。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "It was creative engineering.",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "那是有创意的工程。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "First, check the medicine box. Is it loose?",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "先检查 药箱 medicine box。它松了吗？",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "It wiggles when I touch it.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "我一碰它，它就会晃。",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "Let me touch it. I am good at wiggling.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "让我摸一下。我很会晃东西。",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "That is not the skill we need.",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "我们需要的不是这个本领。",
                   type: "dadAmused",
                   speaker: "dad"
             },
             {
                   en: "Hold the cotton pad still for your sister.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "帮姐姐把 棉片 cotton pad 扶稳。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "I am holding it like a statue.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "我像雕像一样扶着它。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "A statue that talks too much.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "是一座话太多的雕像。",
                   type: "sisTease",
                   speaker: "sister"
             },
             {
                   en: "Try again. Slow hands, careful eyes.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "再试一次。手慢一点，眼睛看仔细。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "It works! I fixed it with my brain.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "成功了！我是用脑子修好的。",
                   type: "sisProud",
                   speaker: "sister"
             },
             {
                   en: "And my statue hands.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "还有我的雕像手。",
                   type: "broProud",
                   speaker: "brother"
             },
             {
                   en: "Yes, your statue hands helped.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "对，你的雕像手也帮忙了。",
                   type: "dadAmused",
                   speaker: "dad"
             },
             {
                   en: "Say thank you to your brother.",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "跟弟弟说谢谢。",
                   type: "dadCalm",
                   speaker: "dad"
             },
             {
                   en: "Thank you, noisy statue.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "谢谢你，吵闹的雕像。",
                   type: "sisTease",
                   speaker: "sister"
             }
       ]
-},
+    },
 
-    // Day 120: 家庭小剧场
+    // Day 120: ?????
     {
       id: 120,
       theme: "家庭小剧场 120",
@@ -7464,113 +7464,113 @@ window.DAILY_LIFE = {
       sentences: [
             {
                   en: "What is this called in English?",
-                  zh: "不要碰我的东西，我刚放在那里。",
+                  zh: "这个用英语怎么说？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "It is a line. Say it slowly first.",
-                  zh: "我没想抢，我只是想帮你看一下。",
+                  zh: "它叫 台词 line。先慢慢说一遍。",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "line. Now can I touch it?",
-                  zh: "你这个帮忙听起来有点像捣乱。",
+                  zh: "台词 line。现在我可以摸它了吗？",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Say: May I touch the line?",
-                  zh: "妈妈，他又开始动我的东西了。",
+                  zh: "说：May I touch the 台词 line？",
                   type: "sisCalm",
                   speaker: "sister"
             },
             {
                   en: "May I touch the line?",
-                  zh: "用别人的东西前要先问，不能直接拿。",
+                  zh: "我可以摸一下 台词 line 吗？",
                   type: "broSoft",
                   speaker: "brother"
             },
             {
                   en: "Yes, but keep it away from the bow.",
-                  zh: "我可以用一分钟吗？我用完马上放回去。",
+                  zh: "可以，但要让它离 鞠躬 bow 远一点。",
                   type: "sisFirm",
                   speaker: "sister"
             },
             {
                   en: "The bow is not my enemy.",
-                  zh: "可以，但要记得放回原来的位置。",
+                  zh: "鞠躬 bow 又不是我的敌人。",
                   type: "broPout",
                   speaker: "brother"
             },
             {
                   en: "It becomes your enemy when you knock it over.",
-                  zh: "好吧，我还会把旁边的东西也整理好。",
+                  zh: "你把它碰倒的时候，它就变成你的敌人了。",
                   type: "sisAnnoy",
                   speaker: "sister"
             },
             {
                   en: "Mom, how do I say knock it over?",
-                  zh: "谢谢，这样我就不会生气了。",
+                  zh: "妈妈，“knock it over” 怎么说？",
                   type: "broCurious",
                   speaker: "brother"
             },
             {
                   en: "Say: I knocked it over. But try not to need that sentence.",
-                  zh: "你们两个先整理好，再开始玩或表演。",
+                  zh: "说：I knocked it over。不过尽量别让自己需要这句话。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Too late, the sofa moved.",
-                  zh: "爸爸，这个东西应该放在哪里？",
+                  zh: "太晚了，沙发 sofa 动了。",
                   type: "broWorry",
                   speaker: "brother"
             },
             {
                   en: "It did not move. You pushed it.",
-                  zh: "放在旁边的固定位置，不要挡路。",
+                  zh: "它没有自己动，是你推了它。",
                   type: "sisTell",
                   speaker: "sister"
             },
             {
                   en: "I gently encouraged it.",
-                  zh: "我来放，我现在真的是在帮忙。",
+                  zh: "我只是轻轻鼓励了它一下。",
                   type: "broSilly",
                   speaker: "brother"
             },
             {
                   en: "Put it back where it belongs.",
-                  zh: "你有时候帮忙，有时候像在制造麻烦。",
+                  zh: "把它放回它该在的地方。",
                   type: "momFirm",
                   speaker: "mom"
             },
             {
                   en: "I put it back. I said the sentence too.",
-                  zh: "我是有创意，不是制造麻烦。",
+                  zh: "我把它放回去了。我也把句子说了。",
                   type: "broCalm",
                   speaker: "brother"
             },
             {
                   en: "Good sentence. Good hands.",
-                  zh: "好，有创意的小朋友，请快点收好。",
+                  zh: "句子说得好，手也做得好。",
                   type: "momCalm",
                   speaker: "mom"
             },
             {
                   en: "Can we learn snack words next?",
-                  zh: "这些东西都回到自己的位置了。",
+                  zh: "接下来我们可以学零食单词吗？",
                   type: "broCute",
                   speaker: "brother"
             },
             {
                   en: "Only after you learn cleaning words.",
-                  zh: "好了，现在可以开始我们的家庭表演。",
+                  zh: "要先学会清洁整理的词，才可以。",
                   type: "sisTease",
                   speaker: "sister"
             }
       ]
-}
+    }
   ]
 };
