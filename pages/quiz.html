@@ -129,6 +129,29 @@
     background: #fff7ed;
     color: #c2410c;
   }
+  .setup-card {
+    display: none;
+    background: #fff;
+    border: 1px solid #fed7aa;
+    border-radius: 16px;
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+  .setup-card.show { display: block; }
+  .setup-card label {
+    display: block;
+    color: #475569;
+    font-size: 13px;
+    margin: 8px 0 4px;
+  }
+  .setup-card input {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 0 10px;
+    font-size: 14px;
+  }
   @media (max-width: 420px) {
     .zh-prompt { font-size: 25px; min-height: 110px; }
     .quiz-top { align-items: stretch; flex-direction: column; }
@@ -138,7 +161,7 @@
 <body>
 <div class="wrap">
   <div class="top">
-    <button class="icon-btn" onclick="location.href='../index.html?v=20260522-speechgen-kids'">←</button>
+    <button class="icon-btn" onclick="location.href='../index.html?v=20260523-quiz-prev'">←</button>
     <h1>自测</h1>
     <button class="icon-btn" onclick="nextQuestion()">换题</button>
   </div>
@@ -146,6 +169,15 @@
   <div class="mode-tabs">
     <button id="randomMode" onclick="setMode('random')">随机测试</button>
     <button id="dayMode" onclick="setMode('day')">本课复习</button>
+  </div>
+
+  <div class="setup-card" id="setupCard">
+    <strong>需要先连接录音判分服务</strong>
+    <label>Worker 地址</label>
+    <input id="cfgUrl" placeholder="https://xxx.workers.dev">
+    <label>App 密码</label>
+    <input id="cfgPwd" type="password" placeholder="和首页设置一致">
+    <button class="sub-btn" onclick="saveQuizConfig()">保存设置</button>
   </div>
 
   <div class="quiz-card">
@@ -175,8 +207,8 @@
   </div>
 </div>
 
-<script src="../js/core.js?v=20260522-speechgen-kids"></script>
-<script src="../data/daily-life.js?v=20260522-speechgen-kids"></script>
+<script src="../js/core.js?v=20260523-quiz-prev"></script>
+<script src="../data/daily-life.js?v=20260523-quiz-prev"></script>
 <script>
 const PASS_SCORE = 72;
 const MIN_LEN_RATIO = 0.58;
@@ -208,7 +240,22 @@ function init() {
   mode = requestedMode === 'day' ? 'day' : 'random';
   fillDaySelect();
   setMode(mode, false);
+  syncSetupCard();
   nextQuestion();
+}
+
+function syncSetupCard() {
+  const card = document.getElementById('setupCard');
+  card.classList.toggle('show', !DE.Config.isReady());
+  document.getElementById('cfgUrl').value = DE.Config.workerUrl || '';
+  document.getElementById('cfgPwd').value = DE.Config.password || '';
+}
+
+function saveQuizConfig() {
+  DE.Config.workerUrl = document.getElementById('cfgUrl').value.trim();
+  DE.Config.password = document.getElementById('cfgPwd').value.trim();
+  syncSetupCard();
+  showMessage(DE.Config.isReady(), DE.Config.isReady() ? 100 : 0, '', DE.Config.isReady() ? '设置已保存，可以开始自测' : '请填完整 Worker 地址和密码');
 }
 
 function fillDaySelect() {
@@ -271,6 +318,7 @@ function renderQuestion() {
   document.getElementById('micHint').textContent = '点麦克风开始回答';
   document.getElementById('micBtn').classList.remove('recording', 'uploading');
   document.getElementById('micBtn').textContent = '🎙️';
+  syncSetupCard();
 }
 
 function showAnswer() {
@@ -288,7 +336,8 @@ async function playAnswer() {
 async function toggleRecord() {
   if (!current) return;
   if (!DE.Config.isReady()) {
-    showMessage(false, 0, '', '请先在首页设置 Worker 地址和密码。');
+    syncSetupCard();
+    showMessage(false, 0, '', '请先保存 Worker 地址和密码，才能录音判分。');
     return;
   }
   if (!DE.Recorder.isSupported()) {
