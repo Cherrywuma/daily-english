@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -30,6 +30,7 @@
   <button class="big-btn" onclick="startToday()">🚀 开始今日打卡</button>
   <button class="sub-btn" onclick="printToday()">打印今日表演稿</button>
   <button class="sub-btn" onclick="startQuiz()">随机自测</button>
+  <button class="sub-btn" onclick="openScenes()">500生活场景</button>
 
   <div class="card">
     <div style="font-weight:700;margin-bottom:10px;">📚 选一天来学</div>
@@ -60,8 +61,8 @@
   </div>
 </div>
 
-<script src="js/core.js?v=20260523-quiz-prev"></script>
-<script src="data/daily-life.js?v=20260523-quiz-prev"></script>
+<script src="js/core.js?v=20260523-scenes"></script>
+<script src="data/daily-life.js?v=20260523-scenes"></script>
 <script>
 const TOTAL_DAYS = (window.DAILY_LIFE && DAILY_LIFE.days.length) || 30;
 
@@ -115,16 +116,20 @@ function startToday() {
     showSettings();
     return;
   }
-  location.href = 'pages/daily.html?v=20260523-quiz-prev';
+  location.href = 'pages/daily.html?v=20260523-scenes';
+}
+
+function openScenes() {
+  location.href = 'pages/scenes.html?v=20260523-scenes';
 }
 
 function startQuiz() {
-  location.href = 'pages/quiz.html?mode=random&v=20260523-quiz-prev';
+  location.href = 'pages/quiz.html?mode=random&v=20260523-scenes';
 }
 
 function printToday() {
   const dayId = DE.Tracking.currentDayId(TOTAL_DAYS);
-  location.href = `pages/print.html?day=${dayId}&v=20260523-quiz-prev`;
+  location.href = `pages/print.html?day=${dayId}&v=20260523-scenes`;
 }
 
 function showSettings() {
@@ -167,7 +172,7 @@ function renderDayPicker() {
     const done = finishedIds.has(d.id);
     btn.style.cssText = `padding:12px;border-radius:12px;border:none;background:${done?'linear-gradient(135deg,#A8E6CF,#81C784)':'#FFF5E1'};color:${done?'white':'#333'};font-size:13px;text-align:left;cursor:pointer;`;
     btn.innerHTML = `<div style="font-weight:700;">Day ${d.id} ${done?'✓':''}</div><div style="font-size:11px;opacity:.85;margin-top:2px;">${d.theme}</div>`;
-    btn.onclick = () => { localStorage.setItem('chosen_day', d.id); location.href='pages/daily.html?v=20260523-quiz-prev'; };
+    btn.onclick = () => { localStorage.setItem('chosen_day', d.id); location.href='pages/daily.html?v=20260523-scenes'; };
     picker.appendChild(btn);
   });
 }

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>500生活场景</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+  body { background: #f8fafc; }
+  .scene-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background: rgba(248,250,252,.96);
+    padding: 8px 0 12px;
+  }
+  .search {
+    width: 100%;
+    border: 1px solid #d8dee9;
+    border-radius: 14px;
+    padding: 12px 14px;
+    font-size: 16px;
+    outline: none;
+    background: white;
+  }
+  .tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 10px 0 2px;
+  }
+  .tabs button {
+    flex: 0 0 auto;
+    border: 1px solid #d8dee9;
+    border-radius: 999px;
+    background: white;
+    padding: 9px 12px;
+    color: #475569;
+    font-weight: 700;
+  }
+  .tabs button.active {
+    background: #fff7ed;
+    border-color: #fb923c;
+    color: #c2410c;
+  }
+  .scene-card {
+    background: white;
+    border-radius: 16px;
+    padding: 14px;
+    margin-bottom: 12px;
+    box-shadow: 0 6px 18px rgba(15,23,42,.06);
+  }
+  .scene-head {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .scene-title {
+    font-size: 18px;
+    font-weight: 900;
+    color: #111827;
+    line-height: 1.25;
+  }
+  .scene-meta {
+    margin-top: 4px;
+    color: #64748b;
+    font-size: 12px;
+  }
+  .scene-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .scene-actions button {
+    border: 1px solid #ffd6a8;
+    background: #fff;
+    color: #c2410c;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-weight: 800;
+  }
+  .scene-lines {
+    display: none;
+    margin-top: 12px;
+    border-top: 1px solid #edf2f7;
+    padding-top: 8px;
+  }
+  .scene-card.open .scene-lines { display: block; }
+  .line {
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .role {
+    font-size: 12px;
+    font-weight: 900;
+    color: #64748b;
+  }
+  .en {
+    font-size: 15px;
+    font-weight: 800;
+    color: #1f2937;
+    line-height: 1.35;
+  }
+  .zh {
+    margin-top: 2px;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .empty {
+    text-align: center;
+    color: #64748b;
+    padding: 40px 16px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <button class="icon-btn" onclick="location.href='../index.html?v=20260523-scenes'">←</button>
+    <h1>500生活场景</h1>
+    <button class="icon-btn" onclick="render()">刷新</button>
+  </div>
+
+  <div class="scene-toolbar">
+    <input class="search" id="search" placeholder="搜索：电饭锅、袜子、刷牙..." oninput="render()">
+    <div class="tabs" id="tabs"></div>
+  </div>
+
+  <div class="tiny" id="summary" style="margin:4px 0 12px;"></div>
+  <div id="list"></div>
+</div>
+
+<script src="../js/core.js?v=20260523-scenes"></script>
+<script src="../data/scenes.js?v=20260523-scenes"></script>
+<script>
+let currentCategory = 'all';
+let playing = false;
+
+const roleNames = {
+  mom: '妈妈',
+  dad: '爸爸',
+  sister: '姐姐',
+  brother: '弟弟',
+  teacher: '老师',
+  doctor: '医生',
+  grandma: '奶奶',
+  grandpa: '爷爷',
+  classmate: '同学',
+  kid: '孩子'
+};
+
+function categories() {
+  return Object.entries(SCENES.categories || {});
+}
+
+function renderTabs() {
+  const tabs = document.getElementById('tabs');
+  const items = [['all', '全部'], ...categories()];
+  tabs.innerHTML = items.map(([key, label]) =>
+    `<button class="${key === currentCategory ? 'active' : ''}" onclick="setCategory('${key}')">${label}</button>`
+  ).join('');
+}
+
+function setCategory(category) {
+  currentCategory = category;
+  render();
+}
+
+function filteredScenes() {
+  const q = document.getElementById('search').value.trim().toLowerCase();
+  return (SCENES.scenes || []).filter((scene) => {
+    if (currentCategory !== 'all' && scene.category !== currentCategory) return false;
+    if (!q) return true;
+    const text = [
+      scene.title,
+      scene.category,
+      ...(scene.tags || []),
+      ...scene.sentences.flatMap((s) => [s.en, s.zh])
+    ].join(' ').toLowerCase();
+    return text.includes(q);
+  });
+}
+
+function render() {
+  renderTabs();
+  const scenes = filteredScenes();
+  document.getElementById('summary').textContent =
+    `共 ${SCENES.scenes.length} 个场景，当前显示 ${scenes.length} 个`;
+  const list = document.getElementById('list');
+  if (!scenes.length) {
+    list.innerHTML = '<div class="empty">没有找到这个场景</div>';
+    return;
+  }
+  list.innerHTML = scenes.slice(0, 120).map(sceneCard).join('');
+}
+
+function sceneCard(scene) {
+  const category = (SCENES.categories || {})[scene.category] || scene.category || '生活场景';
+  const tags = (scene.tags || []).map((tag) => `#${tag}`).join(' ');
+  return `<div class="scene-card" id="scene_${scene.id}">
+    <div class="scene-head">
+      <div>
+        <div class="scene-title">#${scene.id} ${scene.title}</div>
+        <div class="scene-meta">${category} · ${scene.sentences.length} 句 ${tags ? '· ' + tags : ''}</div>
+      </div>
+      <div class="scene-actions">
+        <button onclick="toggleScene(${scene.id})">展开</button>
+        <button onclick="playScene(${scene.id})">播放</button>
+      </div>
+    </div>
+    <div class="scene-lines">
+      ${scene.sentences.map((s) => `<div class="line">
+        <div class="role">${roleNames[s.speaker] || s.speaker || ''}</div>
+        <div>
+          <div class="en">${s.en}</div>
+          <div class="zh">${s.zh}</div>
+        </div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function toggleScene(id) {
+  const card = document.getElementById('scene_' + id);
+  if (!card) return;
+  card.classList.toggle('open');
+}
+
+async function playScene(id) {
+  if (playing) {
+    DE.TTS.stop();
+    playing = false;
+    return;
+  }
+  const scene = (SCENES.scenes || []).find((s) => s.id === id);
+  if (!scene) return;
+  const card = document.getElementById('scene_' + id);
+  if (card) card.classList.add('open');
+  if (!DE.Config.isReady()) {
+    alert('请先在首页设置 Worker 地址和密码，才能播放声音。');
+    return;
+  }
+  playing = true;
+  try {
+    await DE.TTS.unlock();
+    await DE.TTS.playAll(scene.sentences, null, () => { playing = false; });
+  } catch (e) {
+    playing = false;
+    alert('播放失败：' + e.message);
+  }
+}
+
+render();
+</script>
+</body>
+</html>
