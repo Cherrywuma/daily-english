@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>自测</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+  body { background: #f7fafc; }
+  .quiz-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, .07);
+  }
+  .quiz-top {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .quiz-top select,
+  .quiz-top button {
+    height: 36px;
+    border: 1px solid #d8dee9;
+    border-radius: 10px;
+    background: #fff;
+    padding: 0 10px;
+    color: #1f2933;
+    font-size: 13px;
+  }
+  .prompt-label {
+    color: #64748b;
+    font-size: 13px;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .zh-prompt {
+    min-height: 118px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 18px;
+    border-radius: 16px;
+    background: #fff7ed;
+    color: #111827;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+  .hint-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .hint-row button {
+    border: 1px solid #ffd6a8;
+    background: #fff;
+    color: #c2410c;
+    border-radius: 999px;
+    padding: 8px 12px;
+  }
+  .answer {
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 14px;
+    background: #f1f5f9;
+    display: none;
+  }
+  .answer.show { display: block; }
+  .answer .en {
+    font-size: 20px;
+    font-weight: 800;
+    color: #111827;
+    line-height: 1.35;
+  }
+  .answer .meta {
+    margin-top: 8px;
+    color: #64748b;
+    font-size: 13px;
+  }
+  .mic-btn.recording {
+    background: #dc2626 !important;
+    animation: pulse 1s infinite;
+  }
+  .mic-btn.uploading { background: #f97316 !important; }
+  .result-panel {
+    margin-top: 12px;
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+    display: none;
+  }
+  .result-panel.show { display: block; }
+  .result-panel.pass { background: #dcfce7; color: #166534; }
+  .result-panel.fail { background: #fee2e2; color: #991b1b; }
+  .score-big {
+    font-size: 38px;
+    font-weight: 900;
+    line-height: 1;
+    margin: 6px 0;
+  }
+  .small-text {
+    font-size: 13px;
+    opacity: .8;
+    line-height: 1.5;
+  }
+  .mode-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .mode-tabs button {
+    border: 1px solid #d8dee9;
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px;
+    font-weight: 800;
+    color: #475569;
+  }
+  .mode-tabs button.active {
+    border-color: #ff8a3d;
+    background: #fff7ed;
+    color: #c2410c;
+  }
+  @media (max-width: 420px) {
+    .zh-prompt { font-size: 25px; min-height: 110px; }
+    .quiz-top { align-items: stretch; flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <button class="icon-btn" onclick="location.href='../index.html?v=20260522-speechgen-kids'">←</button>
+    <h1>自测</h1>
+    <button class="icon-btn" onclick="nextQuestion()">换题</button>
+  </div>
+
+  <div class="mode-tabs">
+    <button id="randomMode" onclick="setMode('random')">随机测试</button>
+    <button id="dayMode" onclick="setMode('day')">本课复习</button>
+  </div>
+
+  <div class="quiz-card">
+    <div class="quiz-top">
+      <select id="daySelect" aria-label="选择课程"></select>
+      <button onclick="nextQuestion()">抽一句</button>
+    </div>
+
+    <div class="prompt-label">请看中文，自己说英文</div>
+    <div class="zh-prompt" id="zhPrompt">加载中...</div>
+
+    <button class="mic-btn" id="micBtn" onclick="toggleRecord()">🎙️</button>
+    <div class="mic-hint" id="micHint">点麦克风开始回答</div>
+
+    <div class="hint-row">
+      <button onclick="showAnswer()">看答案</button>
+      <button onclick="playAnswer()">听答案</button>
+      <button onclick="nextQuestion()">下一题</button>
+    </div>
+
+    <div class="answer" id="answerBox">
+      <div class="en" id="enAnswer"></div>
+      <div class="meta" id="answerMeta"></div>
+    </div>
+
+    <div class="result-panel" id="resultPanel"></div>
+  </div>
+</div>
+
+<script src="../js/core.js?v=20260522-speechgen-kids"></script>
+<script src="../data/daily-life.js?v=20260522-speechgen-kids"></script>
+<script>
+const PASS_SCORE = 72;
+const MIN_LEN_RATIO = 0.58;
+const RECORD_MAX_MS = 5000;
+let mode = 'random';
+let dayId = 1;
+let current = null;
+let recording = false;
+let recordTimer = null;
+
+const roleNames = {
+  mom: '妈妈',
+  dad: '爸爸',
+  sister: '姐姐',
+  brother: '弟弟',
+  teacher: '老师',
+  doctor: '医生',
+  grandma: '奶奶',
+  grandpa: '爷爷',
+  classmate: '同学',
+  kid: '孩子'
+};
+
+function init() {
+  const params = new URLSearchParams(location.search);
+  const requestedMode = params.get('mode');
+  const requestedDay = Number(params.get('day') || localStorage.getItem('chosen_day') || 1);
+  dayId = Number.isFinite(requestedDay) && requestedDay > 0 ? requestedDay : 1;
+  mode = requestedMode === 'day' ? 'day' : 'random';
+  fillDaySelect();
+  setMode(mode, false);
+  nextQuestion();
+}
+
+function fillDaySelect() {
+  const select = document.getElementById('daySelect');
+  select.innerHTML = '';
+  DAILY_LIFE.days.forEach((day) => {
+    const option = document.createElement('option');
+    option.value = day.id;
+    option.textContent = `Day ${day.id} - ${day.theme}`;
+    option.selected = day.id === dayId;
+    select.appendChild(option);
+  });
+  select.onchange = () => {
+    dayId = Number(select.value);
+    mode = 'day';
+    setMode('day');
+    nextQuestion();
+  };
+}
+
+function setMode(nextMode, shouldPick = true) {
+  mode = nextMode;
+  document.getElementById('randomMode').classList.toggle('active', mode === 'random');
+  document.getElementById('dayMode').classList.toggle('active', mode === 'day');
+  document.getElementById('daySelect').disabled = mode === 'random';
+  const url = new URL(location.href);
+  url.searchParams.set('mode', mode);
+  url.searchParams.set('day', dayId);
+  history.replaceState(null, '', url.toString());
+  if (shouldPick) nextQuestion();
+}
+
+function pool() {
+  if (mode === 'day') {
+    const day = DAILY_LIFE.days.find((d) => d.id === dayId) || DAILY_LIFE.days[0];
+    return day.sentences.map((sentence, index) => ({ day, sentence, index }));
+  }
+  return DAILY_LIFE.days.flatMap((day) =>
+    day.sentences.map((sentence, index) => ({ day, sentence, index }))
+  );
+}
+
+function nextQuestion() {
+  stopIfNeeded();
+  const items = pool();
+  current = items[Math.floor(Math.random() * items.length)];
+  renderQuestion();
+}
+
+function renderQuestion() {
+  if (!current) return;
+  document.getElementById('zhPrompt').textContent = current.sentence.zh;
+  document.getElementById('enAnswer').textContent = current.sentence.en;
+  document.getElementById('answerMeta').textContent =
+    `Day ${current.day.id}: ${current.day.theme} · ${roleNames[current.sentence.speaker] || current.sentence.speaker}`;
+  document.getElementById('answerBox').classList.remove('show');
+  const result = document.getElementById('resultPanel');
+  result.className = 'result-panel';
+  result.innerHTML = '';
+  document.getElementById('micHint').textContent = '点麦克风开始回答';
+  document.getElementById('micBtn').classList.remove('recording', 'uploading');
+  document.getElementById('micBtn').textContent = '🎙️';
+}
+
+function showAnswer() {
+  document.getElementById('answerBox').classList.add('show');
+}
+
+async function playAnswer() {
+  if (!current) return;
+  showAnswer();
+  await DE.TTS.unlock();
+  try { await DE.TTS.playOne(current.sentence); }
+  catch (e) { showMessage(false, 0, '', '声音播放失败：' + e.message); }
+}
+
+async function toggleRecord() {
+  if (!current) return;
+  if (!DE.Config.isReady()) {
+    showMessage(false, 0, '', '请先在首页设置 Worker 地址和密码。');
+    return;
+  }
+  if (!DE.Recorder.isSupported()) {
+    showMessage(false, 0, '', '这个设备暂时不能录音。');
+    return;
+  }
+  if (recording) {
+    await stopRecord();
+    return;
+  }
+  await DE.TTS.unlock();
+  document.getElementById('answerBox').classList.remove('show');
+  document.getElementById('resultPanel').className = 'result-panel';
+  try {
+    await DE.Recorder.start();
+  } catch (e) {
+    showMessage(false, 0, '', e.message);
+    return;
+  }
+  recording = true;
+  const btn = document.getElementById('micBtn');
+  btn.classList.add('recording');
+  btn.textContent = '停止';
+  document.getElementById('micHint').textContent = '正在录音，再点一次停止';
+  recordTimer = setTimeout(stopRecord, RECORD_MAX_MS);
+}
+
+async function stopRecord() {
+  if (!recording) return;
+  recording = false;
+  if (recordTimer) {
+    clearTimeout(recordTimer);
+    recordTimer = null;
+  }
+  const btn = document.getElementById('micBtn');
+  btn.classList.remove('recording');
+  btn.classList.add('uploading');
+  btn.textContent = '判分';
+  document.getElementById('micHint').textContent = '正在识别和判分...';
+
+  let heard = '';
+  try {
+    const blob = await DE.Recorder.stop();
+    if (blob) heard = await DE.Recorder.transcribe(blob);
+  } catch (e) {
+    btn.classList.remove('uploading');
+    btn.textContent = '🎙️';
+    showMessage(false, 0, '', '识别失败：' + e.message);
+    return;
+  }
+
+  btn.classList.remove('uploading');
+  btn.textContent = '🎙️';
+  document.getElementById('micHint').textContent = '点麦克风再试一次';
+  const result = DE.Pronunciation.passed(current.sentence.en, heard, PASS_SCORE, MIN_LEN_RATIO);
+  showMessage(result.ok, result.score, heard, result.ok ? '说对了' : '再试一次');
+  if (!result.ok) showAnswer();
+}
+
+function showMessage(ok, score, heard, title) {
+  const panel = document.getElementById('resultPanel');
+  panel.className = `result-panel show ${ok ? 'pass' : 'fail'}`;
+  const replay = DE.Recorder.hasPlayback()
+    ? '<button class="sub-btn" onclick="DE.Recorder.playback()">听刚才</button>'
+    : '';
+  panel.innerHTML = `
+    <div>${title}</div>
+    <div class="score-big">${score || 0}<span style="font-size:14px;">分</span></div>
+    <div class="small-text">你说：${heard || '没有识别到声音'}</div>
+    <div class="small-text">答案：${current ? current.sentence.en : ''}</div>
+    <div style="margin-top:10px;">${replay}</div>
+  `;
+}
+
+async function stopIfNeeded() {
+  if (!recording) return;
+  try { await DE.Recorder.stop(); } catch {}
+  recording = false;
+}
+
+init();
+</script>
+</body>
+</html>

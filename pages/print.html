@@ -310,6 +310,11 @@ function render(id) {
   }).join('');
 }
 
+function quizDay() {
+  const id = new URLSearchParams(location.search).get('day') || 1;
+  location.href = `quiz.html?mode=day&day=${id}&v=20260522-speechgen-kids`;
+}
+
 function toggleZh() {
   document.body.classList.toggle('hide-zh');
   event.currentTarget.textContent = document.body.classList.contains('hide-zh') ? '显示中文' : '隐藏中文';

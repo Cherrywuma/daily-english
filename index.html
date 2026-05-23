@@ -29,6 +29,7 @@
 
   <button class="big-btn" onclick="startToday()">🚀 开始今日打卡</button>
   <button class="sub-btn" onclick="printToday()">打印今日表演稿</button>
+  <button class="sub-btn" onclick="startQuiz()">随机自测</button>
 
   <div class="card">
     <div style="font-weight:700;margin-bottom:10px;">📚 选一天来学</div>
@@ -115,6 +116,10 @@ function startToday() {
     return;
   }
   location.href = 'pages/daily.html?v=20260522-speechgen-kids';
+}
+
+function startQuiz() {
+  location.href = 'pages/quiz.html?mode=random&v=20260522-speechgen-kids';
 }
 
 function printToday() {
