@@ -178,6 +178,7 @@
 let activePhase = 'phase1';
 let currentCategory = 'all';
 let playing = false;
+let currentAudio = null;
 
 const roleNames = {
   mom: '妈妈',
@@ -351,12 +352,39 @@ function instructionsFor(sentence) {
 
 async function speakSentence(sentence) {
   const voice = voiceFor(sentence.speaker);
-  await DE.TTS.speak(sentence.en, voice, instructionsFor(sentence));
+  if (!DE.Config || !DE.Config.isReady()) throw new Error('??????? Worker ?????');
+  const resp = await fetch(DE.Config.workerUrl.replace(/\/$/, '') + '/tts', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      text: sentence.en,
+      voice_id: voice,
+      voice,
+      emotion: sentence.type || 'neutral',
+      password: DE.Config.password,
+    }),
+  });
+  if (!resp.ok) {
+    const detail = await resp.text();
+    throw new Error('TTS ' + resp.status + ': ' + detail.slice(0, 120));
+  }
+  const blob = await resp.blob();
+  const url = URL.createObjectURL(blob);
+  await new Promise((resolve) => {
+    const audio = new Audio(url);
+    currentAudio = audio;
+    audio.onended = resolve;
+    audio.onerror = resolve;
+    audio.play().catch(resolve);
+  });
+  URL.revokeObjectURL(url);
+  currentAudio = null;
 }
 
 async function playScene(id) {
   if (playing) {
-    DE.TTS.stop();
+    try { if (currentAudio) currentAudio.pause(); } catch {}
+    try { if (DE.TTS && DE.TTS.stop) DE.TTS.stop(); } catch {}
     playing = false;
     return;
   }
