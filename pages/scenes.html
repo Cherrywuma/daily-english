@@ -179,6 +179,8 @@ let activePhase = 'phase1';
 let currentCategory = 'all';
 let playing = false;
 let currentAudio = null;
+let sceneAudio = new Audio();
+sceneAudio.setAttribute('playsinline', '');
 
 const roleNames = {
   mom: '妈妈',
@@ -337,6 +339,23 @@ function userVoiceFor(speaker) {
   }
 }
 
+function silentWav() {
+  return 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQQAAAAAAA==';
+}
+
+async function unlockSceneAudio() {
+  try {
+    sceneAudio.pause();
+    sceneAudio.src = silentWav();
+    sceneAudio.currentTime = 0;
+    await sceneAudio.play();
+    sceneAudio.pause();
+    sceneAudio.currentTime = 0;
+  } catch (e) {
+    console.warn('mobile audio unlock failed', e);
+  }
+}
+
 function voiceFor(speaker) {
   const lib = activeLibrary();
   return userVoiceFor(speaker)
@@ -371,11 +390,19 @@ async function speakSentence(sentence) {
   const blob = await resp.blob();
   const url = URL.createObjectURL(blob);
   await new Promise((resolve) => {
-    const audio = new Audio(url);
-    currentAudio = audio;
-    audio.onended = resolve;
-    audio.onerror = resolve;
-    audio.play().catch(resolve);
+    sceneAudio.pause();
+    sceneAudio.src = url;
+    sceneAudio.currentTime = 0;
+    currentAudio = sceneAudio;
+    sceneAudio.onended = resolve;
+    sceneAudio.onerror = resolve;
+    const playPromise = sceneAudio.play();
+    if (playPromise && playPromise.catch) {
+      playPromise.catch((err) => {
+        console.warn('scene audio play blocked', err);
+        resolve();
+      });
+    }
   });
   URL.revokeObjectURL(url);
   currentAudio = null;
@@ -384,10 +411,12 @@ async function speakSentence(sentence) {
 async function playScene(id) {
   if (playing) {
     try { if (currentAudio) currentAudio.pause(); } catch {}
+    try { if (sceneAudio) sceneAudio.pause(); } catch {}
     try { if (DE.TTS && DE.TTS.stop) DE.TTS.stop(); } catch {}
     playing = false;
     return;
   }
+  await unlockSceneAudio();
   const lib = activeLibrary();
   const scene = lib.scenes.find((s) => s.id === id);
   if (!scene) return;
