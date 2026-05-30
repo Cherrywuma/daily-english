@@ -23,17 +23,23 @@
     const style = document.createElement('style');
     style.id = 'shadow-mic-css';
     style.textContent = `
-      .line-mic {
-        background: #FFB74D; color: #fff; border: 0;
-        border-radius: 50%; width: 34px; height: 34px;
-        font-size: 14px; cursor: pointer;
+      .line-mic, .line-listen, .line-slow {
+        color: #fff; border: 0;
+        border-radius: 50%; width: 32px; height: 32px;
+        font-size: 13px; cursor: pointer;
         display: inline-flex; align-items: center; justify-content: center;
-        align-self: flex-start; flex-shrink: 0;
-        transition: transform .1s;
+        flex-shrink: 0; transition: transform .1s;
       }
-      .line-mic:active { transform: scale(.9); }
+      .line-mic { background: #FFB74D; }
+      .line-listen { background: #66BB6A; }
+      .line-slow { background: #42A5F5; }
+      .line-mic:active, .line-listen:active, .line-slow:active { transform: scale(.9); }
+      .line-listen.playing, .line-slow.playing { animation: shmPulse 1.2s ease-in-out infinite; }
       .line-mic.recording { background: #E53935; animation: shmPulse 1.2s ease-in-out infinite; }
       .line-mic.uploading { background: #FFA726; cursor: wait; }
+      .line-actions {
+        display: flex; gap: 4px; align-items: flex-start;
+      }
       @keyframes shmPulse {
         0%,100% { box-shadow: 0 0 0 0 rgba(229,57,53,0.6); }
         50%     { box-shadow: 0 0 0 8px rgba(229,57,53,0); }
@@ -229,8 +235,71 @@
     return r;
   }
 
+  // ============ 听原句 / 慢速听 ============
+  // 用户场景：小孩想反复听、慢慢听才能学会。复用 DE.TTS._fetchBuffer 拿 AudioBuffer
+  // 然后自己用 AudioBufferSourceNode 控制 playbackRate（slow=true 时 0.65x）
+  let lastListenBtn = null;
+  let lastListenSrc = null;
+
+  function resolveVoice(speaker, lineEl) {
+    if (lineEl?.dataset.voice) return lineEl.dataset.voice;
+    if (typeof window.voiceFor === 'function') {
+      try { const v = window.voiceFor(speaker); if (v) return v; } catch {}
+    }
+    if (window.VOICE_IDS?.[speaker]) return window.VOICE_IDS[speaker];
+    if (window.DAILY_LIFE?.defaultSpeakers?.[speaker]) return window.DAILY_LIFE.defaultSpeakers[speaker];
+    const fb = { mom: 'shimmer', dad: 'onyx', sister: 'coral', brother: 'echo', teacher: 'sage', kid: 'echo', grandma: 'nova', grandpa: 'onyx', classmate: 'echo', doctor: 'echo' };
+    return fb[speaker] || 'shimmer';
+  }
+
+  async function listenOnBtn(btn, slow) {
+    if (!btn) return;
+    const target = btn.dataset.en || '';
+    if (!target || !window.DE?.TTS?._fetchBuffer) {
+      console.warn('listen: missing target or DE.TTS._fetchBuffer');
+      return;
+    }
+    const line = btn.closest('.line');
+    const speaker = line?.dataset.speaker || btn.dataset.speaker || '';
+    const type = line?.dataset.type || btn.dataset.type || 'neutral';
+    const voiceId = resolveVoice(speaker, line);
+
+    try { await DE.TTS.unlock(); } catch {}
+
+    // 停掉上一次的回放
+    if (lastListenSrc) { try { lastListenSrc.stop(); } catch {} lastListenSrc = null; }
+    if (lastListenBtn) { lastListenBtn.classList.remove('playing'); lastListenBtn = null; }
+    try { DE.TTS.stop?.(); } catch {}
+
+    let buf;
+    try {
+      buf = await DE.TTS._fetchBuffer(target, voiceId, type);
+    } catch (e) {
+      console.warn('listen fetch fail', e.message);
+      return;
+    }
+
+    const ctx = DE.TTS.ctx || (DE.TTS._ensureCtx && DE.TTS._ensureCtx());
+    if (!ctx) return;
+    const src = ctx.createBufferSource();
+    src.buffer = buf;
+    // playbackRate 改变会同时改音调（速度慢→声音也变低）
+    // 0.65 对小孩学发音足够清楚，又能听清每个词
+    src.playbackRate.value = slow ? 0.65 : 1.0;
+    src.connect(ctx.destination);
+    btn.classList.add('playing');
+    src.onended = () => {
+      btn.classList.remove('playing');
+      if (lastListenBtn === btn) { lastListenBtn = null; lastListenSrc = null; }
+    };
+    lastListenBtn = btn;
+    lastListenSrc = src;
+    try { src.start(0); } catch (e) { btn.classList.remove('playing'); }
+  }
+
   window.ShadowMic = {
     onClick: onMicClick,
+    listen: listenOnBtn,
     stop: () => activeBtn && stopRec(activeBtn),
   };
 
