@@ -117,10 +117,11 @@
   .scene-card.open .scene-lines { display: block; }
   .line {
     display: grid;
-    grid-template-columns: 64px 1fr;
+    grid-template-columns: 64px 1fr 40px;
     gap: 8px;
     padding: 8px 0;
     border-bottom: 1px solid #f1f5f9;
+    align-items: start;
   }
   .role {
     font-size: 12px;
@@ -171,9 +172,10 @@
   <div id="list"></div>
 </div>
 
-<script src="../js/core.js?v=20260524-scenes2-mobile2"></script>
-<script src="../data/scenes.js?v=20260524-scenes2-mobile2"></script>
-<script src="../data/scenes2.js?v=20260524-scenes2-mobile2"></script>
+<script src="../js/core.js?v=20260530-shadow"></script>
+<script src="../js/shadow-widget.js?v=20260530-shadow"></script>
+<script src="../data/scenes.js?v=20260530-shadow"></script>
+<script src="../data/scenes2.js?v=20260530-shadow"></script>
 <script>
 let activePhase = 'phase1';
 let currentCategory = 'all';
@@ -317,6 +319,7 @@ function sceneCard(scene) {
           <div class="en">${s.en}</div>
           <div class="zh">${s.zh}</div>
         </div>
+        <button class="line-mic" data-en="${(s.en || '').replace(/"/g, '&quot;')}" onclick="ShadowMic.onClick(this)" title="跟读这句">🎤</button>
       </div>`).join('')}
     </div>
   </div>`;

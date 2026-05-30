@@ -207,8 +207,9 @@
   </div>
 </div>
 
-<script src="../js/core.js?v=20260523-quiz-prev"></script>
-<script src="../data/daily-life.js?v=20260523-quiz-prev"></script>
+<script src="../js/core.js?v=20260530-shadow"></script>
+<script src="../js/shadow-widget.js?v=20260530-shadow"></script>
+<script src="../data/daily-life.js?v=20260530-shadow"></script>
 <script>
 const PASS_SCORE = 72;
 const MIN_LEN_RATIO = 0.58;
@@ -397,17 +398,39 @@ async function stopRecord() {
   if (!result.ok) showAnswer();
 }
 
+function quizEscapeHtml(s) {
+  return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
+
+function quizRenderDiff(target, heard) {
+  if (!DE.Pronunciation.wordDiff) return '';
+  const diff = DE.Pronunciation.wordDiff(target, heard);
+  if (!diff.length) return '';
+  const tokens = String(target).split(/(\s+)/);
+  let di = 0;
+  const html = tokens.map(tok => {
+    if (/^\s*$/.test(tok)) return tok;
+    const rec = diff[di++] || { status: 'miss' };
+    const heardHtml = (rec.heardAs && rec.status !== 'match')
+      ? `<span style="display:block;font-size:10px;color:#888;font-weight:400;">${quizEscapeHtml(rec.heardAs)}</span>`
+      : '';
+    return `<span class="w ${rec.status}">${quizEscapeHtml(tok)}${heardHtml}</span>`;
+  }).join('');
+  return `<div class="word-diff">${html}</div>`;
+}
+
 function showMessage(ok, score, heard, title) {
   const panel = document.getElementById('resultPanel');
   panel.className = `result-panel show ${ok ? 'pass' : 'fail'}`;
   const replay = DE.Recorder.hasPlayback()
     ? '<button class="sub-btn" onclick="DE.Recorder.playback()">听刚才</button>'
     : '';
+  const target = current ? current.sentence.en : '';
   panel.innerHTML = `
     <div>${title}</div>
     <div class="score-big">${score || 0}<span style="font-size:14px;">分</span></div>
-    <div class="small-text">你说：${heard || '没有识别到声音'}</div>
-    <div class="small-text">答案：${current ? current.sentence.en : ''}</div>
+    ${target && heard ? quizRenderDiff(target, heard) : ''}
+    <div class="small-text" style="opacity:.6;">Whisper 听到：${quizEscapeHtml(heard) || '(无)'}</div>
     <div style="margin-top:10px;">${replay}</div>
   `;
 }
