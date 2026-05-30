@@ -79,19 +79,22 @@ function _typeToEmotion(type) {
   return 'neutral';
 }
 
-// type → speed（夸张版）
+// type → speed（ESL 友好版：默认 1.0，让 ESL 小孩听得懂）
+// 旧值（1.5-1.8 夸张版）对刚学英语的姐弟太快，听不清。
+// 现在压到正常对话节奏附近，最快也只到 1.15，保留情绪起伏但不再失控。
 function _typeToSpeed(type) {
-  if (!type) return 1.5;
+  if (!type) return 1.0;
   const t = String(type).toLowerCase();
-  // 超快：急、生气、激动、兴奋（夸张到 1.85）
-  if (t.includes('rushed') || t.includes('yell') || t.includes('angry') || t.includes('annoy') || t.includes('excite') || t.includes('loud') || t.includes('boss')) return 1.8;
-  // 超慢：哭、伤心、害怕（颤抖感）
-  if (t.includes('cry') || t.includes('sad') || t.includes('scare')) return 1.25;
-  // 慢：温柔、悄悄话、累
-  if (t.includes('whisper') || t.includes('soft') || t.includes('tired') || t.includes('cozy')) return 1.35;
-  if (t.includes('bro') || t.includes('sis') || t.includes('cute') || t.includes('whine') || t.includes('pout') || t.includes('tease')) return 1.65;
-  // 默认：偏真实对话速度
-  return 1.5;
+  // 稍快：急、生气、激动、兴奋（比正常快 15%，仍清晰）
+  if (t.includes('rushed') || t.includes('yell') || t.includes('angry') || t.includes('annoy') || t.includes('excite') || t.includes('loud') || t.includes('boss')) return 1.15;
+  // 慢：哭、伤心、害怕（颤抖感）
+  if (t.includes('cry') || t.includes('sad') || t.includes('scare')) return 0.85;
+  // 稍慢：温柔、悄悄话、累
+  if (t.includes('whisper') || t.includes('soft') || t.includes('tired') || t.includes('cozy')) return 0.9;
+  // 小孩相关情绪：正常对话速度
+  if (t.includes('bro') || t.includes('sis') || t.includes('cute') || t.includes('whine') || t.includes('pout') || t.includes('tease')) return 1.0;
+  // 默认：正常对话速度
+  return 1.0;
 }
 
 // type → 音量（生气/兴奋更响，哭/悄悄话更轻）
