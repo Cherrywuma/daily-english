@@ -562,6 +562,65 @@ const Pronunciation = {
     const r = this.lengthRatio(target, heard);
     return { score: s, lenRatio: r, ok: s >= minScore && r >= minLenRatio };
   },
+
+  // 词级 Levenshtein 对齐，返回每个原句词的状态：
+  // 'match' 完全读对 | 'close' 读近似（含 >=60% 字符相似） | 'wrong' 读错 | 'miss' 完全跳词
+  // 用 DP + 回溯做最优对齐
+  wordDiff(target, heard) {
+    const t = this.norm(target).split(/\s+/).filter(Boolean);
+    const h = this.norm(heard).split(/\s+/).filter(Boolean);
+    if (!t.length) return [];
+    const m = t.length, n = h.length;
+    // dp[i][j] = 把 t[0..i) 对齐到 h[0..j) 的最小代价
+    const dp = Array(m + 1).fill(null).map(() => Array(n + 1).fill(0));
+    const op = Array(m + 1).fill(null).map(() => Array(n + 1).fill(''));
+    for (let i = 0; i <= m; i++) { dp[i][0] = i; op[i][0] = 'miss'; }
+    for (let j = 0; j <= n; j++) { dp[0][j] = j; op[0][j] = 'extra'; }
+    op[0][0] = '';
+    for (let i = 1; i <= m; i++) {
+      for (let j = 1; j <= n; j++) {
+        const wt = t[i - 1], wh = h[j - 1];
+        const sim = wt === wh ? 1 : this._wordSim(wt, wh);
+        const cost = wt === wh ? 0 : (sim >= 0.6 ? 0.5 : 1);
+        const dMiss  = dp[i - 1][j] + 1;       // 跳了原句词
+        const dExtra = dp[i][j - 1] + 1;       // 多读一个词
+        const dAlign = dp[i - 1][j - 1] + cost;
+        if (dAlign <= dMiss && dAlign <= dExtra) {
+          dp[i][j] = dAlign;
+          op[i][j] = cost === 0 ? 'match' : (cost === 0.5 ? 'close' : 'wrong');
+        } else if (dMiss <= dExtra) {
+          dp[i][j] = dMiss;
+          op[i][j] = 'miss';
+        } else {
+          dp[i][j] = dExtra;
+          op[i][j] = 'extra';
+        }
+      }
+    }
+    const out = [];
+    let i = m, j = n;
+    while (i > 0 || j > 0) {
+      const o = op[i][j];
+      if (o === 'match' || o === 'close' || o === 'wrong') {
+        const rec = { word: t[i - 1], status: o };
+        if (o !== 'match' && j > 0) rec.heardAs = h[j - 1];
+        out.unshift(rec);
+        i--; j--;
+      } else if (o === 'miss') {
+        out.unshift({ word: t[i - 1], status: 'miss' });
+        i--;
+      } else { // 'extra' — 多读的词不映射回原句
+        j--;
+      }
+    }
+    return out;
+  },
+
+  _wordSim(a, b) {
+    if (!a || !b) return 0;
+    const d = this._lev(a.split(''), b.split(''));
+    return 1 - d / Math.max(a.length, b.length);
+  },
 };
 
 // ============ 打卡追踪 ============
