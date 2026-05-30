@@ -108,10 +108,12 @@ async function handleSpeechGenKidTTS(body, env) {
 }
 
 function tuneSpeechGenSpeed(role, speed) {
-  const n = Number(speed || 1.45);
-  if (role === 'brother') return clamp(Number(Math.max(1.28, Math.min(1.55, n)).toFixed(2)), 0.8, 1.6);
-  if (role === 'sister') return clamp(Number(Math.max(1.22, Math.min(1.48, n)).toFixed(2)), 0.8, 1.55);
-  return clamp(Number(Math.min(1.42, Math.max(1.1, n)).toFixed(2)), 0.8, 1.5);
+  // 默认从 1.45 降到 1.0，让前端传 1.0 时姐弟真的按正常速度读
+  const n = Number(speed || 1.0);
+  // 姐弟最低底线下调到 ~1.0，最高仍允许激动场景 1.3（不再一律 1.28+ 起步）
+  if (role === 'brother') return clamp(Number(Math.max(1.0, Math.min(1.3, n)).toFixed(2)), 0.8, 1.6);
+  if (role === 'sister') return clamp(Number(Math.max(0.95, Math.min(1.25, n)).toFixed(2)), 0.8, 1.55);
+  return clamp(Number(Math.min(1.25, Math.max(0.95, n)).toFixed(2)), 0.8, 1.5);
 }
 
 function tuneSpeechGenPitch(role, emotion) {
