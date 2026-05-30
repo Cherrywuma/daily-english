@@ -63,6 +63,29 @@
     cursor: pointer;
   }
   .replay-row button:active { background: #FFE0B2; }
+  /* 逐词高亮：绿读对了/黄读近似/红读错或跳词 */
+  .word-diff {
+    font-size: 18px; line-height: 1.7; font-weight: 600;
+    text-align: center; margin: 8px 0; word-wrap: break-word;
+  }
+  .word-diff .w {
+    display: inline-block; padding: 1px 6px; margin: 2px 2px;
+    border-radius: 6px; transition: background .2s;
+  }
+  .word-diff .w.match { background: #C8E6C9; color: #1B5E20; }
+  .word-diff .w.close { background: #FFF59D; color: #6F4500; }
+  .word-diff .w.wrong { background: #FFCDD2; color: #B71C1C; text-decoration: line-through; }
+  .word-diff .w.miss  { background: #FFCDD2; color: #B71C1C; opacity: .8; }
+  .word-diff .w.miss::after { content: '？'; font-size: 12px; vertical-align: super; }
+  .word-diff .w .heard {
+    display: block; font-size: 11px; font-weight: 400;
+    color: #888; margin-top: -2px;
+  }
+  .word-legend {
+    display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+    font-size: 11px; color: #999; margin-top: 4px;
+  }
+  .word-legend span { display: inline-block; padding: 1px 6px; border-radius: 4px; }
 </style>
 </head>
 <body>
@@ -456,6 +479,38 @@ function scoreAndShow(heard) {
   }
 }
 
+function escapeHtml(s) {
+  return String(s || '').replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[c]);
+}
+
+// 把 wordDiff 数组渲染成带颜色的 span。原句保留大小写/标点；只用 diff 决定颜色
+function renderWordDiff(targetEn, heard) {
+  const diff = DE.Pronunciation.wordDiff(targetEn, heard);
+  if (!diff.length) return '';
+  // 词数应该跟 target tokenize 后一致
+  // 用空格切原句保留显示形式
+  const targetTokens = targetEn.split(/(\s+)/);  // 保留空白
+  // 把 diff 按非空白 token 对齐
+  let di = 0;
+  const html = targetTokens.map(tok => {
+    if (/^\s*$/.test(tok)) return tok;  // 空格直接保留
+    const rec = diff[di++] || { status: 'miss' };
+    const cls = rec.status;
+    const heardHtml = (rec.heardAs && rec.status !== 'match')
+      ? `<span class="heard">${escapeHtml(rec.heardAs)}</span>`
+      : '';
+    return `<span class="w ${cls}">${escapeHtml(tok)}${heardHtml}</span>`;
+  }).join('');
+  return `
+    <div class="word-diff">${html}</div>
+    <div class="word-legend">
+      <span class="w match" style="background:#C8E6C9;color:#1B5E20;">读对</span>
+      <span class="w close" style="background:#FFF59D;color:#6F4500;">近似</span>
+      <span class="w wrong" style="background:#FFCDD2;color:#B71C1C;">读错</span>
+      <span class="w miss"  style="background:#FFCDD2;color:#B71C1C;">跳词</span>
+    </div>`;
+}
+
 function showResult(score, lenRatio, ok, heard) {
   const cls = ok ? 'pass' : 'fail';
   const emoji = ok ? '🎉' : (score >= 50 ? '💪' : '😅');
@@ -468,8 +523,8 @@ function showResult(score, lenRatio, ok, heard) {
     <div class="result ${cls}">
       <div style="font-size:13px;opacity:.8;">${emoji} ${tip}</div>
       <div class="score">${score}<span style="font-size:14px;">分</span></div>
-      <div class="heard">你说: "${heard}"</div>
-      <div class="heard" style="opacity:.6;">原句: "${s.en}"</div>
+      ${renderWordDiff(s.en, heard)}
+      <div class="heard" style="opacity:.5;font-size:11px;">Whisper 听到：${escapeHtml(heard) || '(无)'}</div>
       <div class="replay-row">
         ${replayBtn}
         <button onclick="DE.TTS.playOne(sentences[curIdx])">🔊 听原句</button>
