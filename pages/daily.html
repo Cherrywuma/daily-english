@@ -136,8 +136,9 @@
       <div class="sentence-en" id="senEn">Loading...</div>
       <div class="sentence-zh hidden" id="senZh" onclick="revealZh()"></div>
 
-      <div style="text-align:center;margin-top:8px;">
-        <button class="sub-btn" style="display:inline-block;width:auto;padding:8px 16px;" onclick="playSentence()">🔊 再听一次</button>
+      <div style="text-align:center;margin-top:8px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+        <button class="sub-btn" style="width:auto;padding:8px 16px;" onclick="playSentence()">🔊 再听一次</button>
+        <button class="sub-btn" style="width:auto;padding:8px 16px;background:#42A5F5;color:#fff;" onclick="playSentenceSlow()">🐢 慢速听</button>
       </div>
 
       <button class="mic-btn" id="micBtn" onclick="onMic()">🎤</button>
@@ -155,8 +156,8 @@
   </div>
 </div>
 
-<script src="../js/core.js?v=20260530-worddiff"></script>
-<script src="../data/daily-life.js?v=20260530-worddiff"></script>
+<script src="../js/core.js?v=20260530-listen"></script>
+<script src="../data/daily-life.js?v=20260530-listen"></script>
 <script>
 const TOTAL_DAYS = DAILY_LIFE.days.length;
 const chosen = localStorage.getItem('chosen_day');
@@ -351,6 +352,26 @@ async function playSentence() {
   await DE.TTS.unlock();
   try { await DE.TTS.playOne(sentences[curIdx]); }
   catch (e) { console.warn('playSentence err', e.message); }
+}
+
+// 慢速听：用 Web Audio API 把 playbackRate 改成 0.65（音调也会变低，但能听清每个词）
+async function playSentenceSlow() {
+  await DE.TTS.unlock();
+  const s = sentences[curIdx];
+  try {
+    const voiceId = (window.VOICE_IDS && window.VOICE_IDS[s.speaker]) || 'shimmer';
+    const buf = await DE.TTS._fetchBuffer(s.en, voiceId, s.type);
+    const ctx = DE.TTS.ctx || DE.TTS._ensureCtx();
+    DE.TTS.stop();
+    const src = ctx.createBufferSource();
+    src.buffer = buf;
+    src.playbackRate.value = 0.65;
+    src.connect(ctx.destination);
+    src.start(0);
+    DE.TTS.currentSrc = src;
+  } catch (e) {
+    console.warn('playSentenceSlow err', e.message);
+  }
 }
 
 function revealZh() {

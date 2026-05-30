@@ -117,8 +117,8 @@
   .scene-card.open .scene-lines { display: block; }
   .line {
     display: grid;
-    grid-template-columns: 64px 1fr 40px;
-    gap: 8px;
+    grid-template-columns: 56px 1fr auto;
+    gap: 6px;
     padding: 8px 0;
     border-bottom: 1px solid #f1f5f9;
     align-items: start;
@@ -172,10 +172,10 @@
   <div id="list"></div>
 </div>
 
-<script src="../js/core.js?v=20260530-shadow"></script>
-<script src="../js/shadow-widget.js?v=20260530-shadow"></script>
-<script src="../data/scenes.js?v=20260530-shadow"></script>
-<script src="../data/scenes2.js?v=20260530-shadow"></script>
+<script src="../js/core.js?v=20260530-listen"></script>
+<script src="../js/shadow-widget.js?v=20260530-listen"></script>
+<script src="../data/scenes.js?v=20260530-listen"></script>
+<script src="../data/scenes2.js?v=20260530-listen"></script>
 <script>
 let activePhase = 'phase1';
 let currentCategory = 'all';
@@ -313,13 +313,17 @@ function sceneCard(scene) {
       </div>
     </div>
     <div class="scene-lines">
-      ${(scene.sentences || []).map((s) => `<div class="line">
+      ${(scene.sentences || []).map((s) => `<div class="line" data-speaker="${s.speaker || ''}" data-type="${s.type || 'neutral'}">
         <div class="role ${s.speaker || ''}">${roleNames[s.speaker] || s.speaker || ''}</div>
         <div>
           <div class="en">${s.en}</div>
           <div class="zh">${s.zh}</div>
         </div>
-        <button class="line-mic" data-en="${(s.en || '').replace(/"/g, '&quot;')}" onclick="ShadowMic.onClick(this)" title="跟读这句">🎤</button>
+        <div class="line-actions">
+          <button class="line-listen" data-en="${(s.en || '').replace(/"/g, '&quot;')}" onclick="ShadowMic.listen(this, false)" title="听一遍">🔊</button>
+          <button class="line-slow" data-en="${(s.en || '').replace(/"/g, '&quot;')}" onclick="ShadowMic.listen(this, true)" title="慢速听">🐢</button>
+          <button class="line-mic" data-en="${(s.en || '').replace(/"/g, '&quot;')}" onclick="ShadowMic.onClick(this)" title="跟读这句">🎤</button>
+        </div>
       </div>`).join('')}
     </div>
   </div>`;
